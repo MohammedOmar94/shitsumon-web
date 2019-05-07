@@ -1,10 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import classes from './NavBar.module.scss';
+import classes from "./NavBar.module.scss";
 
-const NavBar = (props) => (
+const NavBar = props => (
   <header className={classes.NavBar}>
-    <h2>shitsumon</h2>
+    <h1>
+      <text className={classes.Katakana}>シツモン</text>
+      shitsumon
+    </h1>
   </header>
 );
 
