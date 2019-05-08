@@ -13,8 +13,12 @@
   padding: 8px;
   background-color: $teal;
   border-radius: 5px;
+  font-size: 16px;
 }
 
-.Section p {
-  color: $teal;
+
+@media only screen and (min-width: 768px) {
+  .SectionHeader {
+    font-size: 24px;
+  }
 }

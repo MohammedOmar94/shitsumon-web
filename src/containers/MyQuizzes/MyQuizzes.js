@@ -6,8 +6,7 @@ import classes from './MyQuizzes.module.scss';
 class MyQuizzes extends Component {
   render() {
     return (
-      <Section name='Dates' className={classes.MyQuizzes}>
-        <p>27th October 2018 - [Japanese text here]</p>
+      <Section name='Dates 年月日' className={classes.MyQuizzes}>
       </Section>
     );
   };
