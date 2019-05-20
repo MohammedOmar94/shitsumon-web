@@ -1,0 +1,32 @@
+@import '../../assets/_colors.scss';
+
+.Questions {
+  margin-top: 8px;
+}
+
+.Question {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.QuestionProgress {
+  color: $teal;
+}
+
+.Question p {
+  color: $dark-teal;
+}
+
+.Question input {
+  color: $dark-teal;
+  width: 55%;
+}
+
+.NextBtn {
+  background-color: $dark-teal;
+  border: none;
+  font-size: 14px;
+  padding: 8px;
+  margin-top: 8px;
+}
