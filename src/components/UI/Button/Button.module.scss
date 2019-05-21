@@ -1,0 +1,23 @@
+@import '../../../assets/_colors.scss';
+
+.Button, .ActiveBtn {
+  border: none;
+  font-size: 12px;
+  padding: 8px;
+  margin-top: 8px;
+}
+
+.Button {
+  background-color: $dark-teal;
+}
+
+.ActiveBtn, .Button:hover {
+  background-color: $light-teal;
+  transition: 200ms;
+}
+
+@media only screen and (min-width: 768px) {
+  .Button, .ActiveBtn {
+    font-size: 14px;
+  }
+}

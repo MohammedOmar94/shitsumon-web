@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import Questions from "../../components/Questions/Questions";
+import Button from "../../components/UI/Button/Button";
 import Section from "../../components/UI/Section/Section";
 import classes from "./MyQuizzes.module.scss";
 
@@ -24,7 +25,8 @@ class MyQuizzes extends Component {
       { id: 10, text: "October", answer: "juugatsu" },
       { id: 11, text: "November", answer: "juuichigatsu" },
       { id: 12, text: "December", answer: "juunigatsu" }
-    ]
+    ],
+    inputMode: '',
   };
 
   shuffle = array => {
@@ -52,6 +54,10 @@ class MyQuizzes extends Component {
     event.preventDefault();
   }
 
+  setInputMode = (inputMode) => {
+    this.setState({inputMode});
+  }
+
   componentDidMount() {
     const months = this.shuffle([...this.state.months]);
     this.setState({ months: months });
@@ -64,6 +70,12 @@ class MyQuizzes extends Component {
         questions={this.state.months}
         questionIndex={this.state.questionIndex}
         next={(event, questionId, correctAnswer) => this.handleNext(event, questionId, correctAnswer) } />
+        <div className={classes.Preferences}>
+          <p>Input mode</p>
+          <Button selected={this.state.inputMode === 'Kana'} onClick={() => this.setInputMode('Kana')}>Kana</Button>
+          <Button selected={this.state.inputMode === 'Kanji'} onClick={() => this.setInputMode('Kanji')}>Kanji</Button>
+          <Button selected={this.state.inputMode === 'Romaji'} onClick={() => this.setInputMode('Romaji')}>Romaji</Button>
+        </div>
       </Section>
     );
   }

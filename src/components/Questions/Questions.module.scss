@@ -17,6 +17,7 @@
 }
 
 .Question p {
+  font-size: 12px;
   color: $dark-teal;
 }
 
@@ -29,7 +30,7 @@
 .NextBtn {
   background-color: $dark-teal;
   border: none;
-  font-size: 14px;
+  font-size: 12px;
   padding: 8px;
   margin-top: 8px;
 }
@@ -37,5 +38,14 @@
 @media only screen and (min-width: 768px) {
   .QuestionProgress {
     font-size: 16px;
+  }
+
+  .Question p {
+    font-size: 14px;
+    color: $dark-teal;
+  }
+
+  .NextBtn {
+    font-size: 14px;
   }
 }
