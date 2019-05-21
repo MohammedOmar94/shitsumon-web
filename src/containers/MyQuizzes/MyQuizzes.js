@@ -26,7 +26,7 @@ class MyQuizzes extends Component {
       { id: 11, text: "November", answer: "juuichigatsu" },
       { id: 12, text: "December", answer: "juunigatsu" }
     ],
-    inputMode: '',
+    inputMode: 'toHiragana',
   };
 
   shuffle = array => {
@@ -39,8 +39,8 @@ class MyQuizzes extends Component {
 
   handleNext = (event, questionId, correctAnswer) => {
     const usersAnswer = event.target.answerField.value;
-    const score = usersAnswer=== wanakana.toHiragana(correctAnswer) ? this.state.score + 1 : this.state.score;
-    console.log(score, usersAnswer, wanakana.toHiragana(correctAnswer));
+    const score = wanakana.toRomaji(usersAnswer) === wanakana.toRomaji(correctAnswer) ? this.state.score + 1 : this.state.score;
+    console.log(score, wanakana.toRomaji(usersAnswer), wanakana.toRomaji(correctAnswer));
     if (this.state.questionIndex + 1 === this.state.months.length) {
       console.log('Finished quiz');
     } else {
@@ -69,12 +69,13 @@ class MyQuizzes extends Component {
       <Questions
         questions={this.state.months}
         questionIndex={this.state.questionIndex}
+        inputMode={this.state.inputMode}
         next={(event, questionId, correctAnswer) => this.handleNext(event, questionId, correctAnswer) } />
         <div className={classes.Preferences}>
           <p>Input mode</p>
-          <Button selected={this.state.inputMode === 'Kana'} onClick={() => this.setInputMode('Kana')}>Kana</Button>
-          <Button selected={this.state.inputMode === 'Kanji'} onClick={() => this.setInputMode('Kanji')}>Kanji</Button>
-          <Button selected={this.state.inputMode === 'Romaji'} onClick={() => this.setInputMode('Romaji')}>Romaji</Button>
+          <Button selected={this.state.inputMode === 'toHiragana'} onClick={() => this.setInputMode('toHiragana')}>Hiragana</Button>
+          <Button selected={this.state.inputMode === 'toKatakana'} onClick={() => this.setInputMode('toKatakana')}>Katakana</Button>
+          <Button selected={this.state.inputMode === 'Default'} onClick={() => this.setInputMode('Default')}>Romaji</Button>
         </div>
       </Section>
     );
