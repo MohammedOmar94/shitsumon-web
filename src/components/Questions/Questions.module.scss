@@ -8,6 +8,7 @@
 .Question {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   margin: 16px 0 8px;
 }
 
@@ -23,8 +24,10 @@
 
 .Question input {
   color: $dark-teal;
-  width: 55%;
+  width: 100%;
   margin-left: 16px;
+  font-size: 14px;
+  padding: 4px 8px;
 }
 
 .NextBtn {
@@ -43,6 +46,11 @@
   .Question p {
     font-size: 14px;
     color: $dark-teal;
+  }
+
+  .Question input {
+    font-size: 16px;
+    padding: 4px 8px;
   }
 
   .NextBtn {
