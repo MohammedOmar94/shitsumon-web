@@ -19,7 +19,7 @@ class MyQuizzes extends Component {
       { id: 4, text: "April", answer: "shigatsu" },
       { id: 5, text: "May", answer: "gogatsu" },
       { id: 6, text: "June", answer: "rokugatsu" },
-      { id: 7, text: "July", answer: "shigatsu"  },
+      { id: 7, text: "July", answer: "shichigatsu"  },
       { id: 8, text: "August", answer: "hachigatsu" },
       { id: 9, text: "September", answer: "kugatsu" },
       { id: 10, text: "October", answer: "juugatsu" },
@@ -27,6 +27,7 @@ class MyQuizzes extends Component {
       { id: 12, text: "December", answer: "juunigatsu" }
     ],
     inputMode: 'toHiragana',
+    answerHistory: [],
   };
 
   shuffle = array => {
@@ -37,17 +38,28 @@ class MyQuizzes extends Component {
     return array;
   };
 
-  handleNext = (event, questionId, correctAnswer) => {
+  handleNext = (event) => {
+    const question = this.state.months[this.state.questionIndex];
+
     const usersAnswer = event.target.answerField.value;
-    const score = wanakana.toRomaji(usersAnswer) === wanakana.toRomaji(correctAnswer) ? this.state.score + 1 : this.state.score;
-    console.log(score, wanakana.toRomaji(usersAnswer), wanakana.toRomaji(correctAnswer));
+    const answerWasCorrect = wanakana.toRomaji(usersAnswer) === wanakana.toRomaji(question.answer);
+    const answerHistory = [...this.state.answerHistory];
+
+    let score = this.state.score;
+    if (answerWasCorrect) {
+      score = score + 1;
+    }
+    answerHistory.push({ question, usersAnswer, answerWasCorrect })
+    console.log(answerHistory);
+    console.log(score, wanakana.toRomaji(usersAnswer), wanakana.toRomaji(question.answer));
     if (this.state.questionIndex + 1 === this.state.months.length) {
       console.log('Finished quiz');
     } else {
       this.setState(prevState => {
         return {
           questionIndex: prevState.questionIndex + 1,
-          score: score
+          score,
+          answerHistory
          }
       });
     }
@@ -70,7 +82,7 @@ class MyQuizzes extends Component {
         questions={this.state.months}
         questionIndex={this.state.questionIndex}
         inputMode={this.state.inputMode}
-        next={(event, questionId, correctAnswer) => this.handleNext(event, questionId, correctAnswer) } />
+        next={(event) => this.handleNext(event) } />
         <div className={classes.Preferences}>
           <p>Input mode</p>
           <Button selected={this.state.inputMode === 'toHiragana'} onClick={() => this.setInputMode('toHiragana')}>Hiragana</Button>
