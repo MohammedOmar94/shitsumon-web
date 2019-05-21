@@ -51,11 +51,9 @@ class MyQuizzes extends Component {
       score = score + 1;
     }
     answerHistory.push({ text: question.text, usersAnswer, correctAnswer: question.answer, answerWasCorrect })
-    console.log(answerHistory);
-    console.log(score, wanakana.toRomaji(usersAnswer), wanakana.toRomaji(question.answer));
     if (this.state.questionIndex + 1 === this.state.months.length) {
-      this.setState({endOfQuiz: true});
-    } else {
+      this.setState({endOfQuiz: true, answerHistory});
+    } else if (usersAnswer) {
       this.setState(prevState => {
         return {
           questionIndex: prevState.questionIndex + 1,

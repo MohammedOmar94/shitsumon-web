@@ -43,7 +43,7 @@ const questions = props => {
         <h4 className={classes.QuestionNumber}>Question {props.questionIndex + 1} of {props.questions.length}</h4>
         <section key={question.id} className={classes.Question}>
           <p>{question.text}</p>
-          <input key={props.inputMode} type="text" ref={inputEl} name='answerField' value={props.usersAnswer}/>
+          <input key={props.inputMode} type="text" ref={inputEl} name='answerField' autoFocus value={props.usersAnswer}/>
         </section>
         <input className={classes.NextBtn} type="submit" />
       </form>
@@ -52,9 +52,9 @@ const questions = props => {
     return (
       <form className={classes.Questions}>
       { props.answerHistory.map((question, index) => (
-        <Fragment>
+        <Fragment key={'answer-' + (index + 1)} >
           <h4 className={classes.QuestionNumber}>Question {index + 1} - {question.text}</h4>
-          <section key={question.id} className={classes.AnswerHistory}>
+          <section className={classes.AnswerHistory}>
             <p className={classes.Answers}>You wrote {resultMsg(question.usersAnswer, question.answerWasCorrect)} </p>
           </section>
         </Fragment>
