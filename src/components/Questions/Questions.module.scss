@@ -12,7 +12,7 @@
   margin: 16px 0 8px;
 }
 
-.QuestionProgress {
+.QuestionNumber {
   color: $teal;
   font-size: 14px;
 }
@@ -45,9 +45,42 @@
   background-color: $light-teal;
 }
 
+.AnswerHistory {
+  margin: 4px 0px;
+}
+
+.Answers {
+  display: inline-block;
+  color: $dark-teal;
+  font-size: 12px;
+  & i {
+    margin-left: 4px;
+  }
+}
+
+.CorrectAnswer {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  color: $light-teal;
+}
+
+.WrongAnswer {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ff0000;
+}
+
+
+.Answer {
+  color: $light-teal;
+  font-weight: bold;
+}
+
 
 @media only screen and (min-width: 768px) {
-  .QuestionProgress {
+  .QuestionNumber {
     font-size: 16px;
   }
 
@@ -61,7 +94,7 @@
     padding: 4px 8px;
   }
 
-  .NextBtn {
+  .Answers, .WrongAnswer, .CorrectAnswer, .NextBtn {
     font-size: 14px;
   }
 }

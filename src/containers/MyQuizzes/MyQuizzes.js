@@ -28,6 +28,7 @@ class MyQuizzes extends Component {
     ],
     inputMode: 'toHiragana',
     answerHistory: [],
+    endOfQuiz: false,
   };
 
   shuffle = array => {
@@ -49,11 +50,11 @@ class MyQuizzes extends Component {
     if (answerWasCorrect) {
       score = score + 1;
     }
-    answerHistory.push({ question, usersAnswer, answerWasCorrect })
+    answerHistory.push({ text: question.text, usersAnswer, correctAnswer: question.answer, answerWasCorrect })
     console.log(answerHistory);
     console.log(score, wanakana.toRomaji(usersAnswer), wanakana.toRomaji(question.answer));
     if (this.state.questionIndex + 1 === this.state.months.length) {
-      console.log('Finished quiz');
+      this.setState({endOfQuiz: true});
     } else {
       this.setState(prevState => {
         return {
@@ -76,19 +77,27 @@ class MyQuizzes extends Component {
   }
 
   render() {
-    return (
-      <Section name="Dates 年月日" className={classes.MyQuizzes}>
-      <Questions
-        questions={this.state.months}
-        questionIndex={this.state.questionIndex}
-        inputMode={this.state.inputMode}
-        next={(event) => this.handleNext(event) } />
+    let inputMode = null;
+    if (!this.state.endOfQuiz) {
+      inputMode = (
         <div className={classes.Preferences}>
           <p>Input mode</p>
           <Button selected={this.state.inputMode === 'toHiragana'} onClick={() => this.setInputMode('toHiragana')}>Hiragana</Button>
           <Button selected={this.state.inputMode === 'toKatakana'} onClick={() => this.setInputMode('toKatakana')}>Katakana</Button>
           <Button selected={this.state.inputMode === 'Default'} onClick={() => this.setInputMode('Default')}>Romaji</Button>
         </div>
+      );
+    }
+    return (
+      <Section name="Dates 年月日" className={classes.MyQuizzes}>
+      <Questions
+        questions={this.state.months}
+        questionIndex={this.state.questionIndex}
+        inputMode={this.state.inputMode}
+        next={(event) => this.handleNext(event) }
+        answerHistory={this.state.answerHistory}
+        endOfQuiz={this.state.endOfQuiz} />
+        { inputMode }
       </Section>
     );
   }
