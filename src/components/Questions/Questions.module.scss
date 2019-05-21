@@ -2,16 +2,18 @@
 
 .Questions {
   margin-top: 8px;
+  padding: 4px;
 }
 
 .Question {
   display: flex;
-  justify-content: space-between;
-  margin-top: 4px;
+  justify-content: flex-start;
+  margin: 16px 0 8px;
 }
 
 .QuestionProgress {
   color: $teal;
+  font-size: 14px;
 }
 
 .Question p {
@@ -21,6 +23,7 @@
 .Question input {
   color: $dark-teal;
   width: 55%;
+  margin-left: 16px;
 }
 
 .NextBtn {
@@ -29,4 +32,10 @@
   font-size: 14px;
   padding: 8px;
   margin-top: 8px;
+}
+
+@media only screen and (min-width: 768px) {
+  .QuestionProgress {
+    font-size: 16px;
+  }
 }
