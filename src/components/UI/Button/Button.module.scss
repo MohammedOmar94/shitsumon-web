@@ -10,11 +10,11 @@
 
 .Button {
   background-color: $dark-teal;
+  transition: 200ms;
 }
 
 .ActiveBtn, .Button:hover {
   background-color: $light-teal;
-  transition: 200ms;
 }
 
 @media only screen and (min-width: 768px) {
