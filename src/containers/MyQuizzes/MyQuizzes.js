@@ -4,23 +4,26 @@ import Questions from "../../components/Questions/Questions";
 import Section from "../../components/UI/Section/Section";
 import classes from "./MyQuizzes.module.scss";
 
+const wanakana = require('wanakana');
+
+
 class MyQuizzes extends Component {
   state = {
     score: 0,
     questionIndex: 0,
     months: [
-      { id: 1, text: "いちがつ", answer: "January" },
-      { id: 2, text: "にがつ", answer: "Feburary" },
-      { id: 3, text: "さんがつ", answer: "March" },
-      { id: 4, text: "しがつ", answer: "April" },
-      { id: 5, text: "ごがつ", answer: "May" },
-      { id: 6, text: "ろくがつ", answer: "June" },
-      { id: 7, text: "しちがつ", answer: "July" },
-      { id: 8, text: "はちがつ", answer: "August" },
-      { id: 9, text: "くがつ", answer: "September" },
-      { id: 10, text: "じゅうがつ", answer: "October" },
-      { id: 11, text: "じゅういちがつ", answer: "November" },
-      { id: 12, text: "じゅうにがつ", answer: "December" }
+      { id: 1, text: "January", answer: "ichigatsu" },
+      { id: 2, text: "Feburary", answer: "nigatsu" },
+      { id: 3, text: "March", answer: "sangatsu" },
+      { id: 4, text: "April", answer: "shigatsu" },
+      { id: 5, text: "May", answer: "gogatsu" },
+      { id: 6, text: "June", answer: "rokugatsu" },
+      { id: 7, text: "July", answer: "shigatsu"  },
+      { id: 8, text: "August", answer: "hachigatsu" },
+      { id: 9, text: "September", answer: "kugatsu" },
+      { id: 10, text: "October", answer: "juugatsu" },
+      { id: 11, text: "November", answer: "juuichigatsu" },
+      { id: 12, text: "December", answer: "juunigatsu" }
     ]
   };
 
@@ -34,8 +37,8 @@ class MyQuizzes extends Component {
 
   handleNext = (event, questionId, correctAnswer) => {
     const usersAnswer = event.target.answerField.value;
-    const score = usersAnswer.toLowerCase() === correctAnswer.toLowerCase() ? this.state.score + 1 : this.state.score;
-    console.log(score, usersAnswer, correctAnswer);
+    const score = usersAnswer=== wanakana.toHiragana(correctAnswer) ? this.state.score + 1 : this.state.score;
+    console.log(score, usersAnswer, wanakana.toHiragana(correctAnswer));
     if (this.state.questionIndex + 1 === this.state.months.length) {
       console.log('Finished quiz');
     } else {
