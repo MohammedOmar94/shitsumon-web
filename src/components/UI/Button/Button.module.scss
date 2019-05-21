@@ -1,6 +1,7 @@
 @import '../../../assets/_colors.scss';
 
 .Button, .ActiveBtn {
+  cursor: pointer;
   border: none;
   font-size: 12px;
   padding: 8px;
