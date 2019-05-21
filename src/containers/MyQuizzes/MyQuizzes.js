@@ -29,6 +29,7 @@ class MyQuizzes extends Component {
     inputMode: 'toHiragana',
     answerHistory: [],
     endOfQuiz: false,
+    sectionName: '',
   };
 
   shuffle = array => {
@@ -52,7 +53,7 @@ class MyQuizzes extends Component {
     }
     answerHistory.push({ text: question.text, usersAnswer, correctAnswer: question.answer, answerWasCorrect })
     if (this.state.questionIndex + 1 === this.state.months.length) {
-      this.setState({endOfQuiz: true, answerHistory});
+      this.setState({endOfQuiz: true, answerHistory, sectionName: 'Results'});
     } else if (usersAnswer) {
       this.setState(prevState => {
         return {
@@ -71,7 +72,7 @@ class MyQuizzes extends Component {
 
   componentDidMount() {
     const months = this.shuffle([...this.state.months]);
-    this.setState({ months: months });
+    this.setState({ months, sectionName: 'Dates 年月日' });
   }
 
   render() {
@@ -87,7 +88,7 @@ class MyQuizzes extends Component {
       );
     }
     return (
-      <Section name="Dates 年月日" className={classes.MyQuizzes}>
+      <Section name={this.state.sectionName} className={classes.MyQuizzes}>
       <Questions
         questions={this.state.months}
         questionIndex={this.state.questionIndex}
