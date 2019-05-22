@@ -43,7 +43,7 @@ const questions = props => {
         <h4 className={classes.QuestionNumber}>Question {props.questionIndex + 1} of {props.questions.length}</h4>
         <section key={question.id} className={classes.Question}>
           <p>{question.text}</p>
-          <input key={props.inputMode} type="text" ref={inputEl} name='answerField' autoFocus value={props.usersAnswer}/>
+          <input key={props.inputMode} type="text" ref={inputEl} name='answerField' autoFocus autoComplete="off" value={props.usersAnswer}/>
         </section>
         <input className={classes.NextBtn} type="submit" />
       </form>
