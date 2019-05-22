@@ -21,7 +21,7 @@ const portalLink = props => {
       break;
   }
   return (
-    <a href className={classes.PortalLink}>
+    <a href={props.href} className={classes.PortalLink}>
       { icon }
       <p>{props.label}</p>
     </a>
