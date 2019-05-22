@@ -1,0 +1,30 @@
+@import '../../assets/_colors.scss';
+
+.Portal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  margin: 32px auto 8px;
+  padding: 8px;
+  width: 80%;
+  height: 100%;
+  background-color: $light;
+}
+
+.Portal ul {
+  list-style-type: none;
+  columns: 2;
+}
+
+.Portal li {
+  margin-bottom: 10px;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .Portal {
+    width: 80%;
+  }
+}

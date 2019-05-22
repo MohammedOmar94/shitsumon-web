@@ -1,0 +1,54 @@
+@import '../../assets/_colors.scss';
+
+.PortalLink {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-right: 8px;
+  border-radius: 5px;
+  padding: 8px;
+  width: 75px;
+  height: 100%;
+  background-color: $light-teal;
+  transition: 300ms;
+}
+
+.PortalLink:hover {
+  background-color: $lightest-teal;
+}
+
+.PortalLink p {
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.PortalLink i {
+  font-size: 40px;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .PortalLink {
+    width: 100px;
+    height: 100%;
+    font-size: 56px;
+  }
+
+  .PortalLink:hover {
+    background-color: $lightest-teal;
+  }
+
+  .PortalLink p {
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .PortalLink i {
+    font-size: 56px;
+  }
+}
