@@ -23,12 +23,16 @@
   color: $dark-teal;
 }
 
-.Question input {
+.AnswerField, .EmptyAnswer {
   color: $dark-teal;
   width: 100%;
   margin-left: 16px;
   font-size: 14px;
   padding: 4px 8px;
+}
+
+.EmptyAnswer {
+  border: 2px solid red;
 }
 
 .NextBtn {

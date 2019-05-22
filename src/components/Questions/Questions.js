@@ -43,7 +43,17 @@ const questions = props => {
         <h4 className={classes.QuestionNumber}>Question {props.questionIndex + 1} of {props.questions.length}</h4>
         <section key={question.id} className={classes.Question}>
           <p>{question.text}</p>
-          <input key={props.inputMode} type="text" ref={inputEl} name='answerField' autoFocus autoComplete="off" value={props.usersAnswer}/>
+          <input
+            key={props.inputMode}
+            className={props.emptyAnswer ? classes.EmptyAnswer : classes.AnswerField}
+            ref={inputEl}
+            type="text"
+            name="answerField"
+            autoFocus
+            autoComplete="off"
+            placeholder="Type the Japanese word here"
+            value={props.usersAnswer}
+          />
         </section>
         <input className={classes.NextBtn} type="submit" />
       </form>
@@ -67,6 +77,7 @@ const questions = props => {
 questions.propTypes = {
   questions: PropTypes.array.isRequired,
   questionIndex: PropTypes.number.isRequired,
+  emptyAnswer: PropTypes.bool.isRequired,
   inputMode: PropTypes.string.isRequired,
   endOfQuiz: PropTypes.bool.isRequired
 };

@@ -26,6 +26,7 @@ class MyQuizzes extends Component {
       { id: 11, text: "November", answer: "juuichigatsu" },
       { id: 12, text: "December", answer: "juunigatsu" }
     ],
+    emptyAnswer: false,
     inputMode: 'toHiragana',
     answerHistory: [],
     endOfQuiz: false,
@@ -62,6 +63,8 @@ class MyQuizzes extends Component {
           answerHistory
          }
       });
+    } else {
+      this.setState({emptyAnswer: true});
     }
     event.preventDefault();
   }
@@ -95,6 +98,7 @@ class MyQuizzes extends Component {
         inputMode={this.state.inputMode}
         next={(event) => this.handleNext(event) }
         answerHistory={this.state.answerHistory}
+        emptyAnswer={this.state.emptyAnswer}
         endOfQuiz={this.state.endOfQuiz} />
         { inputMode }
       </Section>
