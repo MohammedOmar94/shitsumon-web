@@ -9,11 +9,11 @@ class Portal extends Component {
   render() {
     const settings = {
       arrows: false,
-      lazyLoad: true,
+      // lazyLoad: true,
       // fade: true,
       infinite: true,
       speed: 500,
-      swipe: false,
+      // swipe: false,
       autoplay: true,
       autoplaySpeed: 4000,
     };

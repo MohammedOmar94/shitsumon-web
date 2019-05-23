@@ -60,7 +60,8 @@ class MyQuizzes extends Component {
         return {
           questionIndex: prevState.questionIndex + 1,
           score,
-          answerHistory
+          answerHistory,
+          emptyAnswer: false
          }
       });
     } else {
