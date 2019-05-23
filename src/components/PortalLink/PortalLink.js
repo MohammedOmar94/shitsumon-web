@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from 'react-router-dom'
+
 
 import classes from "./PortalLink.module.scss";
 
@@ -21,10 +23,10 @@ const portalLink = props => {
       break;
   }
   return (
-    <a href={props.href} className={classes.PortalLink}>
+    <Link to={{pathname: props.href}} className={classes.PortalLink}>
       { icon }
       <p>{props.label}</p>
-    </a>
+    </Link>
   );
 };
 
