@@ -11,7 +11,7 @@ class Portal extends Component {
       arrows: false,
       lazyLoad: true,
       // fade: true,
-      infinite: false,
+      infinite: true,
       speed: 500,
       swipe: false,
       autoplay: true,
