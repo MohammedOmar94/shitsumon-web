@@ -1,7 +1,7 @@
 @import '../../assets/_colors.scss';
 
 .Layout {
-  display: flex;
   background-color: $dark-teal;
+  overflow: auto;
   min-height: 100%;
 }

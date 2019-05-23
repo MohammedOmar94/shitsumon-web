@@ -17,9 +17,58 @@
   margin: 10px
 }
 
+.Slider {
+  width: 80%;
+  height: 100%;
+  margin: 32px auto;
+  background-color: $light;
+  padding: 4px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.Slide, .ImageSlide {
+  height: 250px;
+}
+
+.Slide p, .ImageSlide p {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-style: italic;
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: $dark-teal;
+  // margin: 0 8px;
+}
+
+.ImageSlide {
+  background:
+  linear-gradient(
+    rgba(255, 31, 218, 0.45),
+    rgba(255, 31, 218, 0.45),
+  ), url('../../assets/images/angry_kirby.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.ImageSlide p {
+  color: $light;
+}
+
 
 @media only screen and (min-width: 768px) {
   .Portal {
     width: 80%;
+  }
+
+  .Slide, .ImageSlide {
+    height: 400px;
+  }
+  .Slide p, .ImageSlide p {
+    font-size: 24px;
   }
 }
