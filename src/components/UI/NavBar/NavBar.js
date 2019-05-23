@@ -5,7 +5,7 @@ import classes from "./NavBar.module.scss";
 
 const NavBar = props => (
   <header className={classes.NavBar}>
-    <Link to={{pathname: '/'}} exact>
+    <Link to={{pathname: '/'}} >
       <h1>
         <p className={classes.Hiragana}>しつもん</p>
         shitsumon
