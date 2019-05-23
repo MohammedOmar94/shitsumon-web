@@ -20,19 +20,19 @@ self.__precacheManifest = [
     "url": "/shitsumon-web/static/js/runtime~main.7cbc342c.js"
   },
   {
-    "revision": "42f1d2b015634e9476a9",
-    "url": "/shitsumon-web/static/js/main.d2a3f00a.chunk.js"
+    "revision": "9511e86ebd1ee810f866",
+    "url": "/shitsumon-web/static/js/main.f7eff38d.chunk.js"
   },
   {
     "revision": "01182f40b932810e0797",
     "url": "/shitsumon-web/static/js/2.37affd15.chunk.js"
   },
   {
-    "revision": "42f1d2b015634e9476a9",
+    "revision": "9511e86ebd1ee810f866",
     "url": "/shitsumon-web/static/css/main.8de88d0a.chunk.css"
   },
   {
-    "revision": "3c78b00472eaa0ca1e65deed0e52ae29",
+    "revision": "0b83586a6cf3eacca27a05d468900e77",
     "url": "/shitsumon-web/index.html"
   }
 ];
