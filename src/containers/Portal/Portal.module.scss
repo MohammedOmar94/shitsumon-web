@@ -20,43 +20,80 @@
 .Slider {
   width: 80%;
   height: 100%;
-  margin: 32px auto;
+  margin: 24px auto 32px;
   background-color: $light;
   padding: 4px;
   border-radius: 5px;
   text-align: center;
 }
 
-.Slide, .ImageSlide {
-  height: 250px;
+.Slide {
+  padding: 4px;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.Slide p, .ImageSlide p {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+.SlideCaption, .ImageCaption {
   font-style: italic;
   font-family: 'Raleway', sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
-  color: $dark-teal;
   // margin: 0 8px;
 }
 
-.ImageSlide {
+.SlideCaption {
+  color: $dark-teal;
+}
+
+.ImageCaption {
+  color: $light;
+}
+
+.KirbySlide {
   background:
   linear-gradient(
     rgba(255, 31, 218, 0.45),
     rgba(255, 31, 218, 0.45),
-  ), url('../../assets/images/angry_kirby.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  ),
+  url('../../assets/images/angry_kirby.jpg')
+  no-repeat
+  center/cover;
 }
 
-.ImageSlide p {
-  color: $light;
+.WiggleSlide {
+  background:
+  linear-gradient(
+    rgba(0, 0, 0, 0.45),
+    rgba(0, 0, 0, 0.45),
+  ),
+  url('../../assets/images/shaq_wiggle.gif')
+  no-repeat
+  center/cover;
+}
+
+.MiyamotoApproveSlide {
+  background:
+  linear-gradient(
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.25),
+  ),
+  url('../../assets/images/miyamoto_approve.gif')
+  no-repeat
+  top/cover;
+}
+
+.MiyamotoRejectSlide {
+  background:
+  linear-gradient(
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.25),
+  ),
+  url('../../assets/images/miyamoto_reject.gif')
+  no-repeat
+  center/cover;
 }
 
 
@@ -65,10 +102,10 @@
     width: 80%;
   }
 
-  .Slide, .ImageSlide {
-    height: 400px;
+  .Slide {
+    height: 80vh;
   }
-  .Slide p, .ImageSlide p {
+  .SlideCaption, .ImageCaption {
     font-size: 24px;
   }
 }
