@@ -54,8 +54,8 @@ const questions = props => {
             placeholder="Type the Japanese word here"
             value={props.usersAnswer}
           />
+          <input className={classes.NextBtn} type="submit" value="Next"/>
         </section>
-        <input className={classes.NextBtn} type="submit" />
       </form>
     );
   } else {

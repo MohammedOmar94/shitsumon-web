@@ -7,9 +7,9 @@
 
 .Question {
   display: flex;
-  justify-content: flex-start;
+  flex-wrap: wrap;
   align-items: center;
-  margin: 16px 0 8px;
+  margin: 8px 0px 8px 8px;
 }
 
 .QuestionNumber {
@@ -19,14 +19,14 @@
 
 .Question p {
   font-weight: 500;
-  font-size: 12px;
+  font-size: 18px;
   color: $dark-teal;
 }
 
 .AnswerField, .EmptyAnswer {
   color: $dark-teal;
   width: 100%;
-  margin-left: 16px;
+  margin: 8px 0 16px;
   font-size: 14px;
   padding: 4px 8px;
 }
@@ -41,8 +41,7 @@
   transition: 200ms;
   border: none;
   font-size: 12px;
-  padding: 8px;
-  margin-top: 8px;
+  padding: 8px 16px;
 }
 
 .NextBtn:hover {
@@ -89,16 +88,19 @@
   }
 
   .Question p {
-    font-size: 14px;
-    color: $dark-teal;
+    font-size: 24px;
   }
 
-  .Question input {
+  .AnswerField {
     font-size: 16px;
     padding: 4px 8px;
   }
 
-  .Answers, .WrongAnswer, .CorrectAnswer, .NextBtn {
+  .Answers, .WrongAnswer, .CorrectAnswer {
     font-size: 14px;
+  }
+
+  .NextBtn {
+    font-size: 16px;
   }
 }
