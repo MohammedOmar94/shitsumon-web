@@ -53,7 +53,6 @@
 }
 
 .Answers {
-  display: inline-block;
   color: $dark-teal;
   font-size: 12px;
   & i {
@@ -62,14 +61,12 @@
 }
 
 .CorrectAnswer {
-  display: inline-block;
   font-size: 12px;
   font-weight: bold;
   color: $light-teal;
 }
 
 .WrongAnswer {
-  display: inline-block;
   font-size: 12px;
   font-weight: bold;
   color: #ff0000;

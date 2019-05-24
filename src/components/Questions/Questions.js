@@ -35,6 +35,14 @@ const questions = props => {
     );
   }
 
+  const correctAnswer = (correctAnswer, answerWasCorrect) => {
+    if (!answerWasCorrect) {
+      return <p className={classes.CorrectAnswer}>The correct answer was {correctAnswer}</p>
+    } else {
+      return null;
+    }
+  };
+
   const submitHandler = (event) => props.next(event, question.id, question.answer);
 
   if (!props.endOfQuiz) {
@@ -60,16 +68,17 @@ const questions = props => {
     );
   } else {
     return (
-      <form className={classes.Questions}>
+      <div className={classes.Questions}>
       { props.answerHistory.map((question, index) => (
         <Fragment key={'answer-' + (index + 1)} >
           <h4 className={classes.QuestionNumber}>Question {index + 1} - {question.text}</h4>
           <section className={classes.AnswerHistory}>
             <p className={classes.Answers}>You wrote {resultMsg(question.usersAnswer, question.answerWasCorrect)} </p>
+            {correctAnswer(wanakana.toHiragana(question.correctAnswer), question.answerWasCorrect)}
           </section>
         </Fragment>
       ))}
-      </form>
+      </div>
     );
   }
 };
