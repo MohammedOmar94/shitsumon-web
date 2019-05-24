@@ -2,6 +2,7 @@ import React, { Fragment, useRef } from "react";
 import PropTypes from "prop-types";
 
 import classes from "./Questions.module.scss";
+import Result from  './Result/Result';
 
 const wanakana = require('wanakana');
 
@@ -18,34 +19,9 @@ const questions = props => {
 
   const question = props.questions[props.questionIndex];
 
-  const resultMsg = (usersAnswer, answerWasCorrect) => {
-    if (answerWasCorrect) {
-      return (
-        <span className={classes.CorrectAnswer}>
-          {usersAnswer}
-          <i className={"fas fa-check-circle " + classes.CorrectAnswer}></i>
-        </span>
-      );
-    }
-    return (
-        <span className={classes.WrongAnswer}>
-          {usersAnswer}
-          <i className={"fas fa-times-circle " + classes.WrongAnswer}></i>
-        </span>
-    );
-  }
-
-  const correctAnswer = (correctAnswer, answerWasCorrect) => {
-    if (!answerWasCorrect) {
-      return <p className={classes.CorrectAnswer}>The correct answer was {correctAnswer}</p>
-    } else {
-      return null;
-    }
-  };
-
   const submitHandler = (event) => props.next(event, question.id, question.answer);
 
-  if (!props.endOfQuiz) {
+  if (props.questions.length && !props.endOfQuiz) {
     return (
       <form className={classes.Questions} onSubmit={submitHandler}>
         <h4 className={classes.QuestionNumber}>Question {props.questionIndex + 1} of {props.questions.length}</h4>
@@ -66,20 +42,23 @@ const questions = props => {
         </section>
       </form>
     );
-  } else {
+  } else if (props.endOfQuiz){
     return (
       <div className={classes.Questions}>
       { props.answerHistory.map((question, index) => (
         <Fragment key={'answer-' + (index + 1)} >
           <h4 className={classes.QuestionNumber}>Question {index + 1} - {question.text}</h4>
-          <section className={classes.AnswerHistory}>
-            <p className={classes.Answers}>You wrote {resultMsg(question.usersAnswer, question.answerWasCorrect)} </p>
-            {correctAnswer(wanakana.toHiragana(question.correctAnswer), question.answerWasCorrect)}
-          </section>
+          <Result className={classes.AnswerHistory}
+            answerWasCorrect={question.answerWasCorrect}
+            correctAnswer={question.correctAnswer}
+            usersAnswer={question.usersAnswer}
+          />
         </Fragment>
       ))}
       </div>
     );
+  } else {
+    return null;
   }
 };
 

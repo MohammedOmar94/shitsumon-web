@@ -52,32 +52,6 @@
   margin: 4px 0px;
 }
 
-.Answers {
-  color: $dark-teal;
-  font-size: 12px;
-  & i {
-    margin-left: 4px;
-  }
-}
-
-.CorrectAnswer {
-  font-size: 12px;
-  font-weight: bold;
-  color: $light-teal;
-}
-
-.WrongAnswer {
-  font-size: 12px;
-  font-weight: bold;
-  color: #ff0000;
-}
-
-
-.Answer {
-  color: $light-teal;
-  font-weight: bold;
-}
-
 
 @media only screen and (min-width: 768px) {
   .QuestionNumber {
@@ -91,10 +65,6 @@
   .AnswerField {
     font-size: 16px;
     padding: 4px 8px;
-  }
-
-  .Answers, .WrongAnswer, .CorrectAnswer {
-    font-size: 14px;
   }
 
   .NextBtn {
