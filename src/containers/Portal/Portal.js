@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
 import classes from './Portal.module.scss';
-import PortalLink from '../../components/PortalLink/PortalLink';
 import Slider from "react-slick";
 
 
@@ -19,13 +18,6 @@ class Portal extends Component {
     };
     return (
       <Fragment>
-        <div className={classes.Portal}>
-          <PortalLink label='Partner Up' />
-          <PortalLink label='Games' />
-          <PortalLink href='/my-tests' label='My Quizzes' />
-          <PortalLink label='Profile' />
-        </div>
-
         <Slider {...settings} className={classes.Slider}>
           <Fragment>
             <div className={classes.Slide}>

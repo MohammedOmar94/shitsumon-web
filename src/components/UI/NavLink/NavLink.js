@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from 'react-router-dom'
 
 
-import classes from "./PortalLink.module.scss";
+import classes from "./NavLink.module.scss";
 
-const portalLink = props => {
+const navLink = props => {
   let icon;
   switch (props.label) {
     case "Partner Up":
@@ -23,11 +23,11 @@ const portalLink = props => {
       break;
   }
   return (
-    <Link to={{pathname: props.href}} className={classes.PortalLink}>
+    <Link className={props.className} to={{pathname: props.href}} className={classes.PortalLink}>
       { icon }
       <p>{props.label}</p>
     </Link>
   );
 };
 
-export default portalLink;
+export default navLink;

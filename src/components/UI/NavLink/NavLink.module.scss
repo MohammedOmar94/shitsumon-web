@@ -1,4 +1,4 @@
-@import '../../assets/_colors.scss';
+@import '../../../assets/_colors.scss';
 
 .PortalLink {
   cursor: pointer;
@@ -6,11 +6,9 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  margin-right: 8px;
   border-radius: 5px;
-  padding: 8px;
-  width: 75px;
-  height: 100%;
+  padding: 8px 0;
+  width: 100%;
   background-color: $light-teal;
   transition: 300ms;
   text-decoration: none;
@@ -28,14 +26,12 @@
 }
 
 .PortalLink i {
-  font-size: 40px;
+  font-size: 24px;
 }
 
 
 @media only screen and (min-width: 768px) {
   .PortalLink {
-    width: 100px;
-    height: 100%;
     font-size: 56px;
   }
 
@@ -47,9 +43,5 @@
     width: 100%;
     text-align: center;
     font-size: 16px;
-  }
-
-  .PortalLink i {
-    font-size: 56px;
   }
 }
