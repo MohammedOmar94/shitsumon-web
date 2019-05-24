@@ -102,16 +102,16 @@ class MyQuizzes extends Component {
     // Temporary, pretty sure there is a better way around all this.
     if (this.state.questions.length) {
         return (
-          <Section name={this.state.sectionName} className={classes.MyQuizzes}>
-          <Questions
-            questions={this.state.questions}
-            questionIndex={this.state.questionIndex}
-            inputMode={this.state.inputMode}
-            next={(event) => this.handleNext(event) }
-            answerHistory={this.state.answerHistory}
-            emptyAnswer={this.state.emptyAnswer}
-            endOfQuiz={this.state.endOfQuiz} />
-            { inputMode }
+          <Section name={this.state.sectionName} className={`${classes.Quiz}`}>
+            <Questions
+              questions={this.state.questions}
+              questionIndex={this.state.questionIndex}
+              inputMode={this.state.inputMode}
+              next={(event) => this.handleNext(event) }
+              answerHistory={this.state.answerHistory}
+              emptyAnswer={this.state.emptyAnswer}
+              endOfQuiz={this.state.endOfQuiz} />
+              { inputMode }
           </Section>
         );
       } else {
