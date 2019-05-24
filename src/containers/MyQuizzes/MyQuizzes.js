@@ -4,6 +4,8 @@ import Questions from "../../components/Questions/Questions";
 import Button from "../../components/UI/Button/Button";
 import Section from "../../components/UI/Section/Section";
 import classes from "./MyQuizzes.module.scss";
+import jpMonths from  '../../japanese/months.js';
+import jpDays from  '../../japanese/days.js';
 
 const wanakana = require('wanakana');
 
@@ -12,22 +14,9 @@ class MyQuizzes extends Component {
   state = {
     score: 0,
     questionIndex: 0,
-    months: [
-      { id: 1, text: "January", answer: "ichigatsu" },
-      { id: 2, text: "Feburary", answer: "nigatsu" },
-      { id: 3, text: "March", answer: "sangatsu" },
-      { id: 4, text: "April", answer: "shigatsu" },
-      { id: 5, text: "May", answer: "gogatsu" },
-      { id: 6, text: "June", answer: "rokugatsu" },
-      { id: 7, text: "July", answer: "shichigatsu"  },
-      { id: 8, text: "August", answer: "hachigatsu" },
-      { id: 9, text: "September", answer: "kugatsu" },
-      { id: 10, text: "October", answer: "juugatsu" },
-      { id: 11, text: "November", answer: "juuichigatsu" },
-      { id: 12, text: "December", answer: "juunigatsu" }
-    ],
     emptyAnswer: false,
     inputMode: 'toHiragana',
+    questions: [],
     answerHistory: [],
     endOfQuiz: false,
     sectionName: '',
@@ -42,18 +31,19 @@ class MyQuizzes extends Component {
   };
 
   handleNext = (event) => {
-    const question = this.state.months[this.state.questionIndex];
+    const question = this.state.questions[this.state.questionIndex];
 
     const usersAnswer = event.target.answerField.value;
     const answerWasCorrect = wanakana.toRomaji(usersAnswer) === wanakana.toRomaji(question.answer);
     const answerHistory = [...this.state.answerHistory];
 
+    console.log(usersAnswer, wanakana.toHiragana(question.answer));
     let score = this.state.score;
     if (answerWasCorrect) {
       score = score + 1;
     }
     answerHistory.push({ text: question.text, usersAnswer, correctAnswer: question.answer, answerWasCorrect })
-    if (this.state.questionIndex + 1 === this.state.months.length) {
+    if (this.state.questionIndex + 1 === this.state.questions.length) {
       this.setState({endOfQuiz: true, answerHistory, sectionName: 'Results'});
     } else if (usersAnswer) {
       this.setState(prevState => {
@@ -74,9 +64,26 @@ class MyQuizzes extends Component {
     this.setState({inputMode});
   }
 
+  setUpDateQuiz = () => {
+    // Randomise days and months
+    const months = this.shuffle([...jpMonths]);
+    const days = this.shuffle([...jpDays]);
+    // Reduce the days array to 12, which is the number of questions we will ask.
+    days.length = 12;
+    let dates = [];
+    for (let i = 0; i < months.length; i++) {
+      const dayEng = days[i].day;
+      const monthEng = months[i].month;
+      // The days/months may have different variations, for now will only include the first variation.
+      const dayJp = days[i].translations[0];
+      const monthJp = months[i].translations[0];
+      dates[i] = { id: i + 1, text: `${dayEng} ${monthEng}`, answer: `${monthJp}${dayJp}` };
+    }
+    this.setState({ questions: dates, sectionName: 'Dates 年月日' });
+  }
+
   componentDidMount() {
-    const months = this.shuffle([...this.state.months]);
-    this.setState({ months, sectionName: 'Dates 年月日' });
+    this.setUpDateQuiz();
   }
 
   render() {
@@ -91,20 +98,26 @@ class MyQuizzes extends Component {
         </div>
       );
     }
-    return (
-      <Section name={this.state.sectionName} className={classes.MyQuizzes}>
-      <Questions
-        questions={this.state.months}
-        questionIndex={this.state.questionIndex}
-        inputMode={this.state.inputMode}
-        next={(event) => this.handleNext(event) }
-        answerHistory={this.state.answerHistory}
-        emptyAnswer={this.state.emptyAnswer}
-        endOfQuiz={this.state.endOfQuiz} />
-        { inputMode }
-      </Section>
-    );
-  }
+
+    // Temporary, pretty sure there is a better way around all this.
+    if (this.state.questions.length) {
+        return (
+          <Section name={this.state.sectionName} className={classes.MyQuizzes}>
+          <Questions
+            questions={this.state.questions}
+            questionIndex={this.state.questionIndex}
+            inputMode={this.state.inputMode}
+            next={(event) => this.handleNext(event) }
+            answerHistory={this.state.answerHistory}
+            emptyAnswer={this.state.emptyAnswer}
+            endOfQuiz={this.state.endOfQuiz} />
+            { inputMode }
+          </Section>
+        );
+      } else {
+        return null;
+      }
+    }
 }
 
 export default MyQuizzes;
