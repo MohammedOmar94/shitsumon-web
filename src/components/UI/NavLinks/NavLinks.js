@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classes from './NavLinks.module.scss';
-import NavLink from '../NavLink/NavLink';
+import NavLink from './NavLink/NavLink';
 
 const navLinks = (props) => (
   <div className={classes.NavLinks}>
