@@ -23,7 +23,7 @@ const navLink = props => {
       break;
   }
   return (
-    <Link className={props.className} to={{pathname: props.href}} className={classes.PortalLink}>
+    <Link to={{pathname: props.href}} className={classes.NavLink}>
       { icon }
       <p>{props.label}</p>
     </Link>
