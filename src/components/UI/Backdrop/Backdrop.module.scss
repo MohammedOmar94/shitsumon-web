@@ -1,0 +1,12 @@
+.Backdrop {
+  display: block;
+  z-index: 999;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.Hidden {
+  display: none;
+}

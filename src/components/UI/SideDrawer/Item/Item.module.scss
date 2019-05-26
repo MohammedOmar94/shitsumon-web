@@ -1,0 +1,20 @@
+@import '../../../../assets/_colors.scss';
+
+.Item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  font-size: 14px;
+  text-decoration: none;
+  border-bottom: 1px $lightest-teal solid;
+  transition: 300ms;
+}
+
+.Item:hover {
+  background-color: $lightest-teal;
+}
+
+.Item i {
+  font-size: 16px;
+  margin-right: 16px;
+}

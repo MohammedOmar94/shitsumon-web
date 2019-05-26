@@ -1,7 +1,7 @@
 @import '../../../assets/_colors.scss';
 
 .NavBar {
-  padding: 8px;
+  display: flex;
   background-color: $light;
 }
 
@@ -12,6 +12,7 @@
   font-size: 24px;
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
+  padding: 16px 8px 4px;
   letter-spacing: -2px;
   opacity: 0.7;
   color: $dark-teal;
@@ -25,6 +26,9 @@
   color: $dark-teal;
 }
 
+.Hamburger {
+  display: none;
+}
 
 @media only screen and (min-width: 768px) {
   .NavBar h1 {
@@ -32,5 +36,22 @@
   }
   .Hiragana {
     font-size: 20px;
+  }
+
+  .Hamburger {
+    cursor: pointer;
+    display: block;
+    font-size: 24px;
+    padding: 8px 20px;
+    background: none;
+    border: none;
+  }
+
+  .Hamburger:focus {
+    outline: none;
+  }
+
+  .Hamburger i {
+    color: $teal;
   }
 }
