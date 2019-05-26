@@ -1,11 +1,12 @@
 {
   "name": "shitsumon-web",
   "version": "0.1.0",
-  "homepage":"https://mohammedomar94.github.io/shitsumon-web",
+  "homepage": "https://mohammedomar94.github.io/shitsumon-web",
   "private": true,
   "dependencies": {
     "gh-pages": "^2.0.1",
     "node-sass": "^4.11.0",
+    "query-string": "^6.5.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",

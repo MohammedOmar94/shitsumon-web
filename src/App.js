@@ -4,7 +4,8 @@ import Backdrop from './components/UI/Backdrop/Backdrop';
 import SideDrawer from './components/UI/SideDrawer/SideDrawer';
 import Layout from './components/Layout/Layout';
 import Portal from './containers/Portal/Portal';
-import MyQuizzes from './containers/MyQuizzes/MyQuizzes';
+import Topics from './containers/Topics/Topics';
+import Quiz from './containers/Quiz/Quiz';
 import { Route } from "react-router-dom";
 
 class App extends Component {
@@ -27,7 +28,8 @@ class App extends Component {
         <SideDrawer show={this.state.sideDrawerOpen} clicked={this.drawerToggleClickHandler}/>
         <Backdrop show={this.state.sideDrawerOpen}  clicked={this.backdropClickHandler} />
         <Route path="/" exact component={Portal} />
-        <Route path="/my-tests/" exact component={MyQuizzes} />
+        <Route path="/topics" exact component={Topics} />
+        <Route path="/quiz" exact component={Quiz} />
       </Layout>
     );
   }

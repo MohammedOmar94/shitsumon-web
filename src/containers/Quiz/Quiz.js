@@ -1,16 +1,17 @@
 import React, { Component } from "react";
+import queryString from 'query-string';
 
 import Questions from "../../components/Questions/Questions";
 import Button from "../../components/UI/Button/Button";
 import Section from "../../components/UI/Section/Section";
-import classes from "./MyQuizzes.module.scss";
+import classes from "./Quiz.module.scss";
 import jpMonths from  '../../japanese/months.js';
 import jpDays from  '../../japanese/days.js';
 
 const wanakana = require('wanakana');
 
 
-class MyQuizzes extends Component {
+class Quiz extends Component {
   state = {
     score: 0,
     questionIndex: 0,
@@ -83,6 +84,11 @@ class MyQuizzes extends Component {
   }
 
   componentDidMount() {
+    const search = this.props.location.search;
+    const queryParams = queryString.parse(search);
+    if (!queryParams.topic) {
+      this.props.history.push('/');
+    }
     this.setUpDateQuiz();
   }
 
@@ -115,4 +121,4 @@ class MyQuizzes extends Component {
   }
 }
 
-export default MyQuizzes;
+export default Quiz;

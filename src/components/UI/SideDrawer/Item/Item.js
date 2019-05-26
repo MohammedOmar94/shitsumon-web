@@ -12,7 +12,7 @@ const item = (props) => {
     case "Games":
       icon = <i className="fas fa-gamepad"></i>;
       break;
-    case "My Quizzes":
+    case "Quizzes":
       icon = <i className="fas fa-pencil-alt" />;
       break;
     case "Profile":

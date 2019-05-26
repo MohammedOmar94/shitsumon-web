@@ -1,0 +1,62 @@
+@import '../../assets/_colors.scss';
+
+.Topics {
+  background-color: $light;
+}
+
+.TopicList {
+  background-color: $light-teal;
+  list-style: none;
+  font-size: 16px;
+}
+
+.Topic {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px $lightest-teal solid;
+  & i {
+    margin-right: 16px;
+  }
+}
+
+.TopicChoices {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: $light;
+  padding: 16px;
+}
+
+.HideTopics {
+  display: none;
+}
+
+.TopicChoice {
+  cursor: pointer;
+  color: $light-teal;
+  background-color: $light;
+  border: 2px solid $light-teal;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 8px;
+  padding: 8px;
+  text-decoration: none;
+  transition: 300ms;
+  &:hover {
+    background-color: $light-teal;
+    color: $light;
+  }
+}
+
+.ChevronDown {
+  font-size: 24px;
+  transition: 300ms;
+}
+
+.RotateChevron {
+  transform: rotate(180deg);
+  transition: 300ms;
+}

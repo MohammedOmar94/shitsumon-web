@@ -15,7 +15,7 @@ const sideDrawer = (props) => {
           <Item label="Games" />
         </li>
         <li onClick={props.clicked}>
-          <Item href='/my-tests' label="My Quizzes" />
+          <Item href='/topics' label="Quizzes" />
         </li>
         <li onClick={props.clicked}>
          <Item label='Profile' />
