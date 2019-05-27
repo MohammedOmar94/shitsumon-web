@@ -5,8 +5,8 @@ import Questions from "../../components/Questions/Questions";
 import Button from "../../components/UI/Button/Button";
 import Section from "../../components/UI/Section/Section";
 import classes from "./Quiz.module.scss";
-import jpMonths from  '../../japanese/months.js';
-import jpDays from  '../../japanese/days.js';
+import jpMonths from  '../../japanese/dates/months.js';
+import jpDays from  '../../japanese/dates/days.js';
 
 const wanakana = require('wanakana');
 
