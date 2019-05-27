@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/shitsumon-web/static/css/main.8ad905a4.chunk.css"
   },
   {
-    "revision": "b168b09367b7806aba88f19f41e58b91",
+    "revision": "eec43924930f8c222d0beaca4bfe44b1",
     "url": "/shitsumon-web/index.html"
   }
 ];

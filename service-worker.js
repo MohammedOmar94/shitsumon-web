@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/shitsumon-web/precache-manifest.4b5426d390108022a4fd528549c3a49d.js"
+  "/shitsumon-web/precache-manifest.6a618308471995478a217735660a8bb3.js"
 );
 
 workbox.clientsClaim();
