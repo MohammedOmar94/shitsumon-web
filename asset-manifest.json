@@ -1,5 +1,5 @@
 {
-  "main.css": "/shitsumon-web/static/css/main.ac42045b.chunk.css",
+  "main.css": "/shitsumon-web/static/css/main.7e7ccf12.chunk.css",
   "main.js": "/shitsumon-web/static/js/main.25b9dc0a.chunk.js",
   "main.js.map": "/shitsumon-web/static/js/main.25b9dc0a.chunk.js.map",
   "runtime~main.js": "/shitsumon-web/static/js/runtime~main.7cbc342c.js",
@@ -7,8 +7,8 @@
   "static/js/2.48256455.chunk.js": "/shitsumon-web/static/js/2.48256455.chunk.js",
   "static/js/2.48256455.chunk.js.map": "/shitsumon-web/static/js/2.48256455.chunk.js.map",
   "index.html": "/shitsumon-web/index.html",
-  "precache-manifest.bd453151f665dfb301ed06e0ce236444.js": "/shitsumon-web/precache-manifest.bd453151f665dfb301ed06e0ce236444.js",
+  "precache-manifest.d89e96bf9446cb0c10bc2bf6666331cb.js": "/shitsumon-web/precache-manifest.d89e96bf9446cb0c10bc2bf6666331cb.js",
   "service-worker.js": "/shitsumon-web/service-worker.js",
-  "static/css/main.ac42045b.chunk.css.map": "/shitsumon-web/static/css/main.ac42045b.chunk.css.map",
+  "static/css/main.7e7ccf12.chunk.css.map": "/shitsumon-web/static/css/main.7e7ccf12.chunk.css.map",
   "static/media/Portal.module.scss": "/shitsumon-web/static/media/shaq_wiggle.ea3610ff.gif"
 }
