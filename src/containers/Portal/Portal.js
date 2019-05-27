@@ -7,7 +7,7 @@ import Slider from "react-slick";
 class Portal extends Component {
   render() {
     const settings = {
-      arrows: false,
+      // arrows: false,
       // lazyLoad: true,
       // fade: true,
       infinite: true,
