@@ -1,5 +1,16 @@
 @import '../../assets/_colors.scss';
 
+.Header {
+  padding: 16px;
+  background-color: $teal;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  border-bottom: 1px solid $lightest-teal;
+  & i {
+    margin-right: 16px;
+  }
+}
+
 .Topics {
   background-color: $light;
 }
@@ -15,7 +26,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
+  padding: 16px 0 16px 16px;
   border-bottom: 1px $lightest-teal solid;
   transition: 300ms;
   &:hover {
