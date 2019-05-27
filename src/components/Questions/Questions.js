@@ -50,7 +50,7 @@ const questions = props => {
           <h4 className={classes.QuestionNumber}>Question {index + 1} - {question.text}</h4>
           <Result className={classes.AnswerHistory}
             answerWasCorrect={question.answerWasCorrect}
-            correctAnswer={question.correctAnswer}
+            correctAnswer={wanakana.toHiragana(question.correctAnswer)}
             usersAnswer={question.usersAnswer}
           />
         </Fragment>
