@@ -65,7 +65,35 @@ class Quiz extends Component {
     this.setState({inputMode});
   }
 
-  setUpDateQuiz = () => {
+  setUpDaysOfMonthQuiz = () => {
+    // Randomise days
+    const days = this.shuffle([...jpDays]);
+    // Reduce the days array to 12, which is the number of questions we will ask.
+    days.length = 12;
+    let dates = [];
+    for (let i = 0; i < days.length; i++) {
+      const dayEng = days[i].day;
+      // The days may have different variations, for now will only include the first variation.
+      const dayJp = days[i].translations[0];
+      dates[i] = { id: i + 1, text: `${dayEng}`, answer: `${dayJp}` };
+    }
+    this.setState({ questions: dates, sectionName: 'Dates 年月日' });
+  }
+
+  setUpMonthsQuiz = () => {
+    // Randomise months
+    const months = this.shuffle([...jpMonths]);
+    let dates = [];
+    for (let i = 0; i < months.length; i++) {
+      const monthEng = months[i].month;
+      // The months may have different variations, for now will only include the first variation.
+      const monthJp = months[i].translations[0];
+      dates[i] = { id: i + 1, text: `${monthEng}`, answer: `${monthJp}` };
+    }
+    this.setState({ questions: dates, sectionName: 'Dates 年月日' });
+  }
+
+  setUpDatesQuiz = (topic) => {
     // Randomise days and months
     const months = this.shuffle([...jpMonths]);
     const days = this.shuffle([...jpDays]);
@@ -88,8 +116,21 @@ class Quiz extends Component {
     const queryParams = queryString.parse(search);
     if (!queryParams.topic) {
       this.props.history.push('/');
+      return;
     }
-    this.setUpDateQuiz();
+    switch (queryParams.topic) {
+      case 'dates':
+        this.setUpDatesQuiz();
+        break;
+      case 'months':
+        this.setUpMonthsQuiz();
+        break;
+      case 'days_of_the_month':
+        this.setUpDaysOfMonthQuiz();
+        break;
+      default:
+        break;
+    }
   }
 
   render() {
