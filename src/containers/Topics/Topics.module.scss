@@ -23,14 +23,21 @@
 }
 
 .TopicChoices {
-  display: flex;
-  flex-wrap: wrap;
   background-color: $light;
-  padding: 16px;
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: 300ms;
+  height: 70px;
+  line-height: 70px;
+  overflow: auto;
 }
 
 .HideTopics {
-  display: none;
+  transform: scaleY(0);
+  height: 0;
+  line-height: 0px;
+  padding: 0px;
+  transition: 300ms;
 }
 
 .TopicChoice {
@@ -41,7 +48,7 @@
   border-radius: 2px;
   font-size: 14px;
   font-weight: 500;
-  margin-right: 8px;
+  margin-left: 8px;
   padding: 8px;
   text-decoration: none;
   transition: 300ms;
