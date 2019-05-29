@@ -6,6 +6,7 @@ import NavLinks from "../UI/NavLinks/NavLinks";
 import NavBar from "../UI/NavBar/NavBar";
 
 const layout = props => {
+  document.createElement('main');
   let navLinks = null;
   if (props.location.pathname !== '/quiz') {
     navLinks = <NavLinks />;
