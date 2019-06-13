@@ -6,7 +6,7 @@ import Button from "../../components/UI/Button/Button";
 import Section from "../../components/UI/Section/Section";
 import classes from "./Quiz.module.scss";
 
-import * as quizSetup from '../../japanese/quiz_setup';
+import * as quizzes from '../../japanese/quiz_setup';
 
 
 const wanakana = require('wanakana');
@@ -76,16 +76,16 @@ class Quiz extends Component {
     }
     switch (queryParams.topic) {
       case 'dates':
-        this.setState({ questions: quizSetup.setUpDatesQuiz(12), sectionName: 'Dates 年月日' });
+        this.setState({ questions: quizzes.dates.setUpDatesQuiz(12), sectionName: 'Dates 年月日' });
         break;
       case 'months':
-        this.setState({ questions: quizSetup.setUpMonthsQuiz(12), sectionName: 'Dates 年月日' });
+        this.setState({ questions: quizzes.dates.setUpMonthsQuiz(12), sectionName: 'Dates 年月日' });
         break;
       case 'days_of_the_month':
-        this.setState({ questions: quizSetup.setUpDaysOfMonthQuiz(12), sectionName: 'Dates 年月日' });
+        this.setState({ questions: quizzes.dates.setUpDaysOfMonthQuiz(12), sectionName: 'Dates 年月日' });
         break;
       case 'days_of_the_week':
-        this.setState({ questions: quizSetup.setUpDaysOfWeekQuiz(7), sectionName: 'Dates 年月日' });
+        this.setState({ questions: quizzes.dates.setUpDaysOfWeekQuiz(7), sectionName: 'Dates 年月日' });
         break;
       default:
         break;
