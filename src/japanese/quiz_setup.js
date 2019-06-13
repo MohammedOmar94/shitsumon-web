@@ -24,39 +24,34 @@ function createQuestion(id, question, answer) {
   return { id,  text: `${question}`, answer }
 }
 
-function setUpDaysOfWeekQuiz(quizlength) {
-  const days = shuffle([...jpDaysOfTheWeek], quizlength);
+function getQuestions(words) {
   let questions = [];
-  for (let i = 0; i < days.length; i++) {
-    const dayEng = getEnglishWord(days[i]);
-    const dayJp = getJapaneseTranslations(days[i]);
-    questions[i] = createQuestion(i + 1, dayEng, dayJp);
+  let wordsLength = words.length;
+  let i = 0;
+  for (i; i < wordsLength; i++) {
+    const eng = getEnglishWord(words[i]);
+    const jp = getJapaneseTranslations(words[i]);
+    questions[i] = createQuestion(i + 1, eng, jp);
   }
   return questions;
 }
 
+function setUpDaysOfWeekQuiz(quizlength) {
+  // Randomise days of the week
+  const days = shuffle([...jpDaysOfTheWeek], quizlength);
+  return getQuestions(days);
+}
+
 function setUpDaysOfMonthQuiz(quizlength) {
-  // Randomise days
+  // Randomise days of the month
   const days = shuffle([...jpDaysOfTheMonth], quizlength);
-  let questions = [];
-  for (let i = 0; i < days.length; i++) {
-    const dayEng = getEnglishWord(days[i]);
-    const dayJp = getJapaneseTranslations(days[i]);
-    questions[i] = createQuestion(i + 1, dayEng, dayJp);
-  }
-  return questions;
+  return getQuestions(days);
 }
 
 function setUpMonthsQuiz(quizlength) {
   // Randomise months
   const months = shuffle([...jpMonths], quizlength);
-  let questions = [];
-  for (let i = 0; i < months.length; i++) {
-    const monthEng = getEnglishWord(months[i]);
-    const monthJp = getJapaneseTranslations(months[i]);
-    questions[i] = createQuestion(i + 1, monthEng, monthJp);
-  }
-  return questions;
+  return getQuestions(months);
 }
 
 function setUpDatesQuiz(quizlength) {
