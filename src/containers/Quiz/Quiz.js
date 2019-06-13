@@ -6,9 +6,8 @@ import Button from "../../components/UI/Button/Button";
 import Section from "../../components/UI/Section/Section";
 import classes from "./Quiz.module.scss";
 
-import jpMonths from  '../../japanese/dates/months';
-import jpDaysOfTheMonth from  '../../japanese/dates/days_of_the_month';
-import jpDaysOfTheWeek from  '../../japanese/dates/days_of_the_week';
+import * as quizSetup from '../../japanese/quiz_setup';
+
 
 const wanakana = require('wanakana');
 
@@ -25,11 +24,12 @@ class Quiz extends Component {
     sectionName: '',
   };
 
-  shuffle = array => {
+  shuffle = (array, quizLength) => {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
+    array.length = quizLength;
     return array;
   };
 
@@ -67,65 +67,6 @@ class Quiz extends Component {
     this.setState({inputMode});
   }
 
-  setUpDaysOfWeekQuiz = () => {
-    // Randomise days
-    const days = this.shuffle([...jpDaysOfTheWeek]);
-    let dates = [];
-    for (let i = 0; i < days.length; i++) {
-      const dayEng = days[i].day;
-      // The days may have different variations, for now will only include the first variation.
-      const dayJp = days[i].translations[0];
-      dates[i] = { id: i + 1, text: `${dayEng}`, answer: `${dayJp}` };
-    }
-    this.setState({ questions: dates, sectionName: 'Dates 年月日' });
-  }
-
-  setUpDaysOfMonthQuiz = () => {
-    // Randomise days
-    const days = this.shuffle([...jpDaysOfTheMonth]);
-    // Reduce the days array to 12, which is the number of questions we will ask.
-    days.length = 12;
-    let dates = [];
-    for (let i = 0; i < days.length; i++) {
-      const dayEng = days[i].day;
-      // The days may have different variations, for now will only include the first variation.
-      const dayJp = days[i].translations[0];
-      dates[i] = { id: i + 1, text: `${dayEng}`, answer: `${dayJp}` };
-    }
-    this.setState({ questions: dates, sectionName: 'Dates 年月日' });
-  }
-
-  setUpMonthsQuiz = () => {
-    // Randomise months
-    const months = this.shuffle([...jpMonths]);
-    let dates = [];
-    for (let i = 0; i < months.length; i++) {
-      const monthEng = months[i].month;
-      // The months may have different variations, for now will only include the first variation.
-      const monthJp = months[i].translations[0];
-      dates[i] = { id: i + 1, text: `${monthEng}`, answer: `${monthJp}` };
-    }
-    this.setState({ questions: dates, sectionName: 'Dates 年月日' });
-  }
-
-  setUpDatesQuiz = (topic) => {
-    // Randomise days and months
-    const months = this.shuffle([...jpMonths]);
-    const days = this.shuffle([...jpDaysOfTheMonth]);
-    // Reduce the days array to 12, which is the number of questions we will ask.
-    days.length = 12;
-    let dates = [];
-    for (let i = 0; i < months.length; i++) {
-      const dayEng = days[i].day;
-      const monthEng = months[i].month;
-      // The days/months may have different variations, for now will only include the first variation.
-      const dayJp = days[i].translations[0];
-      const monthJp = months[i].translations[0];
-      dates[i] = { id: i + 1, text: `${dayEng} ${monthEng}`, answer: `${monthJp}${dayJp}` };
-    }
-    this.setState({ questions: dates, sectionName: 'Dates 年月日' });
-  }
-
   componentDidMount() {
     const search = this.props.location.search;
     const queryParams = queryString.parse(search);
@@ -135,16 +76,16 @@ class Quiz extends Component {
     }
     switch (queryParams.topic) {
       case 'dates':
-        this.setUpDatesQuiz();
+        this.setState({ questions: quizSetup.setUpDatesQuiz(12), sectionName: 'Dates 年月日' });
         break;
       case 'months':
-        this.setUpMonthsQuiz();
+        this.setState({ questions: quizSetup.setUpMonthsQuiz(12), sectionName: 'Dates 年月日' });
         break;
       case 'days_of_the_month':
-        this.setUpDaysOfMonthQuiz();
+        this.setState({ questions: quizSetup.setUpDaysOfMonthQuiz(12), sectionName: 'Dates 年月日' });
         break;
       case 'days_of_the_week':
-        this.setUpDaysOfWeekQuiz();
+        this.setState({ questions: quizSetup.setUpDaysOfWeekQuiz(7), sectionName: 'Dates 年月日' });
         break;
       default:
         break;

@@ -1,16 +1,16 @@
 const months = [
-  { month: "January", translations: [ "ichigatsu" ]},
-  { month: "Feburary", translations: [ "nigatsu" ]},
-  { month: "March", translations: [ "sangatsu" ]},
-  { month: "April", translations: [ "shigatsu" ]},
-  { month: "May", translations: [ "gogatsu" ]},
-  { month: "June", translations: [ "rokugatsu" ]},
-  { month: "July", translations: [ "shichigatsu"  ]},
-  { month: "August", translations: [ "hachigatsu" ]},
-  { month: "September", translations: [ "kugatsu" ]},
-  { month: "October", translations: [ "juugatsu" ]},
-  { month: "November", translations: [ "juuichigatsu" ]},
-  { month: "December", translations: [ "juunigatsu" ]}
+  { word: "January", translations: [ "ichigatsu" ]},
+  { word: "Feburary", translations: [ "nigatsu" ]},
+  { word: "March", translations: [ "sangatsu" ]},
+  { word: "April", translations: [ "shigatsu" ]},
+  { word: "May", translations: [ "gogatsu" ]},
+  { word: "June", translations: [ "rokugatsu" ]},
+  { word: "July", translations: [ "shichigatsu"  ]},
+  { word: "August", translations: [ "hachigatsu" ]},
+  { word: "September", translations: [ "kugatsu" ]},
+  { word: "October", translations: [ "juugatsu" ]},
+  { word: "November", translations: [ "juuichigatsu" ]},
+  { word: "December", translations: [ "juunigatsu" ]}
 ];
 
 export default months;
