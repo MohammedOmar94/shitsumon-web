@@ -1,4 +1,4 @@
-const days = [
+const days_of_the_month = [
   { day: "1st", translations: ["tsuitachi"] },
   { day: "2nd", translations: ["futsuka"] },
   { day: "3rd", translations: ["mikka"] },
@@ -32,4 +32,4 @@ const days = [
   { day: "31st", translations: ["sanjuuichinichi"] }
 ];
 
-export default days;
+export default days_of_the_month;
