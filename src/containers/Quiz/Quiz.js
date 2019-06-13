@@ -5,8 +5,10 @@ import Questions from "../../components/Questions/Questions";
 import Button from "../../components/UI/Button/Button";
 import Section from "../../components/UI/Section/Section";
 import classes from "./Quiz.module.scss";
-import jpMonths from  '../../japanese/dates/months.js';
-import jpDays from  '../../japanese/dates/days.js';
+
+import jpMonths from  '../../japanese/dates/months';
+import jpDaysOfTheMonth from  '../../japanese/dates/days_of_the_month';
+import jpDaysOfTheWeek from  '../../japanese/dates/days_of_the_week';
 
 const wanakana = require('wanakana');
 
@@ -65,9 +67,22 @@ class Quiz extends Component {
     this.setState({inputMode});
   }
 
+  setUpDaysOfWeekQuiz = () => {
+    // Randomise days
+    const days = this.shuffle([...jpDaysOfTheWeek]);
+    let dates = [];
+    for (let i = 0; i < days.length; i++) {
+      const dayEng = days[i].day;
+      // The days may have different variations, for now will only include the first variation.
+      const dayJp = days[i].translations[0];
+      dates[i] = { id: i + 1, text: `${dayEng}`, answer: `${dayJp}` };
+    }
+    this.setState({ questions: dates, sectionName: 'Dates 年月日' });
+  }
+
   setUpDaysOfMonthQuiz = () => {
     // Randomise days
-    const days = this.shuffle([...jpDays]);
+    const days = this.shuffle([...jpDaysOfTheMonth]);
     // Reduce the days array to 12, which is the number of questions we will ask.
     days.length = 12;
     let dates = [];
@@ -96,7 +111,7 @@ class Quiz extends Component {
   setUpDatesQuiz = (topic) => {
     // Randomise days and months
     const months = this.shuffle([...jpMonths]);
-    const days = this.shuffle([...jpDays]);
+    const days = this.shuffle([...jpDaysOfTheMonth]);
     // Reduce the days array to 12, which is the number of questions we will ask.
     days.length = 12;
     let dates = [];
@@ -127,6 +142,9 @@ class Quiz extends Component {
         break;
       case 'days_of_the_month':
         this.setUpDaysOfMonthQuiz();
+        break;
+      case 'days_of_the_week':
+        this.setUpDaysOfWeekQuiz();
         break;
       default:
         break;

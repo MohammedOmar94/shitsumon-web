@@ -39,21 +39,12 @@
 
 .TopicChoices {
   background-color: $light;
-  transform: scaleY(1);
-  transform-origin: top;
-  transition: 300ms;
-  height: 70px;
+  padding: 8px;
   overflow: hidden;
 }
 
-.HideTopics {
-  transform: scaleY(0);
-  height: 0;
-  padding: 0px;
-  transition: 300ms;
-}
-
 .TopicChoice {
+  display: inline-block;
   cursor: pointer;
   color: $light-teal;
   background-color: $light;
@@ -61,8 +52,7 @@
   border-radius: 2px;
   font-size: 14px;
   font-weight: 500;
-  line-height: 70px;
-  margin-left: 8px;
+  margin: 4px;
   padding: 8px;
   text-decoration: none;
   transition: 300ms;
