@@ -29,7 +29,7 @@ class Topics extends Component {
       { topic: "Numbers 番号", icon: "fas fa-calculator", param: 'numbers', choices: [] }
     ],
     openTopics: [],
-    quizLength: 10,
+    quizLength: 5,
   };
 
   topicClickeHandler = (index, topicId) => {
