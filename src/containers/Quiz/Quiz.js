@@ -76,16 +76,19 @@ class Quiz extends Component {
     }
     switch (queryParams.topic) {
       case 'dates':
-        this.setState({ questions: quizzes.dates.setUpDatesQuiz(12), sectionName: 'Dates 年月日' });
+        this.setState({ questions: quizzes.dates.setUpDatesQuiz(queryParams.quiz_length), sectionName: 'Dates 年月日' });
         break;
       case 'months':
-        this.setState({ questions: quizzes.dates.setUpMonthsQuiz(12), sectionName: 'Dates 年月日' });
+        this.setState({ questions: quizzes.dates.setUpMonthsQuiz(queryParams.quiz_length), sectionName: 'Dates 年月日' });
         break;
       case 'days_of_the_month':
-        this.setState({ questions: quizzes.dates.setUpDaysOfMonthQuiz(12), sectionName: 'Dates 年月日' });
+        this.setState({ questions: quizzes.dates.setUpDaysOfMonthQuiz(queryParams.quiz_length), sectionName: 'Dates 年月日' });
         break;
       case 'days_of_the_week':
-        this.setState({ questions: quizzes.dates.setUpDaysOfWeekQuiz(7), sectionName: 'Dates 年月日' });
+        this.setState({ questions: quizzes.dates.setUpDaysOfWeekQuiz(queryParams.quiz_length), sectionName: 'Dates 年月日' });
+        break;
+      case 'minutes':
+        this.setState({ questions: quizzes.times.setUpMinutesQuiz(queryParams.quiz_length), sectionName: 'Minutes 時間' });
         break;
       default:
         break;

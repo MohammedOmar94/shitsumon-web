@@ -62,6 +62,30 @@
   }
 }
 
+.QuizLengthLabel {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 4px 8px 12px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: $light-teal;
+  border-bottom: 1px solid $lightest-teal;
+  font-weight: 500;
+}
+
+.QuizLength {
+  margin-left: 12px;
+  padding: 4px;
+  font-size: 14px;
+  color: $light-teal;
+  border-radius: 5px;
+  border: 2px solid $light-teal;
+  & option {
+    color: $light-teal;
+  }
+}
+
 .ChevronDown {
   font-size: 24px;
   transition: 300ms;

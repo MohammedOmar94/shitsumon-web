@@ -18,10 +18,18 @@ class Topics extends Component {
           { name: "Days of the week", param: "days_of_the_week" }
         ]
       },
-      { topic: "Times 時間", icon: "fas fa-clock", param: 'times', choices: [] },
+      {
+        topic: "Times 時間",
+        icon: "fas fa-clock",
+        param: 'times',
+        choices: [
+          { name: "Minutes", param: "minutes" },
+        ]
+      },
       { topic: "Numbers 番号", icon: "fas fa-calculator", param: 'numbers', choices: [] }
     ],
-    openTopics: []
+    openTopics: [],
+    quizLength: 10,
   };
 
   topicClickeHandler = (index, topicId) => {
@@ -43,7 +51,7 @@ class Topics extends Component {
         <Link
           key={choice.param}
           className={`${classes.TopicChoice} disable-select`}
-          to={{ pathname: `quiz`, search: `?topic=${choice.param}` }}>{choice.name}</Link>
+          to={{ pathname: `quiz`, search: `?topic=${choice.param}&quiz_length=${this.state.quizLength}` }}>{choice.name}</Link>
       ));
       return (
         <Fragment key={topicId}>
@@ -58,6 +66,16 @@ class Topics extends Component {
             height={this.state.openTopics.indexOf(topicId) > -1 ? 'auto' : 0}// see props documentation bellow
           >
             <div id={`topic-choices-${index}`} className={`${classes.TopicChoices}`}>
+              <label className={classes.QuizLengthLabel}>
+                Number of Questions:
+                <select className={classes.QuizLength} onChange={(evt) => this.setState({quizLength: evt.target.value})} >
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="35">35</option>
+                  <option value="50">50</option>
+                </select>
+              </label>
               {topicChoices}
             </div>
         </AnimateHeight>
