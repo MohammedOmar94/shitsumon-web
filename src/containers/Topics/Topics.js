@@ -4,6 +4,8 @@ import AnimateHeight from 'react-animate-height';
 
 import classes from "./Topics.module.scss";
 
+import * as sentenceGenerator from '../../japanese/sentence_generator/sentence_generator';
+
 class Topics extends Component {
   state = {
     topics: [
@@ -51,6 +53,10 @@ class Topics extends Component {
     }
     this.setState({ openTopics });
   };
+
+  componentDidMount() {
+    sentenceGenerator.generateVerbSentence()
+  }
 
   render() {
     const topics = this.state.topics.map((topicObj, index) => {
