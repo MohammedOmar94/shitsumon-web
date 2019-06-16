@@ -22,6 +22,7 @@ class Topics extends Component {
         icon: "fas fa-clock",
         param: 'times',
         choices: [
+          { name: "Hours of the day", param: "hours_of_the_day" },
           { name: "Minutes (1-20)", param: "minutes_upto_20" },
           { name: "Minutes (21-40)", param: "minutes_upto_40" },
           { name: "Minutes (41-60)", param: "minutes_upto_60" },

@@ -1,8 +1,18 @@
+import jpHoursOfTheDay from  './hours_of_the_day';
 import jpMinutes from  './minutes';
 
 import { setQuizLength, shuffle, createQuestion, getEnglishWord, getJapaneseTranslations } from '../quiz_setup';
 
-
+function setUpHoursOfTheDayQuiz() {
+  const minutesInJapanese = shuffle([...jpHoursOfTheDay])
+  let questions = [];
+  for (let i = 0; i < minutesInJapanese.length; i++) {
+    const timesEng = getEnglishWord(minutesInJapanese[i]);
+    const timesJp = getJapaneseTranslations(minutesInJapanese[i]);
+    questions[i] = createQuestion(i + 1, `${timesEng}`, `${timesJp}`);
+  }
+  return questions;
+}
 
 function setUpMinutesQuiz(quiz) {
   const minutesInJapanese = [...jpMinutes];
@@ -22,4 +32,4 @@ function setUpMinutesQuiz(quiz) {
   return questions;
 }
 
-export { setUpMinutesQuiz };
+export { setUpMinutesQuiz, setUpHoursOfTheDayQuiz };
