@@ -87,8 +87,14 @@ class Quiz extends Component {
       case 'days_of_the_week':
         this.setState({ questions: quizzes.dates.setUpDaysOfWeekQuiz(queryParams.quiz_length), sectionName: 'Dates 年月日' });
         break;
-      case 'minutes':
-        this.setState({ questions: quizzes.times.setUpMinutesQuiz(queryParams.quiz_length), sectionName: 'Minutes 時間' });
+      case 'minutes_upto_20':
+        this.setState({ questions: quizzes.times.setUpMinutesQuiz('1-20'), sectionName: 'Times 時間' });
+        break;
+      case 'minutes_upto_40':
+        this.setState({ questions: quizzes.times.setUpMinutesQuiz('21-40'), sectionName: 'Times 時間' });
+        break;
+      case 'minutes_upto_60':
+        this.setState({ questions: quizzes.times.setUpMinutesQuiz('41-60'), sectionName: 'Times 時間' });
         break;
       default:
         break;

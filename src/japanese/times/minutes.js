@@ -58,6 +58,7 @@ const minutes = [
   { word: "57", translations: ["gojuunanahun"] },
   { word: "58", translations: ["gojuuhappun"] },
   { word: "59", translations: ["gojuukyuhun"] },
+  { word: "60", translations: ["rokujuuppun"] },
 ];
 
 export default minutes;
