@@ -1,12 +1,12 @@
 import jpMinutes from  './minutes';
 
-import { setQuizLength, createQuestion, getEnglishWord, getJapaneseTranslations } from '../quiz_setup';
+import { setQuizLength, shuffle, createQuestion, getEnglishWord, getJapaneseTranslations } from '../quiz_setup';
 
 
 
 function setUpMinutesQuiz(quizlength) {
   // Randomise days of the week
-  const times = setQuizLength([...jpMinutes], quizlength);
+  const times = shuffle([...jpMinutes], quizlength);
   let questions = [];
   for (let i = 0; i < times.length; i++) {
     const timesEng = times[i] === '1' ? `${getEnglishWord(times[i])} minute` : `${getEnglishWord(times[i])} minutes`
