@@ -1,5 +1,5 @@
 const particles = [
-  { particle: 'ni', translations: ['in', 'to']}
+  { particle: 'に', translations: ['in', 'to']}
 ]
 
 export default particles;

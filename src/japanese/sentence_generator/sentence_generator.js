@@ -4,9 +4,21 @@ import personalPronouns from './pronouns/personal_pronouns';
 
 const wanakana = require('wanakana');
 
-function generateVerbSentence(particle, pronoun, verbConjugations, verbConjugation) {
+function getVerbObject(verb) {
+  return verbs.filter(verbObj => verbObj.verb === verb)[0];
+}
+
+function getParticleObject(particle) {
+  return particles.filter(particleObj => particleObj.particle === particle)[0];
+}
+
+function generateVerbSentence(particles, destination, pronoun, verbConjugations, verbConjugation) {
     let linkingVerb = 'are';
     let verb;
+    let preposition = '';
+    if (destination && particles.includes('に')) {
+      preposition = 'to';
+    }
     // console.log(pronoun, verbConjugation);
     if (pronoun === 'I') {
       if (verbConjugation === 'present') {
@@ -55,8 +67,8 @@ function generateVerbSentence(particle, pronoun, verbConjugations, verbConjugati
     // setTimeout(() => {
       // console.log(`${wanakana.toHiragana(personalPronouns[0].word)}${wanakana.toHiragana(particles[0].particle)}${wanakana.toHiragana(verbs[0].verb)}`)
       // console.log(`${pronoun}${linkingVerb} ${verb} ${particle} Japan`)
-      return `${pronoun}${linkingVerb} ${verb} ${particle} Japan`;
+      return `${pronoun}${linkingVerb} ${verb} ${preposition} ${destination}`;
     // }, 200);
 };
 
-export { generateVerbSentence };
+export { generateVerbSentence, getVerbObject, getParticleObject };

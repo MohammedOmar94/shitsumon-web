@@ -5,8 +5,9 @@ import personalPronouns from './pronouns/personal_pronouns';
 import * as sentenceGenerator from './sentence_generator';
 
 describe("'ikimasu' conjugations in english", () => {
-  const verbConjugations = verbs[0].conjugations[0];
-  const niParticle = particles[0].translations[1];
+  const verbConjugations = sentenceGenerator.getVerbObject('ikimasu').conjugations;
+  const particlesInSentence = ['に'];
+  const destination = 'Japan';
 
   describe("present conjugations", () => {
     const verbConjugation = Object.keys(verbConjugations)[0];
@@ -15,27 +16,27 @@ describe("'ikimasu' conjugations in english", () => {
     });
     test("sentence is 'I am going to Japan'", () => {
       const pronoun = personalPronouns[0].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('I am going to Japan');
     });
     test("sentence is 'you are going to Japan'", () => {
       const pronoun = personalPronouns[3].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('you are going to Japan');
     });
     test("sentence is 'he is going to Japan'", () => {
       const pronoun = personalPronouns[5].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('he is going to Japan');
     });
     test("sentence is 'she is going to Japan'", () => {
       const pronoun = personalPronouns[6].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('she is going to Japan');
     });
     test("sentence is 'Mo is going to Japan'", () => {
       const pronoun = 'Mo';
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('Mo is going to Japan');
     });
   });
@@ -48,27 +49,27 @@ describe("'ikimasu' conjugations in english", () => {
     });
     test("sentence is 'I went to Japan'", () => {
       const pronoun = personalPronouns[0].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('I went to Japan');
     });
     test("sentence is 'you went to Japan'", () => {
       const pronoun = personalPronouns[3].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('you went to Japan');
     });
     test("sentence is 'he went to Japan'", () => {
       const pronoun = personalPronouns[5].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('he went to Japan');
     });
     test("sentence is 'she went to Japan'", () => {
       const pronoun = personalPronouns[6].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('she went to Japan');
     });
     test("sentence is 'Mo went to Japan'", () => {
       const pronoun = 'Mo';
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('Mo went to Japan');
     });
   });
@@ -80,27 +81,27 @@ describe("'ikimasu' conjugations in english", () => {
     });
     test("sentence is 'I am not going to Japan'", () => {
       const pronoun = personalPronouns[0].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('I am not going to Japan');
     });
     test("sentence is 'you are not going to Japan'", () => {
       const pronoun = personalPronouns[3].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('you are not going to Japan');
     });
     test("sentence is 'he is not going to Japan'", () => {
       const pronoun = personalPronouns[5].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('he is not going to Japan');
     });
     test("sentence is 'she is not going to Japan'", () => {
       const pronoun = personalPronouns[6].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);;
       expect(sentence).toBe('she is not going to Japan');
     });
     test("sentence is 'Mo is not going to Japan'", () => {
       const pronoun = 'Mo';
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('Mo is not going to Japan');
     });
   });
@@ -121,27 +122,27 @@ describe("'ikimasu' conjugations in english", () => {
     });
     test("sentence is 'I was not going to Japan'", () => {
       const pronoun = personalPronouns[0].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('I was not going to Japan');
     });
     test("sentence is 'you were not going to Japan'", () => {
       const pronoun = personalPronouns[3].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('you were not going to Japan');
     });
     test("sentence is 'he was not going to Japan'", () => {
       const pronoun = personalPronouns[5].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('he was not going to Japan');
     });
     test("sentence is 'she was not going to Japan'", () => {
       const pronoun = personalPronouns[6].translations[0];
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('she was not going to Japan');
     });
     test("sentence is 'Mo was not going to Japan'", () => {
       const pronoun = 'Mo';
-      const sentence = sentenceGenerator.generateVerbSentence(niParticle, pronoun, verbConjugations, verbConjugation);
+      const sentence = sentenceGenerator.generateVerbSentence(particlesInSentence, destination, pronoun, verbConjugations, verbConjugation);
       expect(sentence).toBe('Mo was not going to Japan');
     });
   });
