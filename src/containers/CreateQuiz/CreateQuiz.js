@@ -38,7 +38,7 @@ class CreateQuiz extends Component {
   render() {
     let nameOption = null;
     if (this.state.topic === 'pronoun' && this.state.particles.includes('は')) {
-     nameOption = <option value='Mohammed'>[Name]</option>;
+     nameOption = <option value='name'>[Name]</option>;
     }
     return (
       <Section name='Create Quiz'>

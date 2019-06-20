@@ -30,13 +30,18 @@ function generateSentenceWithTopic(subject, otherInfo) {
     shuffle(adjectives);
     otherInfo = adjectives[0];
   }
-  const descriptionEng = otherInfo.translations[0];
-  const descriptionJp = otherInfo.word;
   if (subject === 'pronoun') {
     const pronounEng = pronoun.translations[0];
     const pronounJp = pronoun.word;
+    if (otherInfo === 'name') {
+      return { english: `${pronounEng} am Mohammed`, japanese: wanakana.toHiragana(`${pronounJp}はMohammedです`) };
+    }
+    const descriptionEng = otherInfo.translations[0];
+    const descriptionJp = otherInfo.word;
     return { english: `${pronounEng} am ${descriptionEng}`, japanese: wanakana.toHiragana(`${pronounJp}は${descriptionJp}です`) };
   } else if (subject === 'location') {
+    const descriptionEng = otherInfo.translations[0];
+    const descriptionJp = otherInfo.word;
     shuffle(locations);
     const locationEng = locations[0].translations[0];
     const locationJp = locations[0].word;
