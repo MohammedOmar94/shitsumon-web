@@ -1,0 +1,19 @@
+@import '../../assets/_colors.scss';
+
+.CreateQuiz {
+}
+
+.WordContainer {
+  display: inline-flex;
+}
+
+.Word, .Sentence {
+  color: $dark-teal;
+  & option {
+    color: $dark-teal;
+  }
+}
+
+.AddBtn {
+  color: $dark-teal;
+}

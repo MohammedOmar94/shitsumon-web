@@ -1,8 +1,20 @@
+import adjectives from './adjectives/adjectives';
+import locations from './locations/locations';
 import particles from './particles/particles';
 import verbs from './verbs/verbs';
 import personalPronouns from './pronouns/personal_pronouns';
 
 const wanakana = require('wanakana');
+
+
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
 
 function getVerbObject(verb) {
   return verbs.filter(verbObj => verbObj.verb === verb)[0];
@@ -10,6 +22,20 @@ function getVerbObject(verb) {
 
 function getParticleObject(particle) {
   return particles.filter(particleObj => particleObj.particle === particle)[0];
+}
+
+function generateSentenceWithTopic(subject, otherInfo) {
+  const pronoun = personalPronouns[0];
+  if (otherInfo === 'adjective') {
+    shuffle(adjectives);
+    otherInfo = adjectives[0];
+  }
+  if (subject === 'pronoun') {
+    return { english: pronoun.translations[0] + ' am ' + otherInfo.translations[0], japanese: wanakana.toHiragana(pronoun.word + 'は' + otherInfo.word) };
+  } else if (subject === 'location') {
+    shuffle(locations);
+    return { english: locations[0].translations[0] + ' is ' + otherInfo.translations[0], japanese: wanakana.toHiragana(locations[0].word + 'は' +  otherInfo.word)};
+  }
 }
 
 function generateVerbSentence(particles, destination, pronoun, verbConjugations, verbConjugation) {
@@ -71,4 +97,4 @@ function generateVerbSentence(particles, destination, pronoun, verbConjugations,
     // }, 200);
 };
 
-export { generateVerbSentence, getVerbObject, getParticleObject };
+export { generateVerbSentence, getVerbObject, generateSentenceWithTopic };
