@@ -12,6 +12,9 @@
   & option {
     color: $dark-teal;
   }
+  &::first-letter {
+    text-transform: capitalize;
+  }
 }
 
 .AddBtn {

@@ -24,21 +24,57 @@ function getParticleObject(particle) {
   return particles.filter(particleObj => particleObj.particle === particle)[0];
 }
 
+function getLinkingVerb(pronoun, verbConjugation) {
+  if (pronoun === 'I') {
+    if (verbConjugation === 'present') {
+      return 'am';
+    } else if (verbConjugation === 'past') {
+      return '';
+    } else if (verbConjugation === 'negative') {
+      return 'am';
+    } else if (verbConjugation === 'past_negative') {
+      return '';
+    }
+  } else if (pronoun === 'you') {
+    if (verbConjugation === 'present') {
+      return 'are';
+    } else if (verbConjugation === 'past') {
+      return '';
+    } else if (verbConjugation === 'negative') {
+      return 'are';
+    } else if (verbConjugation === 'past_negative') {
+      return '';
+    }
+  } else {
+    if (verbConjugation === 'present') {
+      return 'is';
+    } else if (verbConjugation === 'past') {
+      return '';
+    } else if (verbConjugation === 'negative') {
+      return 'is';
+    } else if (verbConjugation === 'past_negative') {
+      return '';
+    }
+  }
+}
+
 function generateSentenceWithTopic(subject, otherInfo) {
-  const pronoun = personalPronouns[0];
   if (otherInfo === 'adjective') {
     shuffle(adjectives);
     otherInfo = adjectives[0];
   }
   if (subject === 'pronoun') {
+    shuffle(personalPronouns);
+    const pronoun = personalPronouns[0];
     const pronounEng = pronoun.translations[0];
     const pronounJp = pronoun.word;
+    const linkingVerb = getLinkingVerb(pronounEng, 'present');
     if (otherInfo === 'name') {
-      return { english: `${pronounEng} am Mohammed`, japanese: wanakana.toHiragana(`${pronounJp}はMohammedです`) };
+      return { english: `${pronounEng} ${linkingVerb} Mohammed`, japanese: wanakana.toHiragana(`${pronounJp}はMohammedです`) };
     }
     const descriptionEng = otherInfo.translations[0];
     const descriptionJp = otherInfo.word;
-    return { english: `${pronounEng} am ${descriptionEng}`, japanese: wanakana.toHiragana(`${pronounJp}は${descriptionJp}です`) };
+    return { english: `${pronounEng} ${linkingVerb} ${descriptionEng}`, japanese: wanakana.toHiragana(`${pronounJp}は${descriptionJp}です`) };
   } else if (subject === 'location') {
     const descriptionEng = otherInfo.translations[0];
     const descriptionJp = otherInfo.word;
