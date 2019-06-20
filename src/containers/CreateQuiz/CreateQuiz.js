@@ -67,8 +67,7 @@ class CreateQuiz extends Component {
           {/* <button className={classes.AddBtn}>Add Adjective or relative time</button> */}
           <select className={classes.Word}>
             {/* If pronoun and ha particle, display option */}
-            <option>です</option>
-            <option>でした</option>
+            <option value={'desu'}>です</option>
           </select>
           {/* <button className={classes.AddBtn}>Add Particle</button> */}
         </div>

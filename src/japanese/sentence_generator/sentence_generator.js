@@ -30,11 +30,17 @@ function generateSentenceWithTopic(subject, otherInfo) {
     shuffle(adjectives);
     otherInfo = adjectives[0];
   }
+  const descriptionEng = otherInfo.translations[0];
+  const descriptionJp = otherInfo.word;
   if (subject === 'pronoun') {
-    return { english: pronoun.translations[0] + ' am ' + otherInfo.translations[0], japanese: wanakana.toHiragana(pronoun.word + 'は' + otherInfo.word) };
+    const pronounEng = pronoun.translations[0];
+    const pronounJp = pronoun.word;
+    return { english: `${pronounEng} am ${descriptionEng}`, japanese: wanakana.toHiragana(`${pronounJp}は${descriptionJp}です`) };
   } else if (subject === 'location') {
     shuffle(locations);
-    return { english: locations[0].translations[0] + ' is ' + otherInfo.translations[0], japanese: wanakana.toHiragana(locations[0].word + 'は' +  otherInfo.word)};
+    const locationEng = locations[0].translations[0];
+    const locationJp = locations[0].word;
+    return { english: `${locationEng} is ${descriptionEng}`, japanese: wanakana.toHiragana(`${locationJp}は${descriptionJp}です`)};
   }
 }
 
