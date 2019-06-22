@@ -24,6 +24,41 @@ function getParticleObject(particle) {
   return particles.filter(particleObj => particleObj.particle === particle)[0];
 }
 
+function getVerb(pronoun, verbConjugation, verb) {
+  verb = getVerbObject(verb).conjugations[verbConjugation];
+  if (pronoun === 'I') {
+    if (verbConjugation === 'present') {
+      return 'am ' + verb.translations[0];
+    } else if (verbConjugation === 'past') {
+      return '' + verb.translations[0];
+    } else if (verbConjugation === 'negative') {
+      return 'am ' + verb.translations[0];
+    } else if (verbConjugation === 'past_negative') {
+      return '' + verb.translations[0];
+    }
+  } else if (pronoun === 'you') {
+    if (verbConjugation === 'present') {
+      return 'are ' + verb.translations[0];
+    } else if (verbConjugation === 'past') {
+      return '' + verb.translations[0];
+    } else if (verbConjugation === 'negative') {
+      return '' + verb.translations[1];
+    } else if (verbConjugation === 'past_negative') {
+      return '' + verb.translations[1];
+    }
+  } else {
+    if (verbConjugation === 'present') {
+      return 'is ' + verb.translations[0];
+    } else if (verbConjugation === 'past') {
+      return '' + verb.translations[0];
+    } else if (verbConjugation === 'negative') {
+      return '' + verb.translations[1];
+    } else if (verbConjugation === 'past_negative') {
+      return '' + verb.translations[0];
+    }
+  }
+}
+
 function getLinkingVerb(pronoun, verbConjugation) {
   if (pronoun === 'I') {
     if (verbConjugation === 'present') {
@@ -82,6 +117,35 @@ function generateSentenceWithTopic(subject, otherInfo) {
     const locationEng = locations[0].translations[0];
     const locationJp = locations[0].word;
     return { english: `${locationEng} is ${descriptionEng}`, japanese: wanakana.toHiragana(`${locationJp}は${descriptionJp}です`)};
+  }
+}
+
+function generateSentenceWithVerb(particle, subject, otherInfo) {
+  if (otherInfo === 'location') {
+    shuffle(locations);
+    otherInfo = locations[0];
+  }
+  let preposition = '';
+  if (particle === 'に') {
+    preposition = 'to';
+  } else if (particle === 'と') {
+    preposition = 'with';
+  }
+  if (subject === 'pronoun') {
+    shuffle(personalPronouns);
+    const pronoun = personalPronouns[0];
+    const pronounEng = pronoun.translations[0];
+    const pronounJp = pronoun.word;
+    const conjugations = ['present', 'past', 'negative', 'past_negative'];
+    const conjugation = shuffle(conjugations)[0];
+    const japaneseVerb = verbs[0].conjugations[conjugation].verb;
+    const linkingVerb = getVerb(pronounEng, conjugation, 'ikimasu');
+    if (otherInfo === 'name') {
+      return { english: `${pronounEng} ${linkingVerb} ${preposition} Mohammed`, japanese: wanakana.toHiragana(`${pronounJp}はMohammed${particle}${japaneseVerb}`) };
+    }
+    const descriptionEng = otherInfo.translations[0];
+    const descriptionJp = otherInfo.word;
+    return { english: `${pronounEng} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: wanakana.toHiragana(`${pronounJp}は${descriptionJp}${particle}${japaneseVerb}`) };
   }
 }
 
@@ -144,4 +208,4 @@ function generateVerbSentence(particles, destination, pronoun, verbConjugations,
     // }, 200);
 };
 
-export { generateVerbSentence, getVerbObject, generateSentenceWithTopic };
+export { generateVerbSentence, getVerbObject, generateSentenceWithTopic, generateSentenceWithVerb };
