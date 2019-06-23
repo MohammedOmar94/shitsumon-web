@@ -2,11 +2,13 @@ import React, { Component, Fragment } from 'react';
 
 import classes from  './CreateQuiz.module.scss';
 import Section from '../../components/UI/Section/Section';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
 import Button from '../../components/UI/Button/Button';
 
+
+import locations from '../../japanese/sentence_generator/locations/locations';
+import personalPronouns from '../../japanese/sentence_generator/pronouns/personal_pronouns';
 
 import * as sentenceGenerator from '../../japanese/sentence_generator/sentence_generator';
 
@@ -44,7 +46,18 @@ class CreateQuiz extends Component {
 
   generateSentence = () => {
     if (this.state.sentenceWithTopicAndVerb) {
-      const sentence = sentenceGenerator.generateSentenceWithVerb('に', this.state.topic, this.state.otherInfo);
+      const conjugations = ['present', 'past', 'negative', 'past_negative'];
+      const conjugation = sentenceGenerator.shuffle(conjugations)[0];
+      let pronoun = null;
+      let location = null;
+      if (this.state.otherInfo === 'location') {
+        location = sentenceGenerator.shuffle([...locations])[0];
+      }
+      if (this.state.topic === 'pronoun') {
+        sentenceGenerator.shuffle(personalPronouns);
+        pronoun = personalPronouns[0];
+      }
+      const sentence = sentenceGenerator.generateSentenceWithVerb('に', pronoun, this.state.topic, this.state.otherInfo, location, conjugation);
       this.setState({sentenceEng: sentence.english, sentenceJp: sentence.japanese})
     } else {
       const sentence = sentenceGenerator.generateSentenceWithTopic(this.state.topic, this.state.otherInfo);

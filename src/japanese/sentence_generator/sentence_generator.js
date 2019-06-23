@@ -120,92 +120,31 @@ function generateSentenceWithTopic(subject, otherInfo) {
   }
 }
 
-function generateSentenceWithVerb(particle, subject, otherInfo) {
-  if (otherInfo === 'location') {
-    shuffle(locations);
-    otherInfo = locations[0];
-  }
+function generateSentenceWithVerb(particle, pronoun, topic, otherInfo, location, conjugation) {
   let preposition = '';
   if (particle === 'に') {
     preposition = 'to';
   } else if (particle === 'と') {
     preposition = 'with';
   }
-  if (subject === 'pronoun') {
-    shuffle(personalPronouns);
-    const pronoun = personalPronouns[0];
+  if (topic === 'pronoun') {
     const pronounEng = pronoun.translations[0];
     const pronounJp = pronoun.word;
-    const conjugations = ['present', 'past', 'negative', 'past_negative'];
-    const conjugation = shuffle(conjugations)[0];
     const japaneseVerb = verbs[0].conjugations[conjugation].verb;
     const linkingVerb = getVerb(pronounEng, conjugation, 'ikimasu');
     if (otherInfo === 'name') {
       return { english: `${pronounEng} ${linkingVerb} ${preposition} Mohammed`, japanese: wanakana.toHiragana(`${pronounJp}はMohammed${particle}${japaneseVerb}`) };
     }
-    const descriptionEng = otherInfo.translations[0];
-    const descriptionJp = otherInfo.word;
+    const descriptionEng = location.translations[0];
+    const descriptionJp = location.word;
     return { english: `${pronounEng} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: wanakana.toHiragana(`${pronounJp}は${descriptionJp}${particle}${japaneseVerb}`) };
+  } else {
+    const descriptionEng = location.translations[0];
+    const descriptionJp = location.word;
+    const japaneseVerb = verbs[0].conjugations[conjugation].verb;
+    const linkingVerb = getVerb(pronoun, conjugation, 'ikimasu');
+    return { english: `${topic} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: wanakana.toHiragana(`${topic}は${descriptionJp}${particle}${japaneseVerb}`) };
   }
 }
 
-function generateVerbSentence(particles, destination, pronoun, verbConjugations, verbConjugation) {
-    let linkingVerb = 'are';
-    let verb;
-    let preposition = '';
-    if (destination && particles.includes('に')) {
-      preposition = 'to';
-    }
-    // console.log(pronoun, verbConjugation);
-    if (pronoun === 'I') {
-      if (verbConjugation === 'present') {
-        linkingVerb = ' am';
-        verb = verbConjugations.present.translations[0];
-      } else if (verbConjugation === 'past') {
-        linkingVerb = '';
-        verb = verbConjugations.past.translations[0];
-      } else if (verbConjugation === 'negative') {
-        linkingVerb = ' am'
-        verb = verbConjugations.negative.translations[0];
-      } else if (verbConjugation === 'past_negative') {
-        linkingVerb = '';
-        verb = verbConjugations.past_negative.translations[0];
-      }
-    } else if (pronoun === 'you') {
-      if (verbConjugation === 'present') {
-        linkingVerb = ' are';
-        verb = verbConjugations.present.translations[0];
-      } else if (verbConjugation === 'past') {
-        linkingVerb = '';
-        verb = verbConjugations.past.translations[0];
-      } else if (verbConjugation === 'negative') {
-        linkingVerb = ' are'
-        verb = verbConjugations.negative.translations[0];
-      } else if (verbConjugation === 'past_negative') {
-        linkingVerb = '';
-        verb = verbConjugations.past_negative.translations[1];
-      }
-    } else {
-      if (verbConjugation === 'present') {
-        linkingVerb = ' is';
-        verb = verbConjugations.present.translations[0];
-      } else if (verbConjugation === 'past') {
-        linkingVerb = '';
-        verb = verbConjugations.past.translations[0];
-      } else if (verbConjugation === 'negative') {
-        linkingVerb = ' is'
-        verb = verbConjugations.negative.translations[0];
-      } else if (verbConjugation === 'past_negative') {
-        linkingVerb = '';
-        verb = verbConjugations.past_negative.translations[0];
-      }
-    }
-    // Cheeky workaround for wanakana so it always works.
-    // setTimeout(() => {
-      // console.log(`${wanakana.toHiragana(personalPronouns[0].word)}${wanakana.toHiragana(particles[0].particle)}${wanakana.toHiragana(verbs[0].verb)}`)
-      // console.log(`${pronoun}${linkingVerb} ${verb} ${particle} Japan`)
-      return `${pronoun}${linkingVerb} ${verb} ${preposition} ${destination}`;
-    // }, 200);
-};
-
-export { generateVerbSentence, getVerbObject, generateSentenceWithTopic, generateSentenceWithVerb };
+export { shuffle, getVerbObject, generateSentenceWithTopic, generateSentenceWithVerb };
