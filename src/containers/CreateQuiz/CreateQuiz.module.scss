@@ -1,18 +1,64 @@
 @import '../../assets/_colors.scss';
 
 .CreateQuiz {
+  margin: 8px;
+}
+
+.SentenceContainer {
+  margin-top: 8px;
 }
 
 .WordContainer {
-  display: inline-flex;
+  display: inline-block;
+  margin-right: 12px;
+}
+
+.ExampleSentence {
+  color: $dark-teal;
+  text-transform: capitalize;
 }
 
 .Word, .Sentence {
   color: $dark-teal;
+  font-weight: 600;
   & option {
     color: $dark-teal;
   }
   &::first-letter {
     text-transform: capitalize;
+  }
+}
+
+.GrammarDropdown {
+  margin-bottom: 8px;
+  padding: 4px;
+  font-size: 12px;
+  color: $light-teal;
+  border-radius: 5px;
+  border: 2px solid $light-teal;
+  background-color: $light;
+  & option {
+    color: $light-teal;
+  }
+}
+
+.GrammarType {
+  color: $dark-teal;
+  margin-bottom: 4px;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .GrammarDropdown {
+    margin-right: 100%;
+    padding: 4px;
+    font-size: 14px;
+    color: $light-teal;
+    border-radius: 5px;
+    border: 2px solid $light-teal;
+    background-color: $light;
+    & option {
+      color: $light-teal;
+    }
   }
 }

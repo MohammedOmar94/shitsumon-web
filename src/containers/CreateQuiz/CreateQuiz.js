@@ -5,6 +5,7 @@ import Section from '../../components/UI/Section/Section';
 
 
 import Button from '../../components/UI/Button/Button';
+import Dropdown from '../../components/UI/Dropdown/Dropdown';
 
 
 import locations from '../../japanese/sentence_generator/locations/locations';
@@ -39,7 +40,7 @@ class CreateQuiz extends Component {
   }
 
   addParticle(particle) {
-    if (particle === 'に')　{
+    if (particle === 'verb')　{
       this.setState({sentenceWithTopicAndVerb: true, topic: 'pronoun', otherInfo: 'location'});
     }
   }
@@ -72,30 +73,35 @@ class CreateQuiz extends Component {
     let addVerb = (
       <div className={classes.WordContainer}>
         <select
-          className={classes.Word}
+          className={classes.GrammarDropdown}
           onChange={evt => this.addParticle(evt.target.value)}>
-          <option>Add particle</option>
-          <option>に</option>
+          <option>More Grammar</option>
+          <option value='verb'>Verb</option>
         </select>
       </div>
     );
     let sentenceWithTopic = (
       <Fragment>
+      <Dropdown
+        label='Topic'
+        options={[
+          { name: "[Pronoun]", value: "pronoun" },
+          { name: "[Location]", value: "location" }
+        ]}
+        onChange={evt => this.setState({ topic: evt.target.value, otherInfo: 'adjective' })}
+      />
         <div className={classes.WordContainer}>
+          <p className={classes.GrammarType}>Particle</p>
           <select
-            className={classes.Word}
-            onChange={evt => this.updateTopic(evt.target.value)}
-          >
-            <option value="pronoun">[Pronoun]</option>
-            <option value="location">[Location]</option>
+              className={classes.GrammarDropdown}
+            >
+              <option>は</option>
           </select>
         </div>
         <div className={classes.WordContainer}>
-          <p className={classes.Word}>は</p>
-        </div>
-        <div className={classes.WordContainer}>
+          <p className={classes.GrammarType}>Other info</p>
           <select
-            className={classes.Word}
+            className={classes.GrammarDropdown}
             onChange={evt => this.setState({ otherInfo: evt.target.value })}
           >
             <option value={"adjective"}>[Adjective]</option>
@@ -105,8 +111,9 @@ class CreateQuiz extends Component {
         </div>
         {/* If there is no verb */}
         <div className={classes.WordContainer}>
+          <p className={classes.GrammarType}>Tense</p>
           {/* <button className={classes.AddBtn}>Add Adjective or relative time</button> */}
-          <select className={classes.Word}>
+          <select className={classes.GrammarDropdown}>
             {/* If pronoun and ha particle, display option */}
             <option value={'desu'}>です</option>
           </select>
@@ -121,18 +128,25 @@ class CreateQuiz extends Component {
       sentenceWithTopicAndVerb = (
         <Fragment>
           <div className={classes.WordContainer}>
+            <p className={classes.GrammarType}>Particle</p>
             <select
-              className={classes.Word}
+              className={classes.GrammarDropdown}
               onChange={evt => this.updateTopic(evt.target.value)}>
               <option value="pronoun">[Pronoun]</option>
             </select>
           </div>
           <div className={classes.WordContainer}>
-            <p className={classes.Word}>は</p>
+            <p className={classes.GrammarType}>Particle</p>
+            <select
+                className={classes.GrammarDropdown}
+              >
+                <option>は</option>
+            </select>
           </div>
           <div className={classes.WordContainer}>
+            <p className={classes.GrammarType}>Other info</p>
             <select
-              className={classes.Word}
+              className={classes.GrammarDropdown}
               onChange={evt => this.setState({ otherInfo: evt.target.value })}>
               <option value={"location"}>[Location]</option>
               {/* If pronoun and ha particle, display option */}
@@ -140,13 +154,17 @@ class CreateQuiz extends Component {
             </select>
           </div>
           <div className={classes.WordContainer}>
-            {/* <button className={classes.AddBtn}>Add Adjective or relative time</button> */}
-            <p className={classes.Word}>に</p>
-            {/* <button className={classes.AddBtn}>Add Particle</button> */}
+            <p className={classes.GrammarType}>Particle</p>
+            <select
+                className={classes.GrammarDropdown}
+              >
+                <option>に</option>
+            </select>
           </div>
           <div className={classes.WordContainer}>
+          <p className={classes.GrammarType}>Action</p>
             <select
-              className={classes.Word}
+              className={classes.GrammarDropdown}
               onChange={evt => this.setState({ otherInfo: evt.target.value })}>
               <option value={"verb"}>[Verb]</option>
             </select>
@@ -155,12 +173,20 @@ class CreateQuiz extends Component {
       );
     }
     return (
-      <Section name='Create Quiz'>
-        { sentenceWithTopic }
-        { addVerb }
-        { sentenceWithTopicAndVerb }
+      <Section name='Create Quiz' className={classes.CreateQuiz}>
+        <div className={classes.SentenceContainer}>
+          { sentenceWithTopic }
+          { addVerb }
+          { sentenceWithTopicAndVerb }
+        </div>
         <Button onClick={() => this.generateSentence()}>Generate sentence</Button>
         <p className={classes.Sentence}>Example:</p>
+        { !this.state.sentenceWithTopicAndVerb &&
+            <p className={classes.ExampleSentence}>[{this.state.topic}]は[{this.state.otherInfo}]</p>
+        }
+        { this.state.sentenceWithTopicAndVerb &&
+          <p className={classes.ExampleSentence}>[{this.state.topic}]は[{this.state.otherInfo}]に[Verb]</p>
+        }
         <p className={classes.Sentence}>{this.state.sentenceJp}</p>
         <p className={classes.Sentence}>{this.state.sentenceEng}</p>
       </Section>

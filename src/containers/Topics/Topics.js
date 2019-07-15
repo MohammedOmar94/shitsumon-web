@@ -106,7 +106,11 @@ class Topics extends Component {
     });
     return (
       <div className={classes.Topics}>
-        <h2 className={classes.Header}><i className="fas fa-pencil-alt" />Quizzes</h2>
+        <h2 className={classes.Header}>
+          <i className="fas fa-pencil-alt" />
+          Quizzes
+          <button onClick={() => this.props.history.push('/create-quiz')}>CREATE</button>
+        </h2>
         <ul className={classes.TopicList}>{topics}</ul>
       </div>
     );

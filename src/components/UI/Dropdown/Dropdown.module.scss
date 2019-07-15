@@ -1,0 +1,30 @@
+@import '../../../assets/_colors.scss';
+
+.DropdownContainer {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.DropdownLabel {
+  color: $dark-teal;
+  margin-bottom: 4px;
+}
+
+.Dropdown {
+  margin-bottom: 8px;
+  padding: 4px;
+  font-size: 12px;
+  color: $light-teal;
+  border-radius: 5px;
+  border: 2px solid $light-teal;
+  background-color: $light;
+  & option {
+    color: $light-teal;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .Dropdown {
+    font-size: 14px;
+  }
+}
