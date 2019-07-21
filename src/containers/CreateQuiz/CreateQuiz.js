@@ -68,7 +68,7 @@ class CreateQuiz extends Component {
   render() {
     let nameOption = null;
     if (this.state.topic === 'pronoun' && this.state.particles.includes('は')) {
-     nameOption = <option value='name'>[Name]</option>;
+     nameOption = { name: '[Name]', value: 'name'};
     }
     let addVerb = (
       <div className={classes.WordContainer}>
@@ -82,43 +82,34 @@ class CreateQuiz extends Component {
     );
     let sentenceWithTopic = (
       <Fragment>
-      <Dropdown
-        label='Topic'
-        options={[
-          { name: "[Pronoun]", value: "pronoun" },
-          { name: "[Location]", value: "location" }
-        ]}
-        onChange={evt => this.setState({ topic: evt.target.value, otherInfo: 'adjective' })}
-      />
-        <div className={classes.WordContainer}>
-          <p className={classes.GrammarType}>Particle</p>
-          <select
-              className={classes.GrammarDropdown}
-            >
-              <option>は</option>
-          </select>
-        </div>
-        <div className={classes.WordContainer}>
-          <p className={classes.GrammarType}>Other info</p>
-          <select
-            className={classes.GrammarDropdown}
-            onChange={evt => this.setState({ otherInfo: evt.target.value })}
-          >
-            <option value={"adjective"}>[Adjective]</option>
-            {/* If pronoun and ha particle, display option */}
-            {nameOption}
-          </select>
-        </div>
+        <Dropdown
+          label='Topic'
+          options={[
+            { name: "[Pronoun]", value: "pronoun" },
+            { name: "[Location]", value: "location" }
+          ]}
+          onChange={evt => this.setState({ topic: evt.target.value, otherInfo: 'adjective' })}
+        />
+        <Dropdown
+          label='Particle'
+          options={[
+            { name: "は", value: "は" },
+          ]}
+        />
+        <Dropdown
+          label='Other info'
+          options={[
+            { name: "[Adjective]", value: "adjective" },
+          ]}
+          onChange={evt => this.setState({ otherInfo: evt.target.value })}
+        />
         {/* If there is no verb */}
-        <div className={classes.WordContainer}>
-          <p className={classes.GrammarType}>Tense</p>
-          {/* <button className={classes.AddBtn}>Add Adjective or relative time</button> */}
-          <select className={classes.GrammarDropdown}>
-            {/* If pronoun and ha particle, display option */}
-            <option value={'desu'}>です</option>
-          </select>
-          {/* <button className={classes.AddBtn}>Add Particle</button> */}
-        </div>
+        <Dropdown
+          label='Tense'
+          options={[
+            { name: "です", value: "です" },
+          ]}
+        />
       </Fragment>
     );
     let sentenceWithTopicAndVerb = null;
@@ -127,68 +118,64 @@ class CreateQuiz extends Component {
       addVerb = null;
       sentenceWithTopicAndVerb = (
         <Fragment>
-          <div className={classes.WordContainer}>
-            <p className={classes.GrammarType}>Particle</p>
-            <select
-              className={classes.GrammarDropdown}
-              onChange={evt => this.updateTopic(evt.target.value)}>
-              <option value="pronoun">[Pronoun]</option>
-            </select>
-          </div>
-          <div className={classes.WordContainer}>
-            <p className={classes.GrammarType}>Particle</p>
-            <select
-                className={classes.GrammarDropdown}
-              >
-                <option>は</option>
-            </select>
-          </div>
-          <div className={classes.WordContainer}>
-            <p className={classes.GrammarType}>Other info</p>
-            <select
-              className={classes.GrammarDropdown}
-              onChange={evt => this.setState({ otherInfo: evt.target.value })}>
-              <option value={"location"}>[Location]</option>
-              {/* If pronoun and ha particle, display option */}
-              {nameOption}
-            </select>
-          </div>
-          <div className={classes.WordContainer}>
-            <p className={classes.GrammarType}>Particle</p>
-            <select
-                className={classes.GrammarDropdown}
-              >
-                <option>に</option>
-            </select>
-          </div>
-          <div className={classes.WordContainer}>
-          <p className={classes.GrammarType}>Action</p>
-            <select
-              className={classes.GrammarDropdown}
-              onChange={evt => this.setState({ otherInfo: evt.target.value })}>
-              <option value={"verb"}>[Verb]</option>
-            </select>
-          </div>
+          <Dropdown
+            label='Topic'
+            options={[
+              { name: "[Pronoun]", value: "pronoun" },
+            ]}
+            onChange={evt => this.updateTopic(evt.target.value)}
+          />
+          <Dropdown
+            label='Particle'
+            options={[
+              { name: "は", value: "は" },
+            ]}
+          />
+          <Dropdown
+            label='Other info'
+            options={[
+              { name: "[Location]", value: "location" },
+              /* If pronoun and ha particle, display option */
+              nameOption
+            ]}
+            onChange={evt => this.setState({ otherInfo: evt.target.value })}
+          />
+          <Dropdown
+            label='Particle'
+            options={[
+              { name: "に", value: "に" }
+            ]}
+          />
+          <Dropdown
+            label='Action'
+            options={[
+              { name: "[Verb]", value: "verb" }
+            ]}
+          />
         </Fragment>
       );
     }
     return (
       <Section name='Create Quiz' className={classes.CreateQuiz}>
-        <div className={classes.SentenceContainer}>
+        <div className={classes.SentenceOptions}>
           { sentenceWithTopic }
           { addVerb }
           { sentenceWithTopicAndVerb }
         </div>
-        <Button onClick={() => this.generateSentence()}>Generate sentence</Button>
-        <p className={classes.Sentence}>Example:</p>
-        { !this.state.sentenceWithTopicAndVerb &&
-            <p className={classes.ExampleSentence}>[{this.state.topic}]は[{this.state.otherInfo}]</p>
-        }
-        { this.state.sentenceWithTopicAndVerb &&
-          <p className={classes.ExampleSentence}>[{this.state.topic}]は[{this.state.otherInfo}]に[Verb]</p>
-        }
-        <p className={classes.Sentence}>{this.state.sentenceJp}</p>
-        <p className={classes.Sentence}>{this.state.sentenceEng}</p>
+        <div className={classes.BtnContainer}>
+          <Button onClick={() => this.generateSentence()}>Generate sentence</Button>
+        </div>
+        <div className={classes.SentenceContainer}>
+          <p className={classes.Sentence}>Example</p>
+          { !this.state.sentenceWithTopicAndVerb &&
+              <p className={classes.ExampleSentence}>[{this.state.topic}]は[{this.state.otherInfo}]</p>
+          }
+          { this.state.sentenceWithTopicAndVerb &&
+            <p className={classes.ExampleSentence}>[{this.state.topic}]は[{this.state.otherInfo}]に[Verb]</p>
+          }
+          <p className={classes.Sentence}>{this.state.sentenceJp}</p>
+          <p className={classes.Sentence}>{this.state.sentenceEng}</p>
+        </div>
       </Section>
     )
   }
