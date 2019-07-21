@@ -19,7 +19,7 @@ class CreateQuiz extends Component {
     particles: ['は'],
     otherInfo: 'adjective',
     sentenceEng: '',
-    sentenceJp: '',
+    sentenceJp: [],
     sentenceWithTopicAndVerb: false,
   };
 
@@ -173,7 +173,11 @@ class CreateQuiz extends Component {
           { this.state.sentenceWithTopicAndVerb &&
             <p className={classes.ExampleSentence}>[{this.state.topic}]は[{this.state.otherInfo}]に[Verb]</p>
           }
-          <p className={classes.Sentence}>{this.state.sentenceJp}</p>
+          <span className={classes.Sentence}>
+            {this.state.sentenceJp.map(word => (
+              <p className={classes.Word}>{word}</p>
+            ))}
+          </span>
           <p className={classes.Sentence}>{this.state.sentenceEng}</p>
         </div>
       </Section>

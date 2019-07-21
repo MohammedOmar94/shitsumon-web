@@ -35,7 +35,17 @@
   font-size: 14px;
 }
 
-.Word, .Sentence {
+.Word {
+  color: $teal;
+  cursor: pointer;
+  display: inline-block;
+  &:hover {
+    color: $light;
+    background-color: $light-teal;
+  }
+}
+
+.Sentence {
   font-weight: 600;
   & option {
     color: $dark-teal;

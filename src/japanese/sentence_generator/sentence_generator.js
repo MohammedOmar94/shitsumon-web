@@ -105,18 +105,18 @@ function generateSentenceWithTopic(subject, otherInfo) {
     const pronounJp = pronoun.word;
     const linkingVerb = getLinkingVerb(pronounEng, 'present');
     if (otherInfo === 'name') {
-      return { english: `${pronounEng} ${linkingVerb} Mohammed`, japanese: wanakana.toHiragana(`${pronounJp}はMohammedです`) };
+      return { english: `${pronounEng} ${linkingVerb} Mohammed`, japanese: [ wanakana.toHiragana(pronounJp), "は", "Mohammed", "です" ]};
     }
     const descriptionEng = otherInfo.translations[0];
     const descriptionJp = otherInfo.word;
-    return { english: `${pronounEng} ${linkingVerb} ${descriptionEng}`, japanese: wanakana.toHiragana(`${pronounJp}は${descriptionJp}です`) };
+    return { english: `${pronounEng} ${linkingVerb} ${descriptionEng}`, japanese: [ wanakana.toHiragana(pronounJp), "は", wanakana.toHiragana(descriptionJp), "です" ]};
   } else if (subject === 'location') {
     const descriptionEng = otherInfo.translations[0];
     const descriptionJp = otherInfo.word;
     shuffle(locations);
     const locationEng = locations[0].translations[0];
     const locationJp = locations[0].word;
-    return { english: `${locationEng} is ${descriptionEng}`, japanese: wanakana.toHiragana(`${locationJp}は${descriptionJp}です`)};
+    return { english: `${locationEng} is ${descriptionEng}`, japanese: [ wanakana.toHiragana(locationJp), "は", wanakana.toHiragana(descriptionJp), "です"]};
   }
 }
 
@@ -137,13 +137,13 @@ function generateSentenceWithVerb(particle, pronoun, topic, otherInfo, location,
     }
     const descriptionEng = location.translations[0];
     const descriptionJp = location.word;
-    return { english: `${pronounEng} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: wanakana.toHiragana(`${pronounJp}は${descriptionJp}${particle}${japaneseVerb}`) };
+    return { english: `${pronounEng} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: [ wanakana.toHiragana(pronounJp), "は", wanakana.toHiragana(descriptionJp), particle, wanakana.toHiragana(japaneseVerb) ] };
   } else {
     const descriptionEng = location.translations[0];
     const descriptionJp = location.word;
     const japaneseVerb = verbs[0].conjugations[conjugation].verb;
     const linkingVerb = getVerb(pronoun, conjugation, 'ikimasu');
-    return { english: `${topic} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: wanakana.toHiragana(`${topic}は${descriptionJp}${particle}${japaneseVerb}`) };
+    return { english: `${topic} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: [ wanakana.toHiragana(topic), "は", wanakana.toHiragana(descriptionJp), particle, wanakana.toHiragana(japaneseVerb) ] };
   }
 }
 
