@@ -1,12 +1,12 @@
 const verbs = [
   {
-    verb: 'ikimasu',
+    word: 'ikimasu',
     conjugations:
     {
-      present: { verb:'ikimasu', translations: ['going', 'go']},
-      past: { verb:'ikimashita', translations: ['went', 'gone']},
-      negative: { verb: 'ikimasen', translations: ['not going', 'did not go']},
-      past_negative: { verb: 'ikimasendeshita', translations: ['was not going', 'were not going']}
+      present: { word: 'ikimasu', translations: ['going', 'go'], kanji: '行きます'　},
+      past: { word: 'ikimashita', translations: ['went', 'gone'], kanji: '行きました'},
+      negative: { word: 'ikimasen', translations: ['not going', 'did not go'], kanji: '行きません'},
+      past_negative: { word: 'ikimasendeshita', translations: ['was not going', 'were not going'], kanji: '行きませんでした'}
     },
   }
 ];

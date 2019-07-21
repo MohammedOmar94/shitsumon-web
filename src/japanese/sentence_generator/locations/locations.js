@@ -1,6 +1,6 @@
 const locations = [
-  { word: 'nihon', translations: ['Japan']},
-  { word: 'igirisu', translations: ['England', 'United Kingdom']},
+  { word: 'nihon', translations: ['Japan'], kanji: '日本'},
+  { word: 'igirisu', translations: ['England', 'United Kingdom'], kanji: '英吉利'},
 ];
 
 export default locations;
