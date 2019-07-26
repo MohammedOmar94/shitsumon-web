@@ -1,14 +1,14 @@
 {
-  "main.css": "/shitsumon-web/static/css/main.e28f2af8.chunk.css",
-  "main.js": "/shitsumon-web/static/js/main.c7e45cfc.chunk.js",
-  "main.js.map": "/shitsumon-web/static/js/main.c7e45cfc.chunk.js.map",
+  "main.css": "/shitsumon-web/static/css/main.e46e17b7.chunk.css",
+  "main.js": "/shitsumon-web/static/js/main.47074524.chunk.js",
+  "main.js.map": "/shitsumon-web/static/js/main.47074524.chunk.js.map",
   "runtime~main.js": "/shitsumon-web/static/js/runtime~main.7cbc342c.js",
   "runtime~main.js.map": "/shitsumon-web/static/js/runtime~main.7cbc342c.js.map",
-  "static/js/2.e2da514f.chunk.js": "/shitsumon-web/static/js/2.e2da514f.chunk.js",
-  "static/js/2.e2da514f.chunk.js.map": "/shitsumon-web/static/js/2.e2da514f.chunk.js.map",
+  "static/js/2.d18366a4.chunk.js": "/shitsumon-web/static/js/2.d18366a4.chunk.js",
+  "static/js/2.d18366a4.chunk.js.map": "/shitsumon-web/static/js/2.d18366a4.chunk.js.map",
   "index.html": "/shitsumon-web/index.html",
-  "precache-manifest.0ab2d831b5d74b4644b21fba0f979f73.js": "/shitsumon-web/precache-manifest.0ab2d831b5d74b4644b21fba0f979f73.js",
+  "precache-manifest.8872f328c13d0b34c95a313bc4d28fe1.js": "/shitsumon-web/precache-manifest.8872f328c13d0b34c95a313bc4d28fe1.js",
   "service-worker.js": "/shitsumon-web/service-worker.js",
-  "static/css/main.e28f2af8.chunk.css.map": "/shitsumon-web/static/css/main.e28f2af8.chunk.css.map",
+  "static/css/main.e46e17b7.chunk.css.map": "/shitsumon-web/static/css/main.e46e17b7.chunk.css.map",
   "static/media/Portal.module.scss": "/shitsumon-web/static/media/shaq_wiggle.ea3610ff.gif"
 }
