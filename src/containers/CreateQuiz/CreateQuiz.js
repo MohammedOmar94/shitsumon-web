@@ -13,7 +13,6 @@ import locations from '../../japanese/sentence_generator/locations/locations';
 import personalPronouns from '../../japanese/sentence_generator/pronouns/personal_pronouns';
 
 import * as sentenceGenerator from '../../japanese/sentence_generator/sentence_generator';
-const wanakana = require('wanakana');
 
 class CreateQuiz extends Component {
   state = {

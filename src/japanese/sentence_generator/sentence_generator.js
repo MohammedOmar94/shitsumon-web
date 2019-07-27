@@ -17,15 +17,11 @@ function shuffle(array) {
 };
 
 function getVerbObject(verb) {
-  return verbs.filter(verbObj => verbObj.word === verb)[0];
-}
-
-function getParticleObject(particle) {
-  return particles.filter(particleObj => particleObj.particle === particle)[0];
+  return verbs.filter(verbObj => verbObj.present.word === verb)[0];
 }
 
 function getVerb(pronoun, verbConjugation, verb) {
-  verb = getVerbObject(verb).conjugations[verbConjugation];
+  verb = getVerbObject(verb)[verbConjugation];
   if (pronoun === 'I') {
     if (verbConjugation === 'present') {
       return 'am ' + verb.translations[0];
@@ -135,8 +131,8 @@ function generateSentenceWithVerb(particle, pronoun, topic, otherInfo, location,
     const pronounEng = pronoun.translations[0];
     const pronounJp = pronoun.kanji;
     const pronounKana = pronoun.word;
-    const japaneseVerb = verbs[0].conjugations[conjugation].kanji;
-    const kanaVerb = verbs[0].conjugations[conjugation].word;
+    const japaneseVerb = verbs[0][conjugation].kanji;
+    const kanaVerb = verbs[0][conjugation].word;
     const linkingVerb = getVerb(pronounEng, conjugation, 'ikimasu');
     if (otherInfo === 'name') {
       return { english: `${pronounEng} ${linkingVerb} ${preposition} Mohammed`, japanese: [ pronounJp, "は", "Mohammed", particle, japaneseVerb ], kana: [ wanakana.toHiragana(pronounKana), "は", "Mohammed", particle, wanakana.toHiragana(kanaVerb) ], tooltipEng: [ pronounEng, "[topic particle]", "Mohammed", preposition, linkingVerb ]};
@@ -149,8 +145,8 @@ function generateSentenceWithVerb(particle, pronoun, topic, otherInfo, location,
     const descriptionEng = location.translations[0];
     const descriptionJp = location.kanji;
     const descriptionKana = location.word;
-    const japaneseVerb = verbs[0].conjugations[conjugation].kanji;
-    const kanaVerb = verbs[0].conjugations[conjugation].word;
+    const japaneseVerb = verbs[0][conjugation].kanji;
+    const kanaVerb = verbs[0][conjugation].word;
     const linkingVerb = getVerb(pronoun, conjugation, 'ikimasu');
     return { english: `${topic} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: [ topic, "は", descriptionJp, particle, japaneseVerb ], kana: [ wanakana.toHiragana(topic), "は", wanakana.toHiragana(descriptionKana), particle, wanakana.toHiragana(kanaVerb) ], tooltipEng: [ topic, "[topic particle]", descriptionEng, preposition, linkingVerb ]};
   }
