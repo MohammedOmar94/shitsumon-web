@@ -37,11 +37,14 @@ class Quiz extends Component {
   };
 
   handleNext = (event) => {
+    event.preventDefault();
     const question = this.state.questions[this.state.questionIndex];
 
     const usersAnswer = event.target.answerField.value;
     const answerWasCorrect = wanakana.toRomaji(usersAnswer) === wanakana.toRomaji(question.answer);
     const answerHistory = [...this.state.answerHistory];
+
+    const waitingForNextQuestion = this.state.showCorrectPopup || this.state.showWrongPopup;
 
     console.log(usersAnswer, wanakana.toHiragana(question.answer));
     let animationDuration = 1100;
@@ -56,7 +59,7 @@ class Quiz extends Component {
     answerHistory.push({ text: question.text, usersAnswer, correctAnswer: question.answer, answerWasCorrect })
     if (this.state.questionIndex + 1 === this.state.questions.length) {
       this.setState({endOfQuiz: true, showCorrectPopup: false, showWrongPopup: false, answerHistory, sectionName: 'Results'});
-    } else if (usersAnswer) {
+    } else if (usersAnswer && !waitingForNextQuestion) {
       setTimeout(() => {
         this.setState(prevState => {
           return {
@@ -72,7 +75,6 @@ class Quiz extends Component {
     } else {
       this.setState({emptyAnswer: true});
     }
-    event.preventDefault();
   }
 
   setInputMode = (inputMode) => {
