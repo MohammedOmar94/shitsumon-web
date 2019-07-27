@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import queryString from 'query-string';
+import classnames from 'classnames';
 
 import Questions from "../../components/Questions/Questions";
 import Button from "../../components/UI/Button/Button";
 import Section from "../../components/UI/Section/Section";
-import classes from "./Quiz.module.scss";
+import "./Quiz.scss";
 
 import * as quizzes from '../../japanese/quiz_setup';
 
@@ -22,6 +23,8 @@ class Quiz extends Component {
     answerHistory: [],
     endOfQuiz: false,
     sectionName: '',
+    showCorrectPopup: false,
+    showWrongPopup: false,
   };
 
   shuffle = (array, quizLength) => {
@@ -41,22 +44,31 @@ class Quiz extends Component {
     const answerHistory = [...this.state.answerHistory];
 
     console.log(usersAnswer, wanakana.toHiragana(question.answer));
+    let animationDuration = 1100;
     let score = this.state.score;
     if (answerWasCorrect) {
       score = score + 1;
+      this.setState({showCorrectPopup: true})
+    } else if (!answerWasCorrect && usersAnswer) {
+      animationDuration = 1200;
+      this.setState({showWrongPopup: true})
     }
     answerHistory.push({ text: question.text, usersAnswer, correctAnswer: question.answer, answerWasCorrect })
     if (this.state.questionIndex + 1 === this.state.questions.length) {
-      this.setState({endOfQuiz: true, answerHistory, sectionName: 'Results'});
+      this.setState({endOfQuiz: true, showCorrectPopup: false, showWrongPopup: false, answerHistory, sectionName: 'Results'});
     } else if (usersAnswer) {
-      this.setState(prevState => {
-        return {
-          questionIndex: prevState.questionIndex + 1,
-          score,
-          answerHistory,
-          emptyAnswer: false
-         }
-      });
+      setTimeout(() => {
+        this.setState(prevState => {
+          return {
+            questionIndex: prevState.questionIndex + 1,
+            score,
+            answerHistory,
+            emptyAnswer: false,
+            showCorrectPopup: false,
+            showWrongPopup: false
+           }
+        });
+      }, animationDuration)
     } else {
       this.setState({emptyAnswer: true});
     }
@@ -108,7 +120,7 @@ class Quiz extends Component {
     let inputMode = null;
     if (!this.state.endOfQuiz) {
       inputMode = (
-        <div className={classes.Preferences}>
+        <div className='Preferences'>
           <p>Input mode</p>
           <Button selected={this.state.inputMode === 'toHiragana'} onClick={() => this.setInputMode('toHiragana')}>Hiragana</Button>
           <Button selected={this.state.inputMode === 'toKatakana'} onClick={() => this.setInputMode('toKatakana')}>Katakana</Button>
@@ -117,8 +129,18 @@ class Quiz extends Component {
       );
     }
 
+    const correctPopupClass = classnames(
+      'CorrectPopup',
+      { '--show' : this.state.showCorrectPopup }
+    )
+
+    const wrongPopupClass = classnames(
+      'WrongPopup',
+      { '--show' : this.state.showWrongPopup }
+    )
+
     return (
-      <Section name={this.state.sectionName} className={classes.Quiz}>
+      <Section name={this.state.sectionName} className={'Quiz'}>
         <Questions
           questions={this.state.questions}
           questionIndex={this.state.questionIndex}
@@ -128,6 +150,14 @@ class Quiz extends Component {
           emptyAnswer={this.state.emptyAnswer}
           endOfQuiz={this.state.endOfQuiz} />
           { inputMode }
+          <div className={correctPopupClass}>
+            <i className="far fa-smile-wink" />
+            <p>正解</p>
+            <p>CORRECT</p>
+          </div>
+          <div className={wrongPopupClass}>
+            <i class="fas fa-times"></i>
+          </div>
       </Section>
     );
   }

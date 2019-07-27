@@ -103,20 +103,24 @@ function generateSentenceWithTopic(subject, otherInfo) {
     const pronoun = personalPronouns[0];
     const pronounEng = pronoun.translations[0];
     const pronounJp = pronoun.kanji;
+    const pronounKana = pronoun.word;
     const linkingVerb = getLinkingVerb(pronounEng, 'present');
     if (otherInfo === 'name') {
-      return { english: `${pronounEng} ${linkingVerb} Mohammed`, japanese: [ wanakana.toHiragana(pronounJp), "は", "Mohammed", "です" ]};
+      return { english: `${pronounEng} ${linkingVerb} Mohammed`, japanese: [ pronounJp, "は", "Mohammed", "です" ], kana: [ wanakana.toHiragana(pronounKana), "は", "Mohammed", "です" ], tooltipEng: [ pronounEng, linkingVerb, "Mohammed" ]};
     }
     const descriptionEng = otherInfo.translations[0];
     const descriptionJp = otherInfo.kanji;
-    return { english: `${pronounEng} ${linkingVerb} ${descriptionEng}`, japanese: [ wanakana.toHiragana(pronounJp), "は", wanakana.toHiragana(descriptionJp), "です" ]};
+    const descriptionKana = otherInfo.word;
+    return { english: `${pronounEng} ${linkingVerb} ${descriptionEng}`, japanese: [ pronounJp, "は", descriptionJp, "です" ], kana: [ wanakana.toHiragana(pronounKana), "は", wanakana.toHiragana(descriptionKana), "です" ], tooltipEng: [ pronounEng, linkingVerb, descriptionEng, "[no direct translation]" ]};
   } else if (subject === 'location') {
     const descriptionEng = otherInfo.translations[0];
     const descriptionJp = otherInfo.kanji;
+    const descriptionKana = otherInfo.word;
     shuffle(locations);
     const locationEng = locations[0].translations[0];
     const locationJp = locations[0].kanji;
-    return { english: `${locationEng} is ${descriptionEng}`, japanese: [ wanakana.toHiragana(locationJp), "は", wanakana.toHiragana(descriptionJp), "です"]};
+    const locationKana = locations[0].word;
+    return { english: `${locationEng} is ${descriptionEng}`, japanese: [ locationJp, "は", descriptionJp, "です"], kana: [ wanakana.toHiragana(locationKana), "は", wanakana.toHiragana(descriptionKana), "です"], tooltipEng: [ locationEng, descriptionEng, "[no direct translation]" ]};
   }
 }
 
@@ -130,20 +134,25 @@ function generateSentenceWithVerb(particle, pronoun, topic, otherInfo, location,
   if (topic === 'pronoun') {
     const pronounEng = pronoun.translations[0];
     const pronounJp = pronoun.kanji;
+    const pronounKana = pronoun.word;
     const japaneseVerb = verbs[0].conjugations[conjugation].kanji;
+    const kanaVerb = verbs[0].conjugations[conjugation].word;
     const linkingVerb = getVerb(pronounEng, conjugation, 'ikimasu');
     if (otherInfo === 'name') {
-      return { english: `${pronounEng} ${linkingVerb} ${preposition} Mohammed`, japanese: [ wanakana.toHiragana(pronounJp), "は", "Mohammed", particle, japaneseVerb ] };
+      return { english: `${pronounEng} ${linkingVerb} ${preposition} Mohammed`, japanese: [ pronounJp, "は", "Mohammed", particle, japaneseVerb ], kana: [ wanakana.toHiragana(pronounKana), "は", "Mohammed", particle, wanakana.toHiragana(kanaVerb) ], tooltipEng: [ pronounEng, "[topic particle]", "Mohammed", preposition, linkingVerb ]};
     }
     const descriptionEng = location.translations[0];
     const descriptionJp = location.kanji;
-    return { english: `${pronounEng} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: [ wanakana.toHiragana(pronounJp), "は", wanakana.toHiragana(descriptionJp), particle, wanakana.toHiragana(japaneseVerb) ] };
+    const descriptionKana = location.word;
+    return { english: `${pronounEng} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: [ pronounJp, "は", descriptionJp, particle, japaneseVerb ], kana: [ wanakana.toHiragana(pronounKana), "は", wanakana.toHiragana(descriptionKana), particle, wanakana.toHiragana(kanaVerb) ], tooltipEng: [ pronounEng, "[topic particle]", descriptionEng, preposition, linkingVerb ] };
   } else {
     const descriptionEng = location.translations[0];
     const descriptionJp = location.kanji;
+    const descriptionKana = location.word;
     const japaneseVerb = verbs[0].conjugations[conjugation].kanji;
+    const kanaVerb = verbs[0].conjugations[conjugation].word;
     const linkingVerb = getVerb(pronoun, conjugation, 'ikimasu');
-    return { english: `${topic} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: [ wanakana.toHiragana(topic), "は", wanakana.toHiragana(descriptionJp), particle, wanakana.toHiragana(japaneseVerb) ] };
+    return { english: `${topic} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: [ topic, "は", descriptionJp, particle, japaneseVerb ], kana: [ wanakana.toHiragana(topic), "は", wanakana.toHiragana(descriptionKana), particle, wanakana.toHiragana(kanaVerb) ], tooltipEng: [ topic, "[topic particle]", descriptionEng, preposition, linkingVerb ]};
   }
 }
 

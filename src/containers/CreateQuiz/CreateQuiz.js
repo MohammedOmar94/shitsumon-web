@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import classes from  './CreateQuiz.module.scss';
 import Section from '../../components/UI/Section/Section';
@@ -12,6 +13,7 @@ import locations from '../../japanese/sentence_generator/locations/locations';
 import personalPronouns from '../../japanese/sentence_generator/pronouns/personal_pronouns';
 
 import * as sentenceGenerator from '../../japanese/sentence_generator/sentence_generator';
+const wanakana = require('wanakana');
 
 class CreateQuiz extends Component {
   state = {
@@ -20,7 +22,9 @@ class CreateQuiz extends Component {
     otherInfo: 'adjective',
     sentenceEng: '',
     sentenceJp: [],
-    sentenceWithTopicAndVerb: false,
+    sentenceKana: [],
+    wordsInEnglish: [],
+    sentenceWithTopicAndVerb: false
   };
 
   // componentDidMount() {
@@ -59,10 +63,10 @@ class CreateQuiz extends Component {
         pronoun = personalPronouns[0];
       }
       const sentence = sentenceGenerator.generateSentenceWithVerb('に', pronoun, this.state.topic, this.state.otherInfo, location, conjugation);
-      this.setState({sentenceEng: sentence.english, sentenceJp: sentence.japanese})
+      this.setState({sentenceEng: sentence.english, sentenceJp: sentence.japanese, sentenceKana: sentence.kana, wordsInEnglish: sentence.tooltipEng })
     } else {
       const sentence = sentenceGenerator.generateSentenceWithTopic(this.state.topic, this.state.otherInfo);
-      this.setState({sentenceEng: sentence.english, sentenceJp: sentence.japanese})
+      this.setState({sentenceEng: sentence.english, sentenceJp: sentence.japanese, sentenceKana: sentence.kana,  wordsInEnglish: sentence.tooltipEng })
     }
   }
   render() {
@@ -174,8 +178,11 @@ class CreateQuiz extends Component {
             <p className={classes.ExampleSentence}>[{this.state.topic}]は[{this.state.otherInfo}]に[Verb]</p>
           }
           <span className={classes.Sentence}>
-            {this.state.sentenceJp.map(word => (
-              <p className={classes.Word}>{word}</p>
+            {this.state.sentenceJp.map((word, index)=> (
+              <Fragment>
+                <ReactTooltip />
+                <p data-tip={`${this.state.sentenceKana[index]} = ${this.state.wordsInEnglish[index]}`} className={classes.Word}>{word}</p>
+              </Fragment>
             ))}
           </span>
           <p className={classes.Sentence}>{this.state.sentenceEng}</p>
