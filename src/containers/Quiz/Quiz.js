@@ -58,7 +58,15 @@ class Quiz extends Component {
     }
     answerHistory.push({ text: question.text, usersAnswer, correctAnswer: question.answer, answerWasCorrect })
     if (this.state.questionIndex + 1 === this.state.questions.length) {
-      this.setState({endOfQuiz: true, showCorrectPopup: false, showWrongPopup: false, answerHistory, sectionName: 'Results'});
+      setTimeout(() => {
+        this.setState({
+          endOfQuiz: true,
+          showCorrectPopup: false,
+          showWrongPopup: false,
+          answerHistory,
+          sectionName: "Results"
+        });
+      }, animationDuration);
     } else if (usersAnswer && !waitingForNextQuestion) {
       setTimeout(() => {
         this.setState(prevState => {
