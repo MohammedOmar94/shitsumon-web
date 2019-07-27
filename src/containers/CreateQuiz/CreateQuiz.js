@@ -103,6 +103,8 @@ class CreateQuiz extends Component {
           label='Other info'
           options={[
             { name: "[Adjective]", value: "adjective" },
+            /* If pronoun and ha particle, display option */
+            nameOption
           ]}
           onChange={evt => this.setState({ otherInfo: evt.target.value })}
         />

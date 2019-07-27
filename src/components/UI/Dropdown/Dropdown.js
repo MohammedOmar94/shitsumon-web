@@ -8,7 +8,7 @@ const dropdown = props => (
     <p className={classes.DropdownLabel}>{props.label}</p>
     <select className={classes.Dropdown} onChange={(evt) => props.onChange(evt)}>
       {props.options.map(option => (
-        <option value={option.value}>{option.name}</option>
+        option && <option value={option.value}>{option.name}</option>
       ))}
     </select>
   </div>
