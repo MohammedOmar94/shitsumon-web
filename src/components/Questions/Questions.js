@@ -1,7 +1,8 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import classnames from "classnames";
 
-import classes from "./Questions.module.scss";
+import "./Questions.scss";
 import Result from  './Result/Result';
 
 const wanakana = require('wanakana');
@@ -23,13 +24,13 @@ const questions = props => {
 
   if (props.questions.length && !props.endOfQuiz) {
     return (
-      <form className={classes.Questions} onSubmit={submitHandler}>
-        <h4 className={classes.QuestionNumber}>Question {props.questionIndex + 1} of {props.questions.length}</h4>
-        <section key={question.id} className={classes.Question}>
+      <form className="questions" onSubmit={submitHandler}>
+        <h4 className="questions__questionNumber">Question {props.questionIndex + 1} of {props.questions.length}</h4>
+        <section key={question.id} className="questions__question">
           <p>{question.text}</p>
           <input
             key={props.inputMode}
-            className={props.emptyAnswer ? classes.EmptyAnswer : classes.AnswerField}
+            className={props.emptyAnswer ? "questions__emptyAnswer" : "questions__answerField"}
             ref={inputEl}
             type="text"
             name="answerField"
@@ -38,23 +39,32 @@ const questions = props => {
             placeholder="Type the Japanese word here"
             value={props.usersAnswer}
           />
-          <input className={classes.NextBtn} type="submit" value="Next"/>
+          <input className="questions__nextBtn" type="submit" value="Next"/>
         </section>
       </form>
     );
   } else if (props.endOfQuiz){
+
+    const resultClasses = (answerWasCorrect) => classnames(
+       "questions__result",
+      { "questions__result--correct": answerWasCorrect },
+      { "questions__result--wrong": !answerWasCorrect },
+    );
+
     return (
-      <div className={classes.Questions}>
-      { props.answerHistory.map((question, index) => (
-        <Fragment key={'answer-' + (index + 1)} >
-          <h4 className={classes.QuestionNumber}>Question {index + 1} - {question.text}</h4>
-          <Result className={classes.AnswerHistory}
-            answerWasCorrect={question.answerWasCorrect}
-            correctAnswer={wanakana.toHiragana(question.correctAnswer)}
-            usersAnswer={question.usersAnswer}
-          />
-        </Fragment>
-      ))}
+      <div className="questions__results">
+        { props.answerHistory.map((question, index) => (
+          <div key={'answer-' + (index + 1)} className={resultClasses(question.answerWasCorrect)}>
+            { "Question " +  (index + 1)}
+            {/* <Result className={classes.AnswerHistory}
+              answerWasCorrect={question.answerWasCorrect}
+              correctAnswer={wanakana.toHiragana(question.correctAnswer)}
+              usersAnswer={question.usersAnswer}
+            /> */}
+            { question.answerWasCorrect && <i class="fas fa-check"></i> }
+            { !question.answerWasCorrect && <i class="fas fa-times"></i> }
+          </div>
+        ))}
       </div>
     );
   } else {

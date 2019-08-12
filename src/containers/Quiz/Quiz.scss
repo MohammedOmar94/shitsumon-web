@@ -58,13 +58,14 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  opacity: 0;
+  visibility: hidden;
   p {
     color: #02cf5e;
     font-weight: 600;
     font-size: 22px;
   }
   &.--show {
+    visibility: visible;
     animation-name: stamp;
     animation-duration: 1000ms;
     animation-iteration-count: 1;
@@ -91,8 +92,9 @@
   color: red;
   font-weight: 600;
   font-size: 72px;
-  opacity: 0;
+  visibility: hidden;
   &.--show {
+    visibility: visible;
     animation-name: pulse;
     animation-duration: 300ms;
     animation-iteration-count: 4;
