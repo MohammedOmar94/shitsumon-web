@@ -13,6 +13,12 @@
   transition: 200ms;
 }
 
+.Button__close {
+  cursor: pointer;
+  color: $dark-teal;
+  font-size: 36px;
+}
+
 .ActiveBtn, .Button:hover {
   background-color: $light-teal;
 }
