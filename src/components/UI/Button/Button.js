@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 button.propTypes = {
-  type: PropTypes.oneOf(['default', 'back']),
-  selected: PropTypes.bool
+  selected: PropTypes.bool,
+  type: PropTypes.oneOf(['default', 'back'])
 }
 
 button.defaultProps = {

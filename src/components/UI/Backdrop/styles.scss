@@ -1,4 +1,4 @@
-.Backdrop {
+.backdrop {
   display: block;
   z-index: 999;
   position: absolute;
@@ -7,6 +7,6 @@
   background-color: rgba(0, 0, 0, 0.35);
 }
 
-.Hidden {
+.backdrop--hidden {
   display: none;
 }

@@ -1,33 +1,36 @@
 import React, { Component } from 'react';
+import { Route } from "react-router-dom";
 
 import Backdrop from './components/UI/Backdrop/Backdrop';
-import SideDrawer from './components/UI/SideDrawer/SideDrawer';
 import Layout from './components/Layout/Layout';
-import Portal from './containers/Portal/Portal';
+import SideDrawer from './components/UI/SideDrawer/SideDrawer';
+
 import CreateQuiz from './containers/CreateQuiz/CreateQuiz';
-import Topics from './containers/Topics/Topics';
+import Portal from './containers/Portal/Portal';
 import Quiz from './containers/Quiz/Quiz';
-import { Route } from "react-router-dom";
+import Topics from './containers/Topics/Topics';
 
 class App extends Component {
   state = {
-    sideDrawerOpen: false
+    isDrawerVisible: false
   };
 
-  drawerToggleClickHandler = () => {
-    const sideDrawerOpen = !this.state.sideDrawerOpen;
-    this.setState({sideDrawerOpen});
+  onDrawerToggle = () => {
+    const isDrawerVisible = !this.state.isDrawerVisible;
+    this.setState({ isDrawerVisible });
   }
 
-  backdropClickHandler = () => {
-    this.setState({ sideDrawerOpen: false })
+  onBackdropClick = () => {
+    this.setState({ isDrawerVisible: false })
   }
 
   render() {
+    const {isDrawerVisible } = this.state;
+
     return (
-      <Layout drawerClickHandler={this.drawerToggleClickHandler}>
-        <SideDrawer show={this.state.sideDrawerOpen} clicked={this.drawerToggleClickHandler}/>
-        <Backdrop show={this.state.sideDrawerOpen}  clicked={this.backdropClickHandler} />
+      <Layout drawerClickHandler={this.onDrawerToggle}>
+        <SideDrawer show={isDrawerVisible} clicked={this.onDrawerToggle}/>
+        <Backdrop hide={!isDrawerVisible}  onClick={this.onBackdropClick} />
         <Route path="/" exact component={Portal} />
         <Route path="/create-quiz" exact component={CreateQuiz} />
         <Route path="/topics" exact component={Topics} />
