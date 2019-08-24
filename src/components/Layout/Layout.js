@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import classes from "./Layout.module.scss";
 import NavLinks from "../UI/NavLinks/NavLinks";
-import NavBar from "../UI/NavBar/NavBar";
+import Header from "../UI/Header/Header";
 
 const layout = props => {
   document.createElement('main');
@@ -13,7 +13,7 @@ const layout = props => {
   }
   return (
     <Fragment>
-      <NavBar openDrawer={props.drawerClickHandler} />
+      <Header onBurgerClick={props.drawerClickHandler} />
       <main className={classes.Layout}>{props.children}</main>
       <footer>
         { navLinks }
