@@ -1,0 +1,31 @@
+@import '../../../assets/_colors.scss';
+
+.button {
+  background-color: $dark-teal;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 8px;
+  padding: 8px;
+  transition: 200ms;
+
+  &:hover {
+    background-color: $light-teal;
+  }
+}
+
+.button--active {
+  background-color: $light-teal;
+}
+
+.button__close {
+  color: $dark-teal;
+  cursor: pointer;
+  font-size: 36px;
+}
+
+@media only screen and (min-width: 768px) {
+  .button {
+    font-size: 14px;
+  }
+}
