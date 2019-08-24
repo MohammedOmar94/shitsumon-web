@@ -1,16 +1,16 @@
 @import '../../../assets/_colors.scss';
 
-.DropdownContainer {
+.dropdown {
   display: inline-block;
   margin-right: 8px;
 }
 
-.DropdownLabel {
+.dropdown__label {
   color: $dark-teal;
   margin-bottom: 4px;
 }
 
-.Dropdown {
+.dropdown__select {
   margin-bottom: 8px;
   padding: 4px;
   font-size: 12px;
@@ -24,7 +24,7 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .Dropdown {
+  .dropdown {
     font-size: 14px;
   }
 }
