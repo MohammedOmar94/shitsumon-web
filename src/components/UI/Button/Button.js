@@ -5,18 +5,25 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 button.propTypes = {
+  rouned: PropTypes.bool,
   selected: PropTypes.bool,
-  type: PropTypes.oneOf(['default', 'back'])
+  theme: PropTypes.oneOf(['dark', 'light']),
+  type: PropTypes.oneOf(['default', 'back']),
 }
 
 button.defaultProps = {
+  rouned: false,
+  theme: 'dark',
   type: 'default'
 }
 
-function button({ className, children, onClick, selected, type }) {
+function button({ className, children, onClick, rounded, selected, theme, type }) {
   const defaultBtnClasses = classnames(
     'button',
     { 'button--active': selected },
+    { 'button--rounded': rounded },
+    { 'button--lightTheme': theme === 'light' },
+    { 'button--darkTheme': theme === 'dark' },
     className
   )
 

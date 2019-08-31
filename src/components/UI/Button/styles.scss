@@ -4,24 +4,46 @@
   background-color: $dark-teal;
   border: none;
   cursor: pointer;
+  display: inline-block;
   font-size: 12px;
-  margin-top: 8px;
+  font-weight: 500;
   padding: 8px;
-  transition: 200ms;
-
-  &:hover {
-    background-color: $light-teal;
-  }
-}
-
-.button--active {
-  background-color: $light-teal;
+  transition: 300ms;
 }
 
 .button__close {
   color: $dark-teal;
   cursor: pointer;
   font-size: 36px;
+}
+
+.button--active {
+  background-color: $light-teal;
+}
+
+.button--darkTheme {
+  color: $light;
+  background-color: $teal;
+  padding: 10px;
+
+  &:hover {
+    background-color: $light-teal;
+  }
+}
+
+.button--lightTheme {
+  color: $light-teal;
+  background-color: $light;
+  border: 2px solid $light-teal;
+
+  &:hover {
+    background-color: $light-teal;
+    color: $light;
+  }
+}
+
+.button--rounded {
+  border-radius: 2px;
 }
 
 @media only screen and (min-width: 768px) {
