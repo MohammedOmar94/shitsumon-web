@@ -8,7 +8,7 @@ import SideDrawer from './components/UI/SideDrawer/SideDrawer';
 import CreateQuiz from './containers/CreateQuiz/CreateQuiz';
 import Portal from './containers/Portal/Portal';
 import Quiz from './containers/Quiz/Quiz';
-import Topics from './containers/Topics/Topics';
+import Topics from './components/Topics';
 
 class App extends Component {
   state = {

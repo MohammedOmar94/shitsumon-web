@@ -1,0 +1,72 @@
+@import '../../../assets/_colors.scss';
+
+.topic {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $light-teal;
+  border-bottom: 1px $lightest-teal solid;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 16px;
+  transition: 300ms;
+  &:hover {
+    background-color: $lightest-teal;
+  }
+}
+
+.topic__header {
+  background-color: $teal;
+  border-bottom: 1px solid $lightest-teal;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  padding: 16px;
+}
+
+.topic__icon {
+  margin-right: 16px;
+}
+
+.topic__chevron {
+  font-size: 24px;
+  transition: 300ms;
+}
+
+.topic__chevron--rotate {
+  transform: rotate(180deg);
+  transition: 300ms;
+}
+
+.topic__quizzes {
+  background-color: $light;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.topic__quiz {
+  margin: 4px;
+}
+
+.topic__label {
+  border-bottom: 1px solid $lightest-teal;
+  color: $light-teal;
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  padding: 4px 8px 12px;
+}
+
+.topic__dropdown {
+  color: $light-teal;
+  background-color: $light;
+  border: 2px solid $light-teal;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-left: 12px;
+  padding: 4px;
+  & option {
+    color: $light-teal;
+  }
+}

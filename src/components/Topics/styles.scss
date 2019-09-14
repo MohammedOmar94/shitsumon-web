@@ -1,0 +1,25 @@
+@import '../../assets/_colors.scss';
+
+.topics__header {
+  background-color: $teal;
+  border-bottom: 1px solid $lightest-teal;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  padding: 16px;
+}
+
+.topics__pencilIcon {
+  margin-right: 16px;
+}
+
+.topics__createBtn {
+  background-color: $light-teal;
+  border: 2px $light solid;
+  color: $light;
+  cursor: pointer;
+  float: right;
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px;
+}
