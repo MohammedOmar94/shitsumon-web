@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import AnimateHeight from 'react-animate-height';
 
 import Button from '../..//UI/Button/Button';
+import IconWithText from '../../UI/IconWithText';
 
 topicSelect.propTypes = {
   changeQuizLength: PropTypes.bool,
@@ -37,18 +38,12 @@ function topicSelect({ changeQuizLength, history, topic }) {
     { 'topic__chevron--rotate': isTopicVisible }
   )
 
-  const topicIconClasses = classnames(
-    'topic__icon',
-    icon
-  )
-
   return (
     <div>
       <div className='topic' onClick={() => setTopicVisibility(!isTopicVisible)}>
-        <p>
-          <i className={topicIconClasses} />
+        <IconWithText icon={icon}>
           {title}
-        </p>
+        </IconWithText>
         <i className={arrowIconClasses}/>
       </div>
       <AnimateHeight

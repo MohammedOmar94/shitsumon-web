@@ -5,6 +5,7 @@ import React from 'react';
 import TopicSelect from './TopicSelect/index';
 
 import { LIST_OF_TOPICS } from './constants';
+import IconWithText from '../UI/IconWithText';
 
 
 function Topics({ history }) {
@@ -15,11 +16,14 @@ function Topics({ history }) {
   return (
     <div>
       <h2 className='topics__header'>
-        <i className={`fas fa-pencil-alt topics__pencilIcon`} />
-        Quizzes
-        <button className='topics__createBtn' onClick={() => history.push('/create-quiz')}>
-          CREATE
-        </button>
+        <IconWithText
+          icon='fas fa-pencil-alt'
+        >
+          Quizzes
+          <button className='topics__createBtn' onClick={() => history.push('/create-quiz')}>
+            CREATE
+          </button>
+        </IconWithText>
       </h2>
       {topics}
     </div>
