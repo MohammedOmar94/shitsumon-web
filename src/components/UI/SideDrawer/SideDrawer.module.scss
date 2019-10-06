@@ -3,7 +3,8 @@
 .SideDrawer {
   z-index: 1000;
   position: absolute;
-  width: 30%;
+  width: 45%;
+  max-width: 370px;
   height: 100vh;
   background-color: $light-teal;
   color: $teal;

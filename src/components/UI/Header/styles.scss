@@ -27,9 +27,20 @@
 }
 
 .header__hamburger-icon {
-  display: none;
-}
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 8px 20px;
 
+  i {
+    color: $teal;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
 @media only screen and (min-width: 768px) {
   .header__text {
     font-size: 32px;
@@ -37,22 +48,5 @@
 
   .header__hirgana-text {
     font-size: 20px;
-  }
-
-  .header__hamburger-icon {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: block;
-    font-size: 24px;
-    padding: 8px 20px;
-
-    i {
-      color: $teal;
-    }
-
-    &:focus {
-      outline: none;
-    }
   }
 }
