@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from "react-router-dom";
 
-import Backdrop from './components/UI/Backdrop/Backdrop';
+import Backdrop from './components/UI/SideDrawer/Backdrop/Backdrop';
 import Layout from './components/Layout/Layout';
 import SideDrawer from './components/UI/SideDrawer/SideDrawer';
 
