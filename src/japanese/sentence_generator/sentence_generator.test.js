@@ -1,5 +1,3 @@
-import particles from './particles/particles';
-import verbs from './verbs/verbs';
 import locations from './locations/locations';
 import personalPronouns from './pronouns/personal_pronouns';
 

@@ -4,7 +4,7 @@ import React from 'react';
 
 import TopicSelect from './TopicSelect/index';
 
-import { LIST_OF_TOPICS } from './constants';
+import { LIST_OF_TOPICS } from '../Topics/constants/index';
 import IconWithText from '../UI/IconWithText';
 
 

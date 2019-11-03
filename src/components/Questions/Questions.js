@@ -104,4 +104,8 @@ questions.propTypes = {
   endOfQuiz: PropTypes.bool.isRequired
 };
 
+questions.defaultProps = {
+  inputMode: 'Default'
+}
+
 export default questions;
