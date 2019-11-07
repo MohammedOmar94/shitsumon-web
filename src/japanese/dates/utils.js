@@ -2,9 +2,26 @@ import jpMonths from  './months';
 import jpDaysOfTheMonth from  './days_of_the_month';
 import jpDaysOfTheWeek from  './days_of_the_week';
 
+import {
+  MONTHS_PARAM,
+  DAYS_OF_THE_MONTH_PARAM,
+  DAYS_OF_THE_WEEK_PARAM
+} from '../../components/Topics/constants/dates';
+
 import { setQuizLength, shuffle, createQuestion, getQuestions, getEnglishWord, getJapaneseTranslations } from '../quiz_setup';
 
-
+function getDatesQuiz(quiz, quizLength) {
+  switch (quiz) {
+    case DAYS_OF_THE_WEEK_PARAM:
+        return setUpDaysOfWeekQuiz(quizLength);
+    case DAYS_OF_THE_MONTH_PARAM:
+        return setUpDaysOfMonthQuiz(quizLength);
+    case MONTHS_PARAM:
+        return setUpMonthsQuiz(quizLength);
+    default:
+      break;
+  }
+}
 
 function setUpDaysOfWeekQuiz(quizlength) {
   // Randomise days of the week
@@ -24,7 +41,7 @@ function setUpMonthsQuiz(quizlength) {
   return getQuestions(months);
 }
 
-function setUpDatesQuiz(quizlength) {
+export function setUpDatesQuiz(quizlength) {
   // Randomise days and months
   const months = setQuizLength([...jpMonths], quizlength);
   const days = setQuizLength([...jpDaysOfTheMonth], quizlength);
@@ -39,4 +56,4 @@ function setUpDatesQuiz(quizlength) {
   return questions;
 }
 
-export { setUpDaysOfWeekQuiz, setUpDaysOfMonthQuiz, setUpMonthsQuiz, setUpDatesQuiz };
+export { getDatesQuiz };

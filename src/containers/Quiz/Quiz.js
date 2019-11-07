@@ -41,7 +41,7 @@ class Quiz extends Component {
     event.preventDefault();
     const question = this.state.questions[this.state.questionIndex];
 
-    const usersAnswer = event.target.answerField.value;
+    const usersAnswer = event.target.answerField.value.toLowerCase();
     const answerWasCorrect = wanakana.toRomaji(usersAnswer) === wanakana.toRomaji(question.answer);
     const answerHistory = [...this.state.answerHistory];
 
@@ -92,12 +92,12 @@ class Quiz extends Component {
   componentDidMount() {
     const search = this.props.location.search;
     const queryParams = queryString.parse(search);
-    const { topic, quiz_length: quizLength } = queryParams;
+    const { topic, quiz, quiz_length: quizLength } = queryParams;
     if (!topic) {
       this.props.history.push('/');
       return;
     }
-    const quizData = loadQuiz(topic, quizLength)
+    const quizData = loadQuiz(topic, quiz, quizLength)
     this.setState(quizData)
   }
 

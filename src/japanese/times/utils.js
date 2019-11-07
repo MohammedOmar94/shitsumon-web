@@ -1,7 +1,29 @@
 import jpHoursOfTheDay from  './hours_of_the_day';
 import jpMinutes from  './minutes';
 
-import { setQuizLength, shuffle, createQuestion, getEnglishWord, getJapaneseTranslations } from '../quiz_setup';
+import {
+  HOURS_OF_THE_DAY_PARAM,
+  MINUTES_UP_TO_20_PARAM,
+  MINUTES_UP_TO_40_PARAM,
+  MINUTES_UP_TO_60_PARAM,
+} from '../../components/Topics/constants/times';
+
+import { shuffle, createQuestion, getEnglishWord, getJapaneseTranslations } from '../quiz_setup';
+
+function getTimesQuiz(quiz, quizLength) {
+  switch (quiz) {
+    case HOURS_OF_THE_DAY_PARAM:
+        return setUpHoursOfTheDayQuiz(quizLength);
+    case MINUTES_UP_TO_20_PARAM:
+        return setUpMinutesQuiz('1-20');
+    case MINUTES_UP_TO_40_PARAM:
+        return setUpMinutesQuiz('21-40');
+    case MINUTES_UP_TO_60_PARAM:
+        return setUpMinutesQuiz('41-60');
+    default:
+      break;
+  }
+}
 
 function setUpHoursOfTheDayQuiz() {
   const minutesInJapanese = shuffle([...jpHoursOfTheDay])
@@ -32,4 +54,4 @@ function setUpMinutesQuiz(quiz) {
   return questions;
 }
 
-export { setUpMinutesQuiz, setUpHoursOfTheDayQuiz };
+export { getTimesQuiz };

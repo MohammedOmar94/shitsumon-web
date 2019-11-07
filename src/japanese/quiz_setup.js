@@ -1,7 +1,3 @@
-import * as dates from './dates/dates_quiz';
-import * as times from './times/times_quiz';
-import * as kana from './kana/quiz';
-
 function setQuizLength(wordsArr, quizlength) {
   let shuffledWords = shuffle([...wordsArr]);
   if (quizlength > wordsArr.length) {
@@ -70,4 +66,4 @@ export const getKanaQuestions = (romaji, convertToKana) => {
   return questions;
 }
 
-export { dates, times, kana, shuffle, setQuizLength, createQuestion, getQuestions, getEnglishWord, getJapaneseTranslations };
+export { shuffle, setQuizLength, createQuestion, getQuestions, getEnglishWord, getJapaneseTranslations };
