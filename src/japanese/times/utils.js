@@ -1,3 +1,5 @@
+import _sample from 'lodash/sample';
+
 import jpHoursOfTheDay from  './hours_of_the_day';
 import jpMinutes from  './minutes';
 
@@ -8,7 +10,7 @@ import {
   MINUTES_UP_TO_60_PARAM,
 } from '../../components/Topics/constants/times';
 
-import { shuffle, createQuestion, getEnglishWord, getJapaneseTranslations } from '../quiz_setup';
+import { setQuizLength, shuffle, createQuestion, getEnglishWord, getJapaneseTranslations } from '../quiz_setup';
 
 function getTimesQuiz(quiz, quizLength) {
   switch (quiz) {
@@ -50,6 +52,39 @@ function setUpMinutesQuiz(quiz) {
     const timesEng = times[i].word === '1' ? `${getEnglishWord(times[i])} minute` : `${getEnglishWord(times[i])} minutes`
     const timesJp = getJapaneseTranslations(times[i]);
     questions[i] = createQuestion(i + 1, `${timesEng}`, `${timesJp}`);
+  }
+  return questions;
+}
+
+function formatHour(number) {
+  return number.split(':')[0];
+}
+
+function formatMinute(number) {
+  return number < 10 ? `0${number}` : number;
+}
+
+export function setUpTimesQuiz(quizlength) {
+  // Ignore 60th minute.
+  jpMinutes.length = 59;
+
+  const timeOfDayArr = [
+    { timeOfDayEng: "am", timeOfDayJp: "gozen" },
+    { timeOfDayEng: "pm", timeOfDayJp: "gogo" }
+  ];
+
+  // Randomise days and months
+  const hours = setQuizLength([...jpHoursOfTheDay], quizlength);
+  const minutes = setQuizLength([...jpMinutes], quizlength);
+  let questions = [];
+  for (let i = 0; i < hours.length; i++) {
+    const hoursEng = formatHour(getEnglishWord(hours[i]));
+    const minutesEng = formatMinute(getEnglishWord(minutes[i]));
+    const hoursJp = getJapaneseTranslations(hours[i]);
+    const minutesJp = getJapaneseTranslations(minutes[i]);
+    const { timeOfDayEng, timeOfDayJp } = _sample(timeOfDayArr);
+
+    questions[i] = createQuestion(i + 1, `${hoursEng}:${minutesEng}${timeOfDayEng}`, `${timeOfDayJp}${hoursJp}${minutesJp}`);
   }
   return questions;
 }
