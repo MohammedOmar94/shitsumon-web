@@ -55,7 +55,7 @@ function topicSelect({ changeQuizLength, history, topic }) {
           { changeQuizLength &&
               <label className='topic__label'>
                 Number of Questions:
-                <select className='topic__dropdown' onChange={evt => setQuizLength({ quizLength: evt.target.value })}>
+                <select className='topic__dropdown' onChange={evt => setQuizLength(evt.target.value)}>
                   <option value='5'>5</option>
                   <option value='10'>10</option>
                   <option value='20'>20</option>
@@ -72,11 +72,14 @@ function topicSelect({ changeQuizLength, history, topic }) {
               if (key === 'random') {
                 quizLengthParam = `&quiz_length=${quizLength}`;
               }
+
+              const urlParam = { pathname: `quiz`, search: `?topic=${key}&quiz=${quiz.param}&${quizLengthParam}` };
+
               return (
                 <Button
                   key={quiz.param}
                   className='topic__quiz'
-                  onClick={() => history.push({ pathname: `quiz`, search: `?topic=${quiz.param}${quizLengthParam}` })}
+                  onClick={() => history.push(urlParam)}
                   rounded
                   theme='light'
                 >
