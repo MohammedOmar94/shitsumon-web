@@ -37,8 +37,10 @@ export const loadQuiz = (topic, quiz, quizLength) => {
       };
     case "random":
       const { questions, sectionName } = getRandomisedQuiz(quiz, quizLength);
+      const hideInputMode = sectionName === HIRAGANA_TITLE || KATAKANA_TITLE ? true : false;
       return {
-        inputMode: TO_HIRAGANA,
+        hideInputMode,
+        inputMode: hideInputMode ? 'Default' : TO_HIRAGANA,
         questions,
         sectionName
       };
