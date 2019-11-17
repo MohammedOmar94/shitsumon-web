@@ -1,14 +1,11 @@
 import adjectives from './adjectives/adjectives';
 import locations from './locations/locations';
-import particles from './particles/particles';
 import verbs from './verbs/verbs';
 import personalPronouns from './pronouns/personal_pronouns';
 
 const wanakana = require('wanakana');
 
-
-
-function shuffle(array) {
+export function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
@@ -16,11 +13,11 @@ function shuffle(array) {
   return array;
 };
 
-function getVerbObject(verb) {
+export function getVerbObject(verb) {
   return verbs.filter(verbObj => verbObj.present.word === verb)[0];
 }
 
-function getVerb(pronoun, verbConjugation, verb) {
+export function getVerb(pronoun, verbConjugation, verb) {
   verb = getVerbObject(verb)[verbConjugation];
   if (pronoun === 'I') {
     if (verbConjugation === 'present') {
@@ -55,7 +52,7 @@ function getVerb(pronoun, verbConjugation, verb) {
   }
 }
 
-function getLinkingVerb(pronoun, verbConjugation) {
+export function getLinkingVerb(pronoun, verbConjugation) {
   if (pronoun === 'I') {
     if (verbConjugation === 'present') {
       return 'am';
@@ -89,7 +86,7 @@ function getLinkingVerb(pronoun, verbConjugation) {
   }
 }
 
-function generateSentenceWithTopic(subject, otherInfo) {
+export function generateSentenceWithTopic(subject, otherInfo) {
   if (otherInfo === 'adjective') {
     shuffle(adjectives);
     otherInfo = adjectives[0];
@@ -120,7 +117,7 @@ function generateSentenceWithTopic(subject, otherInfo) {
   }
 }
 
-function generateSentenceWithVerb(particle, pronoun, topic, otherInfo, location, conjugation) {
+export function generateSentenceWithVerb(particle, pronoun, topic, otherInfo, location, conjugation) {
   let preposition = '';
   if (particle === 'に') {
     preposition = 'to';
@@ -151,5 +148,3 @@ function generateSentenceWithVerb(particle, pronoun, topic, otherInfo, location,
     return { english: `${topic} ${linkingVerb} ${preposition} ${descriptionEng}`, japanese: [ topic, "は", descriptionJp, particle, japaneseVerb ], kana: [ wanakana.toHiragana(topic), "は", wanakana.toHiragana(descriptionKana), particle, wanakana.toHiragana(kanaVerb) ], tooltipEng: [ topic, "[topic particle]", descriptionEng, preposition, linkingVerb ]};
   }
 }
-
-export { shuffle, getVerbObject, generateSentenceWithTopic, generateSentenceWithVerb };
