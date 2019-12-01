@@ -4,6 +4,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
 
+import Logo from '../Logo/index'
+
 header.propTypes = {
  onBurgerClick: PropTypes.func
 }
@@ -15,10 +17,7 @@ function header({ onBurgerClick }) {
         <i className='fas fa-bars'></i>
       </button>
       <Link to={{pathname: '/'}} >
-        <h1 className='header__text'>
-          <p className='header__hirgana-text' >しつもん</p>
-          shitsumon
-        </h1>
+        <Logo />
       </Link>
     </header>
   )
