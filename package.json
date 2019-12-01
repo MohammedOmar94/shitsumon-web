@@ -1,11 +1,13 @@
 {
   "name": "shitsumon-web",
   "version": "0.1.0",
-  "homepage": "https://mohammedomar94.github.io/shitsumon-web",
+  "homepage": "https://www.randomiser-app.com/",
   "private": true,
   "dependencies": {
+    "axios": "^0.19.0",
     "classnames": "^2.2.6",
     "gh-pages": "^2.0.1",
+    "lodash": "^4.17.15",
     "node-sass": "^4.11.0",
     "query-string": "^6.5.0",
     "react": "^16.8.6",
@@ -23,7 +25,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "start-sw": "http-server ./build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,5 +36,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
 }

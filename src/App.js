@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from "react-router-dom";
+import axios from 'axios';
 
 import Backdrop from './components/UI/SideDrawer/Backdrop/Backdrop';
 import Layout from './components/Layout/Layout';
@@ -22,6 +23,10 @@ class App extends Component {
 
   onBackdropClick = () => {
     this.setState({ isDrawerVisible: false })
+  }
+
+  componentDidMount = () => {
+    axios.get('https://shitsumon-web.mohammedomar94.now.sh/api/greet')
   }
 
   render() {
