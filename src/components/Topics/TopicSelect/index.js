@@ -73,7 +73,7 @@ function topicSelect({ changeQuizLength, history, topic }) {
                 quizLengthParam = `&quiz_length=${quizLength}`;
               }
 
-              const urlParam = { pathname: `quiz`, search: `?topic=${key}&quiz=${quiz.param}&${quizLengthParam}` };
+              const urlParam = { pathname: `quiz`, search: `?topic=${key}&quiz=${quiz.param}${quizLengthParam}` };
 
               return (
                 <Button

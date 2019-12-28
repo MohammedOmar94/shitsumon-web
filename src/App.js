@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Route } from "react-router-dom";
-import axios from 'axios';
 
 import Backdrop from './components/UI/SideDrawer/Backdrop/Backdrop';
 import Layout from './components/Layout/Layout';
 import SideDrawer from './components/UI/SideDrawer/SideDrawer';
 
-import CreateQuiz from './containers/CreateQuiz/CreateQuiz';
+// import CreateQuiz from './containers/CreateQuiz/CreateQuiz';
 import Portal from './containers/Portal/Portal';
 import Quiz from './containers/Quiz/Quiz';
 import Topics from './components/Topics';
@@ -25,19 +24,15 @@ class App extends Component {
     this.setState({ isDrawerVisible: false })
   }
 
-  componentDidMount = () => {
-    axios.get('https://shitsumon-web.mohammedomar94.now.sh/api/greet')
-  }
-
   render() {
-    const {isDrawerVisible } = this.state;
+    const { isDrawerVisible } = this.state;
 
     return (
       <Layout drawerClickHandler={this.onDrawerToggle}>
         <SideDrawer show={isDrawerVisible} clicked={this.onDrawerToggle}/>
         <Backdrop hide={!isDrawerVisible}  onClick={this.onBackdropClick} />
         <Route path="/" exact component={Portal} />
-        <Route path="/create-quiz" exact component={CreateQuiz} />
+        {/* <Route path="/create-quiz" exact component={CreateQuiz} /> */}
         <Route path="/topics" exact component={Topics} />
         <Route path="/quiz" exact component={Quiz} />
       </Layout>

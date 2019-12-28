@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import queryString from 'query-string';
 import classnames from 'classnames';
+import axios from 'axios';
 
 import Questions from "../../components/Questions/Questions";
 import Button from "../../components/UI/Button/Button";
 import Section from "../../components/UI/Section/Section";
 import "./Quiz.scss";
 
-import { loadQuiz } from "../../components/Topics/utils";
-
-
 const wanakana = require('wanakana');
-
 
 class Quiz extends Component {
   state = {
@@ -91,14 +88,22 @@ class Quiz extends Component {
 
   componentDidMount() {
     const search = this.props.location.search;
-    const queryParams = queryString.parse(search);
-    const { topic, quiz, quiz_length: quizLength } = queryParams;
+    const quizParams = queryString.parse(search);
+    const { topic } = quizParams;
+
     if (!topic) {
       this.props.history.push('/');
       return;
     }
-    const quizData = loadQuiz(topic, quiz, quizLength)
-    this.setState(quizData)
+
+    axios.post('https://kakarot.mohammedomar94.now.sh/load_quiz', quizParams)
+      .then((response) => {
+        const quizData = response.data
+        this.setState(quizData)
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {
@@ -142,7 +147,7 @@ class Quiz extends Component {
             <p>CORRECT</p>
           </div>
           <div className={wrongPopupClass}>
-            <i class="fas fa-times"></i>
+            <i className="fas fa-times"></i>
           </div>
       </Section>
     );
