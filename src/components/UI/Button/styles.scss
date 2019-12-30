@@ -17,14 +17,14 @@
   font-size: 36px;
 }
 
-.button--active {
-  background-color: $light-teal;
-}
-
 .button--darkTheme {
   color: $light;
   background-color: $teal;
   padding: 10px;
+
+  &.button--active {
+    background-color: $light-teal;
+  }
 
   &:hover {
     background-color: $light-teal;
