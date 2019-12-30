@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import AnimateHeight from 'react-animate-height';
 
-import Button from '../..//UI/Button/Button';
 import IconWithText from '../../UI/IconWithText';
 
 topicSelect.propTypes = {
@@ -36,6 +35,11 @@ function topicSelect({ changeQuizLength, history, topic }) {
     'fas fa-chevron-down',
     'topic__chevron',
     { 'topic__chevron--rotate': isTopicVisible }
+  )
+
+  const arrowIconRightClasses = classnames(
+    'fas fa-chevron-right',
+    'topic__chevron--right'
   )
 
   return (
@@ -76,15 +80,14 @@ function topicSelect({ changeQuizLength, history, topic }) {
               const urlParam = { pathname: `quiz`, search: `?topic=${key}&quiz=${quiz.param}${quizLengthParam}` };
 
               return (
-                <Button
+                <div
                   key={quiz.param}
                   className='topic__quiz'
                   onClick={() => history.push(urlParam)}
-                  rounded
-                  theme='light'
                 >
                   {quiz.title}
-                </Button>
+                  <i className={arrowIconRightClasses}/>
+                </div>
               );
             })
           }

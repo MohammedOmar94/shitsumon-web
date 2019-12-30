@@ -16,6 +16,29 @@
   }
 }
 
+.topic__quiz {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $light-teal;
+  background-color: $light;
+  border-bottom: 1px $light-teal solid;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px;
+  transition: 300ms;
+
+  &:hover {
+    background-color: $lightest-teal;
+    color: $light;
+
+    .topic__chevron--right {
+      color: $light;
+    }
+  }
+}
 .topic__header {
   background-color: $teal;
   border-bottom: 1px solid $lightest-teal;
@@ -34,14 +57,14 @@
   transition: 300ms;
 }
 
-.topic__quizzes {
-  background-color: $light;
-  padding: 8px;
-  overflow: hidden;
+.topic__chevron--right {
+  color: $light-teal;
+  transition: 250ms;
 }
 
-.topic__quiz {
-  margin: 4px;
+.topic__quizzes {
+  background-color: $light;
+  overflow: hidden;
 }
 
 .topic__label {
@@ -50,8 +73,7 @@
   display: block;
   font-size: 14px;
   font-weight: 500;
-  margin-bottom: 8px;
-  padding: 4px 8px 12px;
+  padding: 16px;
 }
 
 .topic__dropdown {
