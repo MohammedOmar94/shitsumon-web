@@ -48,7 +48,6 @@ const questions = props => {
             ref={inputEl}
             type="text"
             name="answerField"
-            autoFocus
             autoComplete="off"
             placeholder="Type the Japanese word here"
             value={props.usersAnswer}

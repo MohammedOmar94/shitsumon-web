@@ -6,10 +6,11 @@ import axios from 'axios';
 import TopicSelect from './TopicSelect/index';
 
 import IconWithText from '../UI/IconWithText';
-
+import Spinner from '../UI/Spinner';
 
 class Topics extends Component {
   state = {
+    hasData: false,
     topics: null
   };
 
@@ -21,16 +22,17 @@ class Topics extends Component {
           <TopicSelect key={topic.key} changeQuizLength={topic.key === 'random'} topic={topic} />
         ));
 
-        this.setState({ topics })
+        this.setState({ hasData: true, topics })
       })
   }
 
   render() {
     const { history } = this.props;
-    const { topics } = this.state;
+    const { hasData, topics } = this.state;
 
     return (
       <div>
+        <Spinner hasData={hasData} />
         <h2 className='topics__header'>
           <IconWithText
             icon='fas fa-pencil-alt'

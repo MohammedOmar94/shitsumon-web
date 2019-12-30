@@ -6,6 +6,7 @@ import axios from 'axios';
 import Questions from "../../components/Questions/Questions";
 import Button from "../../components/UI/Button/Button";
 import Section from "../../components/UI/Section/Section";
+import Spinner from "../../components/UI/Spinner";
 import "./Quiz.scss";
 
 const wanakana = require('wanakana');
@@ -15,6 +16,7 @@ class Quiz extends Component {
     score: 0,
     questionIndex: 0,
     emptyAnswer: false,
+    hasData: false,
     hideInputMode: false,
     inputMode: 'Default',
     questions: [],
@@ -99,7 +101,7 @@ class Quiz extends Component {
     axios.post('https://kakarot.mohammedomar94.now.sh/load_quiz', quizParams)
       .then((response) => {
         const quizData = response.data
-        this.setState(quizData)
+        this.setState({ ...quizData, hasData: true })
       })
       .catch((error) => {
         console.log(error);
@@ -130,26 +132,29 @@ class Quiz extends Component {
     )
 
     return (
-      <Section name={this.state.sectionName} className={'Quiz'}>
-        <Questions
-          questions={this.state.questions}
-          questionIndex={this.state.questionIndex}
-          hideInputMode={this.state.hideInputMode}
-          inputMode={this.state.inputMode}
-          next={(event) => this.handleNext(event) }
-          answerHistory={this.state.answerHistory}
-          emptyAnswer={this.state.emptyAnswer}
-          endOfQuiz={this.state.endOfQuiz} />
-          { inputMode }
-          <div className={correctPopupClass}>
-            <i className="far fa-smile-wink" />
-            <p>正解</p>
-            <p>CORRECT</p>
-          </div>
-          <div className={wrongPopupClass}>
-            <i className="fas fa-times"></i>
-          </div>
-      </Section>
+      <>
+        <Spinner hasData={this.state.hasData} />
+        <Section name={this.state.sectionName} className={'Quiz'}>
+          <Questions
+            questions={this.state.questions}
+            questionIndex={this.state.questionIndex}
+            hideInputMode={this.state.hideInputMode}
+            inputMode={this.state.inputMode}
+            next={(event) => this.handleNext(event) }
+            answerHistory={this.state.answerHistory}
+            emptyAnswer={this.state.emptyAnswer}
+            endOfQuiz={this.state.endOfQuiz} />
+            { inputMode }
+            <div className={correctPopupClass}>
+              <i className="far fa-smile-wink" />
+              <p>正解</p>
+              <p>CORRECT</p>
+            </div>
+            <div className={wrongPopupClass}>
+              <i className="fas fa-times"></i>
+            </div>
+        </Section>
+      </>
     );
   }
 }
