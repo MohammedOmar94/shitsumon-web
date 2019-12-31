@@ -1,17 +1,12 @@
-import React, { useRef, useState } from "react";
-import PropTypes from "prop-types";
-import classnames from "classnames";
-
 import "./Questions.scss";
-import Result from  './Result/Result';
-import Button from "../UI/Button/Button";
+
+import React, { useRef } from "react";
+import PropTypes from "prop-types";
+import Results from  './Results';
 
 const wanakana = require('wanakana');
 
 const questions = props => {
-
-  const [questionIndex, setQuestionIndex] = useState(null)
-  const [showQuestion, setQuestionVisibility] = useState(false)
   let inputEl = useRef(null);
   if (props.inputMode !== 'Default') {
     // Cheeky workaround for wanakana so the binding always works.
@@ -23,16 +18,6 @@ const questions = props => {
     }
 
   const question = props.questions[props.questionIndex];
-
-  const onQuestionClick = (index) => {
-    setQuestionIndex(index);
-    setQuestionVisibility(true)
-  }
-
-  const onQuestionClose = () => {
-    setQuestionIndex(null);
-    setQuestionVisibility(false)
-  }
 
   const submitHandler = (event) => props.next(event, question.id, question.answer);
 
@@ -48,6 +33,7 @@ const questions = props => {
             ref={inputEl}
             type="text"
             name="answerField"
+            autoFocus
             autoComplete="off"
             placeholder="Type the Japanese word here"
             value={props.usersAnswer}
@@ -57,38 +43,8 @@ const questions = props => {
       </form>
     );
   } else if (props.endOfQuiz){
-
-    const resultClasses = (answerWasCorrect) => classnames(
-       "questions__result",
-      { "questions__result--correct": answerWasCorrect },
-      { "questions__result--wrong": !answerWasCorrect },
-    );
-
     return (
-      <>
-        <div className="questions__results">
-          { showQuestion && <Button className="questions__backBtn" onClick={() => onQuestionClose()} type="back" />}
-          { !showQuestion && props.answerHistory.map((question, index) => (
-              <div
-                key={'answer-' + (index + 1)}
-                className={resultClasses(question.answerWasCorrect)}
-                onClick={() => onQuestionClick(index)}
-              >
-                { "Question " +  (index + 1)}
-                { question.answerWasCorrect && <i className="fas fa-check"></i> }
-                { !question.answerWasCorrect && <i className="fas fa-times"></i> }
-              </div>
-          ))}
-          {showQuestion &&
-            <Result className="questions__answerHistory"
-              answerWasCorrect={props.answerHistory[questionIndex].answerWasCorrect}
-              correctAnswer={wanakana.toHiragana(props.answerHistory[questionIndex].correctAnswer)}
-              usersAnswer={props.answerHistory[questionIndex].usersAnswer}
-              questionNumber={questionIndex + 1}
-              questionText={props.answerHistory[questionIndex].text}
-            />}
-        </div>
-      </>
+      <Results answerHistory={props.answerHistory} />
     );
   } else {
     return null;
