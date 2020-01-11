@@ -39,6 +39,7 @@
     }
   }
 }
+
 .topic__header {
   background-color: $teal;
   border-bottom: 1px solid $lightest-teal;
@@ -65,26 +66,4 @@
 .topic__quizzes {
   background-color: $light;
   overflow: hidden;
-}
-
-.topic__label {
-  border-bottom: 1px solid $lightest-teal;
-  color: $light-teal;
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 16px;
-}
-
-.topic__dropdown {
-  color: $light-teal;
-  background-color: $light;
-  border: 2px solid $light-teal;
-  border-radius: 5px;
-  font-size: 14px;
-  margin-left: 12px;
-  padding: 4px;
-  & option {
-    color: $light-teal;
-  }
 }

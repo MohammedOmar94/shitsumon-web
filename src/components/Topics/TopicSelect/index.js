@@ -7,6 +7,7 @@ import classnames from 'classnames';
 import AnimateHeight from 'react-animate-height';
 
 import IconWithText from '../../UI/IconWithText';
+import QuizOptions from '../../UI/QuizOptions';
 
 topicSelect.propTypes = {
   changeQuizLength: PropTypes.bool,
@@ -57,16 +58,10 @@ function topicSelect({ changeQuizLength, history, topic }) {
         <div className='topic__quizzes'>
           {/* Dropdown only shows for quizzes in the Random topic. */}
           { changeQuizLength &&
-              <label className='topic__label'>
-                Number of Questions:
-                <select className='topic__dropdown' onChange={evt => setQuizLength(evt.target.value)}>
-                  <option value='5'>5</option>
-                  <option value='10'>10</option>
-                  <option value='20'>20</option>
-                  <option value='35'>35</option>
-                  <option value='50'>50</option>
-                </select>
-              </label>
+              <QuizOptions
+                showQuizLength={true}
+                onChange={(event) => setQuizLength(event.target.value)}
+              />
           }
           {
 

@@ -19,7 +19,11 @@ class Topics extends Component {
       .then(response => {
         const LIST_OF_TOPICS = response.data
         const topics = LIST_OF_TOPICS.map(topic => (
-          <TopicSelect key={topic.key} changeQuizLength={topic.key === 'random'} topic={topic} />
+          <TopicSelect
+            key={topic.key}
+            changeQuizLength={topic.key === 'random'}
+            topic={topic}
+          />
         ));
 
         this.setState({ hasData: true, topics })
