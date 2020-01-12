@@ -1,0 +1,12 @@
+@import '../../../assets/_colors.scss';
+
+.connectionStatus__no-internet-container {
+  background-color: $dark-teal;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  margin: 4px;
+}

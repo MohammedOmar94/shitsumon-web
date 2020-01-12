@@ -2,7 +2,13 @@
 
 .header {
   display: flex;
+  justify-content: space-between;
   background-color: $light;
+}
+
+.header__navigation {
+  display: flex;
+  align-items: center;
 }
 
 .header__hamburger-icon {

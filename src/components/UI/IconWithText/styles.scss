@@ -1,4 +1,16 @@
+.iconWithText {
+  display: flex;
+  align-items: center;
+}
 
 .iconWithText__icon {
-  margin-right: 16px;
+  margin-right: 8px;
+}
+
+.iconWithText__icon--medium {
+  font-size: 16px;
+}
+
+.iconWithText__icon--big {
+  font-size: 24px;
 }

@@ -1,29 +1,42 @@
-import './styles.scss';
+import "./styles.scss";
 
-import React from 'react';
-import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
 
 IconWithText.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   icon: PropTypes.node,
   iconClassName: PropTypes.string,
-}
+  iconSize: PropTypes.oneOf(["medium", "big"])
+};
 
-function IconWithText({ className, children, icon, iconClassName }) {
+IconWithText.defaultProps = {
+  iconSize: "medium"
+};
+
+function IconWithText({
+  className,
+  children,
+  icon: Icon,
+  iconClassName,
+  iconSize
+}) {
+  const componentClasses = classnames("iconWithText", className);
   const iconClasses = classnames(
-    'iconWithText__icon',
-    icon,
-    iconClassName
-  )
+    "iconWithText__icon",
+    `iconWithText__icon--${iconSize}`,
+    iconClassName,
+    iconSize
+  );
 
   return (
-      <span className={className}>
-        <i className={iconClasses} />
-        {children}
-      </span>
-  )
+    <span className={componentClasses}>
+      <Icon className={iconClasses} />
+      {children}
+    </span>
+  );
 }
 
 export default IconWithText;

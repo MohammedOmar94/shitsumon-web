@@ -3,8 +3,6 @@
 .logo {
   color: $dark-teal;
   cursor: pointer;
-  display: inline-flex;
-  flex-wrap: wrap;
   font-family: 'Raleway', sans-serif;
   font-size: 24px;
   font-weight: 600;
@@ -18,7 +16,6 @@
   font-size: 16px;
   letter-spacing: 3px;
   line-height: 0.5;
-  width: 100%;
 }
 
 @media only screen and (min-width: 768px) {
