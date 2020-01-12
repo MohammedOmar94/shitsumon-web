@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import TopicSelect from './TopicSelect/index';
 
+import Pencil from '../UI/Icons/Pencil';
+
 import IconWithText from '../UI/IconWithText';
 import Spinner from '../UI/Spinner';
 
@@ -31,7 +33,7 @@ class Topics extends Component {
   }
 
   render() {
-    const { history } = this.props;
+    // const { history } = this.props;
     const { hasData, topics } = this.state;
 
     return (
@@ -39,13 +41,13 @@ class Topics extends Component {
         <Spinner hasData={hasData} />
         <h2 className='topics__header'>
           <IconWithText
-            icon='fas fa-pencil-alt'
+            icon={Pencil}
           >
             Quizzes
-            <button className='topics__createBtn' onClick={() => history.push('/create-quiz')}>
-              CREATE
-            </button>
           </IconWithText>
+          {/* <button className='topics__createBtn' onClick={() => history.push('/create-quiz')}>
+            CREATE
+          </button> */}
         </h2>
         {topics}
       </div>

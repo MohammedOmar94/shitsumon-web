@@ -28,6 +28,7 @@ topicSelect.defaultProps = {
 
 function topicSelect({ changeQuizLength, history, topic }) {
   const { icon, key, title, quizzes } = topic;
+  const TopicIcon = ({ className }) => <i className={classnames(className, icon)} />
 
   const [isTopicVisible, setTopicVisibility] = useState(false);
   const [quizLength, setQuizLength] = useState(5);
@@ -46,7 +47,7 @@ function topicSelect({ changeQuizLength, history, topic }) {
   return (
     <div>
       <div className='topic' onClick={() => setTopicVisibility(!isTopicVisible)}>
-        <IconWithText icon={icon}>
+        <IconWithText icon={TopicIcon}>
           {title}
         </IconWithText>
         <i className={arrowIconClasses}/>
