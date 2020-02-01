@@ -52,11 +52,11 @@ const questions = props => {
 };
 
 questions.propTypes = {
-  questions: PropTypes.array.isRequired,
-  questionIndex: PropTypes.number.isRequired,
-  emptyAnswer: PropTypes.bool.isRequired,
-  inputMode: PropTypes.string.isRequired,
-  endOfQuiz: PropTypes.bool.isRequired
+  questions: PropTypes.array,
+  questionIndex: PropTypes.number,
+  emptyAnswer: PropTypes.bool,
+  inputMode: PropTypes.string,
+  endOfQuiz: PropTypes.bool
 };
 
 questions.defaultProps = {
