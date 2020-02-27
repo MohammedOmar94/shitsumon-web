@@ -5,6 +5,8 @@ import queryString from "query-string";
 import classnames from "classnames";
 import axios from "axios";
 
+import _shuffle from "lodash/shuffle";
+
 import Questions from "../../components/Questions/Questions";
 import Button from "../../components/UI/Button/Button";
 import Section from "../../components/UI/Section/Section";
@@ -23,6 +25,7 @@ function Quiz({
   questions,
   answerHistory,
   endOfQuiz,
+  quizId,
   onQuizDownload,
   onUsersAnswer,
   sectionName
@@ -34,16 +37,16 @@ function Quiz({
   useEffect(() => {
     const search = location.search;
     const quizParams = queryString.parse(search);
-    const { topic } = quizParams;
+    const { topic, quiz } = quizParams;
 
     if (!topic) {
       history.push("/");
       return;
     }
 
-    axios.post("https://kakarot.mohammedomar94.now.sh/load_quiz", quizParams)
+    axios.post("http://localhost:5000/load_quiz", quizParams)
       .then(response => {
-        const quizData = response.data;
+        const quizData = { ...response.data, quizId: `${topic}__${quiz}` }
         onQuizDownload(quizData);
       })
       .catch(error => {
@@ -144,13 +147,19 @@ function Quiz({
     "--show": showWrongPopup
   });
 
+  let shuffledQuestions;
+
+  if (questions) {
+    shuffledQuestions = _shuffle(questions)
+  }
+
   return (
     <>
       <Spinner hasData={hasData} />
       <Section name={sectionName} className={"Quiz"}>
-        {questions && (
+        {shuffledQuestions && (
           <Questions
-            questions={questions}
+            questions={shuffledQuestions}
             questionIndex={questionIndex}
             hideInputMode={hideInputMode}
             inputMode={inputMode}
