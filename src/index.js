@@ -1,6 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
+import { save, load } from "redux-localstorage-simple"
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -9,10 +10,16 @@ import App from './App';
 import reducers from './reducers'
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(
-    reducers,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+const createStoreWithMiddleware
+  = applyMiddleware(
+      save() // Saving done here
+  )(createStore)
+
+const store = createStoreWithMiddleware(
+  reducers,
+  load(),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 const app = (
   <Provider store={store}>

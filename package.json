@@ -20,6 +20,7 @@
     "react-spinners-kit": "^1.9.1",
     "react-tooltip": "^3.11.1",
     "redux": "^4.0.5",
+    "redux-localstorage-simple": "^2.1.6",
     "wanakana": "^4.0.2"
   },
   "scripts": {

@@ -25,7 +25,6 @@ function Quiz({
   questions,
   answerHistory,
   endOfQuiz,
-  quizId,
   onQuizDownload,
   onUsersAnswer,
   sectionName
@@ -33,12 +32,14 @@ function Quiz({
   const [showCorrectPopup, setCorrectPopupVisibility] = useState(false);
   const [showWrongPopup, setWrongPopupVisibility] = useState(false);
   const [emptyAnswer, setEmptyAnswer] = useState(false);
+  const [shuffledQuestions, setShuffledQuestions] = useState()
+
+  const search = location.search;
+  const quizParams = queryString.parse(search);
+  const { topic, quiz } = quizParams;
+  const quizId = `${topic}__${quiz}`
 
   useEffect(() => {
-    const search = location.search;
-    const quizParams = queryString.parse(search);
-    const { topic, quiz } = quizParams;
-
     if (!topic) {
       history.push("/");
       return;
@@ -46,13 +47,23 @@ function Quiz({
 
     axios.post("http://localhost:5000/load_quiz", quizParams)
       .then(response => {
-        const quizData = { ...response.data, quizId: `${topic}__${quiz}` }
+        const quizData =
+          {
+            data: {
+              ...response.data
+            },
+            id: quizId
+          }
         onQuizDownload(quizData);
       })
       .catch(error => {
         console.log(error);
       });
   }, [hasData]);
+
+  useEffect(() => {
+    setShuffledQuestions(_shuffle(questions))
+  }, [questions])
 
   const resetUI = () => {
     setCorrectPopupVisibility(false);
@@ -61,12 +72,15 @@ function Quiz({
   };
 
   const setInputMode = inputMode => {
-    onUsersAnswer({ inputMode });
+    onUsersAnswer({
+      [quizId]:
+        { inputMode }
+    });
   };
 
   const handleNext = event => {
     event.preventDefault();
-    const question = questions[questionIndex];
+    const question = shuffledQuestions[questionIndex];
 
     const usersAnswer = event.target.answerField.value.toLowerCase();
     const answerWasCorrect =
@@ -84,28 +98,36 @@ function Quiz({
       animationDuration = 1200;
       setWrongPopupVisibility(true);
     }
+
     usersCurrentAnswers.push({
       text: question.text,
       usersAnswer,
       correctAnswer: question.answer,
       answerWasCorrect
     });
+
     if (questionIndex + 1 === questions.length) {
-      resetUI();
       setTimeout(() => {
+        resetUI();
         onUsersAnswer({
-          endOfQuiz: true,
-          answerHistory: usersCurrentAnswers,
-          sectionName: "Results"
+          data: {
+            endOfQuiz: true,
+            answerHistory: usersCurrentAnswers,
+            sectionName: "Results"
+          },
+          id: quizId
         });
       }, animationDuration);
     } else if (usersAnswer && !waitingForNextQuestion) {
       setTimeout(() => {
         resetUI();
         onUsersAnswer({
-          questionIndex: questionIndex + 1,
-          score,
-          answerHistory: usersCurrentAnswers
+          data: {
+            questionIndex: questionIndex + 1,
+            score,
+            answerHistory: usersCurrentAnswers
+          },
+          id: quizId
         });
       }, animationDuration);
     } else {
@@ -146,12 +168,6 @@ function Quiz({
   const wrongPopupClass = classnames("WrongPopup", {
     "--show": showWrongPopup
   });
-
-  let shuffledQuestions;
-
-  if (questions) {
-    shuffledQuestions = _shuffle(questions)
-  }
 
   return (
     <>
