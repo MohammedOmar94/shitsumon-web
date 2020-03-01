@@ -13,7 +13,7 @@ import Spinner from "../UI/Spinner";
 function Topics({ hasData, onUpdateTopics, topics = [] }) {
 
   useEffect(() => {
-    axios.get("https://kakarot.mohammedomar94.now.sh/topics").then(response => {
+    axios.get("http://localhost:5000/japanese/topics").then(response => {
       onUpdateTopics(response.data);
     });
   }, [hasData]);

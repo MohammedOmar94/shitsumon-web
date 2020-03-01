@@ -45,7 +45,7 @@ function Quiz({
       return;
     }
 
-    axios.post("http://localhost:5000/load_quiz", quizParams)
+    axios.post("http://localhost:5000/japanese/load_quiz", quizParams)
       .then(response => {
         const quizData =
           {

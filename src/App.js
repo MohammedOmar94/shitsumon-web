@@ -33,8 +33,8 @@ class App extends Component {
         <Backdrop hide={!isDrawerVisible}  onClick={this.onBackdropClick} />
         <Route path="/" exact component={Portal} />
         {/* <Route path="/create-quiz" exact component={CreateQuiz} /> */}
-        <Route path="/topics" exact component={Topics} />
-        <Route path="/quiz" exact component={Quiz} />
+        <Route path="/:language/topics" exact component={Topics} />
+        <Route path="/:language/quiz" exact component={Quiz} />
       </Layout>
     );
   }
