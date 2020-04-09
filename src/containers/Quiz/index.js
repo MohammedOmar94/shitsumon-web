@@ -6,7 +6,7 @@ import { setCurrentQuiz, updateAnswerHistory } from "./actions";
 import Quiz from "../../components/Quiz";
 
 const mapStateToProps = (state, ownProps) => {
-  const { quizReducer } = state;
+  const { quizReducer, languageSelectorReducer } = state;
   const { location } = ownProps;
 
   const quizParams = queryString.parse(location.search);
@@ -18,6 +18,7 @@ const mapStateToProps = (state, ownProps) => {
   // debugger
 
   return {
+    ...languageSelectorReducer,
     // Used to store things like the users answer
     ...quizReducer,
     ...quizData

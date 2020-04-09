@@ -21,6 +21,7 @@ function Quiz({
   hideInputMode,
   history,
   inputMode,
+  languageStudied,
   location,
   questions,
   answerHistory,
@@ -45,7 +46,7 @@ function Quiz({
       return;
     }
 
-    axios.post("http://localhost:5000/japanese/load_quiz", quizParams)
+    axios.post(`https://kakarot.now.sh/${languageStudied}/load_quiz`, quizParams)
       .then(response => {
         const quizData =
           {

@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 
 import Backdrop from './components/UI/Backdrop/Backdrop';
 import Layout from './components/Layout/Layout';
-import SideDrawer from './components/UI/SideDrawer/SideDrawer';
+import SideDrawer from './containers/SideDrawer';
 
 // import CreateQuiz from './containers/CreateQuiz/CreateQuiz';
 import Portal from './containers/Portal/Portal';

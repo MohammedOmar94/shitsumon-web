@@ -3,12 +3,13 @@ import { updateTopics } from "./actions";
 import Topics from "../../components/Topics";
 
 const mapStateToProps = state => {
-  const { topicsReducer } = state;
+  const { topicsReducer, languageSelectorReducer } = state;
   const { hasData, topics } = topicsReducer;
 
   return {
     hasData,
-    topics
+    topics,
+    ...languageSelectorReducer
   };
 };
 

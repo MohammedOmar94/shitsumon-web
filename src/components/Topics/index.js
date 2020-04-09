@@ -10,13 +10,13 @@ import Pencil from "../UI/Icons/Pencil";
 import IconWithText from "../UI/IconWithText";
 import Spinner from "../UI/Spinner";
 
-function Topics({ hasData, onUpdateTopics, topics = [] }) {
+function Topics({ hasData, languageStudied, onUpdateTopics, topics = [] }) {
 
   useEffect(() => {
-    axios.get("http://localhost:5000/japanese/topics").then(response => {
+    axios.get(`https://kakarot.now.sh/${languageStudied}/topics`).then(response => {
       onUpdateTopics(response.data);
     });
-  }, [hasData]);
+  }, [hasData, languageStudied]);
 
   return (
     <div>

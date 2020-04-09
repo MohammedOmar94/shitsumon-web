@@ -1,0 +1,37 @@
+@import '../../../assets/_colors.scss';
+
+.languageSelector {
+  background-color: $teal;
+}
+
+.languageSelector__header-container {
+  background-color: $light;
+}
+
+.languageSelector__header {
+  color: $teal;
+  font-weight: 600;
+  padding: 4px 16px;
+}
+
+.languageSelector__icons {
+  padding: 16px 0;
+}
+
+.languageSelector__icon {
+  cursor: pointer;
+  border: 1px solid $teal;
+  border-radius: 3px;
+  margin: 0 8px;
+  max-width: 50px;
+  vertical-align: middle;
+  width: 50%;
+  padding: 8px;
+  opacity: 0.7;
+  transition: 300ms;
+
+  &:hover {
+    background-color: $lightest-teal;
+    opacity: 1;
+  }
+}
