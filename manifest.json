@@ -3,14 +3,13 @@
   "name": "Shitsumon",
   "icons": [
     {
-      "src": "../src/assets/images/karate.png",
+      "src": "../src/assets/images/angry_kirby.jpg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
   ],
-  "start_url": "mohammedomar94.github.io/shitsumon-web/",
+  "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff",
-  "source": "mohammedomar94.github.io/shitsumon-web/"
+  "background_color": "#ffffff"
 }
