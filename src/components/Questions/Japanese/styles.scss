@@ -39,17 +39,8 @@
 }
 
 .japaneseQuestion__nextBtn {
-  cursor: pointer;
-  background-color: $dark-teal;
-  transition: 200ms;
-  border: none;
-  font-size: 12px;
   margin-top: 16px;
   padding: 8px 16px;
-}
-
-.japaneseQuestion__nextBtn:hover {
-  background-color: $light-teal;
 }
 
 @media only screen and (min-width: 768px) {

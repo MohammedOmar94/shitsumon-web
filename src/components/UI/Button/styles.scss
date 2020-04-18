@@ -27,7 +27,8 @@
   }
 
   &:hover {
-    background-color: $light-teal;
+    background-color: none;
+    color: none;
   }
 }
 
@@ -36,9 +37,21 @@
   background-color: $light;
   border: 2px solid $light-teal;
 
-  &.button--active, &:hover {
+  &.button--active {
     background-color: $light-teal;
     color: $light;
+  }
+
+  &:hover {
+    background-color: none;
+    color: none;
+  }
+}
+
+.button--darkTheme, .button--lightTheme {
+  &:hover{
+    background-color: none;
+    color: none;
   }
 }
 
@@ -49,5 +62,22 @@
 @media only screen and (min-width: 768px) {
   .button {
     font-size: 14px;
+  }
+
+  .button--darkTheme {
+    &.button--active {
+      background-color: $light-teal;
+    }
+
+    &:hover {
+      background-color: $light-teal;
+    }
+  }
+
+  .button--lightTheme {
+    &.button--active, &:hover {
+      background-color: $light-teal;
+      color: $light;
+    }
   }
 }
