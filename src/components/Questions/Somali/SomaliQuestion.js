@@ -2,7 +2,7 @@ import "./styles.scss";
 
 import React from "react";
 import PropTypes from "prop-types";
-import Results from  '../Results';
+import Results from  './Results';
 
 import Button from "../../UI/Button/Button"
 

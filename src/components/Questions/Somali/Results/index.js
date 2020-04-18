@@ -2,11 +2,10 @@ import './styles.scss';
 
 import React, { useState } from "react";
 import classnames from "classnames";
-import { toHiragana } from "wanakana";
 
-import Button from "../../UI/Button/Button";
+import Button from "../../../UI/Button/Button";
 
-import Result from "../Result/Result";
+import Result from "./Result/Result";
 
 function Results({ answerHistory }) {
   const [questionIndex, setQuestionIndex] = useState(null);
@@ -44,7 +43,7 @@ function Results({ answerHistory }) {
           <Result
             className="results__answerHistory"
             answerWasCorrect={selectedQuestion.answerWasCorrect}
-            correctAnswer={toHiragana(selectedQuestion.correctAnswer)}
+            correctAnswer={selectedQuestion.correctAnswer}
             usersAnswer={selectedQuestion.usersAnswer}
             questionNumber={questionNumber}
             questionText={selectedQuestion.question_text}

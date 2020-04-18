@@ -2,7 +2,9 @@ import "./styles.scss";
 
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Results from  '../Results';
+import Results from  './Results';
+
+import Button from "../../UI/Button/Button"
 
 import WanakanaInput from "react-wanakana";
 
@@ -38,13 +40,13 @@ function JapaneseQuestion({
 
   const submitHandler = (event) => {
     onSubmit(event);
-    updateInputValue("")
+    // updateInputValue("")
   }
 
     return (
       <>
         {questionCount && !endOfQuiz &&
-          <form id="question_form" className="japaneseQuestion" onSubmit={submitHandler}>
+          <form className="japaneseQuestion" onSubmit={submitHandler}>
             <p className="japaneseQuestion__questionNumber">Question {questionNumber} of {questionCount}</p>
             <div className="japaneseQuestion__question">
               <p className="japaneseQuestion__questionText">{questionText}</p>
@@ -59,7 +61,11 @@ function JapaneseQuestion({
                 value={inputValue}
                 to={inputMode}
               />
-              <input className="japaneseQuestion__nextBtn" type="submit" value="Next"/>
+              <input type="submit">
+                <Button className="japaneseQuestion__nextBtn">
+                  Next
+                </Button>
+              </input>
             </div>
           </form>
       }

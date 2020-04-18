@@ -8,7 +8,6 @@ import axios from "axios";
 import _shuffle from "lodash/shuffle";
 
 import JapaneseQuestion from "../../Questions/Japanese/JapaneseQuestion";
-import Button from "../../UI/Button/Button";
 import Section from "../../UI/Section/Section";
 import Spinner from "../../UI/Spinner";
 

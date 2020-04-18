@@ -1,0 +1,48 @@
+@import '../../../../assets/_colors.scss';
+
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  padding: 4px;
+}
+
+.results__result {
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+  flex: 1 0 125px;
+  font-size: 16px;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  height: 109px;
+  transition: opacity 300ms;
+  & i {
+    font-size: 40px;
+  }
+  &:hover {
+    opacity: 0.4;
+  }
+}
+
+.results__answerHistory {
+  margin: 4px 0px;
+  width: 80%;
+}
+
+.results__backBtn {
+  align-self: flex-start;
+  margin-right: 16px;
+}
+
+
+.results__result--correct {
+  background-color: $light-teal;
+}
+
+.results__result--wrong {
+  background-color: red;
+}

@@ -32,7 +32,7 @@ const result = (props) => {
 
   return (
     <section className={props.className}>
-      <h4 className="questions__questionNumber">Question {props.questionNumber}</h4>
+      <h4 className="japaneseQuestion__questionNumber">Question {props.questionNumber}</h4>
       <p className={classes.QuestionText}>{props.questionText}</p>
       <p className={classes.Answers}>You wrote {answerGiven()}</p>
       {correctAnswer()}
