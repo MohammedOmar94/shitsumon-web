@@ -1,0 +1,72 @@
+@import '../../../assets/_colors.scss';
+
+.japaneseQuestion {
+  margin-top: 8px;
+  padding: 4px;
+}
+
+.japaneseQuestion__question {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 8px 0px 8px 8px;
+}
+
+.japaneseQuestion__questionNumber {
+  color: $light-teal;
+  font-weight: 700;
+  margin: 8px 0;
+}
+
+.japaneseQuestion__questionText {
+  font-weight: 600;
+  font-size: 18px;
+  color: $dark-teal;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.japaneseQuestion__answerField, .japaneseQuestion__emptyAnswer {
+  color: $dark-teal;
+  margin: 8px 0 16px;
+  font-size: 18px;
+  padding: 4px 8px;
+  width: 100%;
+}
+
+.japaneseQuestion__emptyAnswer {
+  border: 2px solid red;
+}
+
+.japaneseQuestion__nextBtn {
+  cursor: pointer;
+  background-color: $dark-teal;
+  transition: 200ms;
+  border: none;
+  font-size: 12px;
+  margin-top: 16px;
+  padding: 8px 16px;
+}
+
+.japaneseQuestion__nextBtn:hover {
+  background-color: $light-teal;
+}
+
+@media only screen and (min-width: 768px) {
+  .japaneseQuestion__questionNumber {
+    font-size: 16px;
+  }
+
+  .japaneseQuestion__questionText {
+    font-size: 24px;
+  }
+
+  .japaneseQuestion__answerField {
+    font-size: 16px;
+    padding: 4px 8px;
+  }
+
+  .japaneseQuestion__nextBtn {
+    font-size: 16px;
+  }
+}
