@@ -47,7 +47,7 @@ function Results({ answerHistory }) {
             correctAnswer={toHiragana(selectedQuestion.correctAnswer)}
             usersAnswer={selectedQuestion.usersAnswer}
             questionNumber={questionNumber}
-            questionText={selectedQuestion.text}
+            questionText={selectedQuestion.question_text}
           />
         </>
         )

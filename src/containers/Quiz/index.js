@@ -15,8 +15,6 @@ const mapStateToProps = (state, ownProps) => {
   const quizId =  `${topic}__${quiz}`
   const quizData = quizReducer[quizId]
 
-  // debugger
-
   return {
     ...languageSelectorReducer,
     // Used to store things like the users answer
