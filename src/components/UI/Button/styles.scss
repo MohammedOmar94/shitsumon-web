@@ -64,6 +64,13 @@
     font-size: 14px;
   }
 
+  .button.button--disableHover {
+    &:hover{
+      background-color: none;
+      color: none;
+    }
+  }
+
   .button--darkTheme {
     &.button--active {
       background-color: $light-teal;

@@ -2,11 +2,11 @@ import "./styles.scss";
 
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+
+import KanaButtons from "../../UI/KanaButtons";
 import Results from  './Results';
 
 import Button from "../../UI/Button/Button"
-
-import WanakanaInput from "react-wanakana";
 
 JapaneseQuestion.propTypes = {
   questions: PropTypes.array,
@@ -46,28 +46,17 @@ function JapaneseQuestion({
     return (
       <>
         {questionCount && !endOfQuiz &&
-          <form className="japaneseQuestion" onSubmit={submitHandler}>
+          <div className="japaneseQuestion">
             <p className="japaneseQuestion__questionNumber">Question {questionNumber} of {questionCount}</p>
             <div className="japaneseQuestion__question">
               <p className="japaneseQuestion__questionText">{questionText}</p>
-              <WanakanaInput
-                className={isFieldEmpty ? "japaneseQuestion__emptyAnswer" : "japaneseQuestion__answerField"}
-                type="text"
-                name="answerField"
-                autoFocus
-                autoComplete="off"
-                placeholder="Type the Japanese word here"
-                onChange={(event) => updateInputValue(event.target.value)}
-                value={inputValue}
-                to={inputMode}
-              />
-              <input type="submit">
-                <Button className="japaneseQuestion__nextBtn">
-                  Next
-                </Button>
-              </input>
+              <p className="japaneseQuestion__questionText">{inputValue}</p>
+              <KanaButtons onChange={updateInputValue} />
+              <Button className="japaneseQuestion__nextBtn" onClick={submitHandler}>
+                Next
+              </Button>
             </div>
-          </form>
+          </div>
       }
       {endOfQuiz && <Results answerHistory={answerHistory} />}
       </>

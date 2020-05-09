@@ -1,0 +1,95 @@
+@import '../../../../assets/_colors.scss';
+
+.kanaButton {
+  position: relative;
+  width: 75px;
+  height: 75px;
+}
+
+.kanaButton__kanaPreview {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  left: 50%;
+  bottom: 105%;
+  transform: translateX(-50%);
+}
+
+.kanaButton__top {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  width: 50px;
+  height: 50px;
+}
+
+.kanaButton__left {
+  position: absolute;
+  background-color: $light-teal;
+  left: 0;
+  top: 0;
+  width: 35%;
+  height: 100%;
+  -webkit-clip-path: polygon(0 0, 0 100%, 100% 50%);
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
+}
+
+.kanaButton__leftLabel {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-65%, 50%)
+}
+
+.kanaButton__right {
+  position: absolute;
+  background-color: $light-teal;
+  right: 0;
+  top: 0;
+  width: 35%;
+  height: 100%;
+  -webkit-clip-path: polygon(100% 0, 100% 100%, 0 50%);
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+}
+
+.kanaButton__rightLabel {
+  position: absolute;
+  right: 50%;
+  bottom: 50%;
+  transform: translate(65%, 50%)
+}
+
+.kanaButton__bottom {
+  position: absolute;
+  background-color: $light-teal;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 35%;
+  -webkit-clip-path: polygon(0 100%, 100% 100%, 50% 0);
+  clip-path: polygon(0 100%, 100% 100%, 50% 0);
+}
+
+.kanaButton__bottomLabel {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.kanaButton__top {
+  position: absolute;
+  background-color: $light-teal;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 35%;
+  -webkit-clip-path: polygon(0 0, 100% 0, 50% 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+.kanaButton__topLabel {
+  position: absolute;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+}

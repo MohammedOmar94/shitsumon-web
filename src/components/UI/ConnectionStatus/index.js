@@ -12,6 +12,7 @@ function ConnectionStatus() {
   const [hasErrorsConnecting, setErrorsStatus] = useState(false);
 
   const hasNoConnectivity = isConnected && hasErrorsConnecting;
+  console.log(hasNoConnectivity)
 
   const handleConnection = () => {
     if (navigator.onLine) {
