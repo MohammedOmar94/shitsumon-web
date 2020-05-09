@@ -71,11 +71,10 @@ function JapaneseQuiz({
     setAnswerEmpty(false);
   };
 
-  const handleNext = event => {
-    event.preventDefault();
+  const handleNext = (inputValue) => {
     const question = shuffledQuestions[questionIndex];
 
-    const usersAnswer = event.target.answerField.value.toLowerCase();
+    const usersAnswer = inputValue.toLowerCase();
     const answerWasCorrect =
       wanakana.toRomaji(usersAnswer) === wanakana.toRomaji(question.answer);
     const usersCurrentAnswers = [...answerHistory];

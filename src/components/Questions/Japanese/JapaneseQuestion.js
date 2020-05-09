@@ -38,19 +38,36 @@ function JapaneseQuestion({
     question_text: questionText
   } = question;
 
-  const submitHandler = (event) => {
-    onSubmit(event);
+  const submitHandler = () => {
+    onSubmit(inputValue);
     // updateInputValue("")
+  }
+
+  // Get the input field
+  const input = document.getElementById("japaneseQuestion__answerField");
+
+  if(input) {
+    // Execute a function when the user releases a key on the keyboard
+    input.addEventListener("keyup", function(event) {
+      // Number 13 is the "Enter" key on the keyboard
+      if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.querySelector(".japaneseQuestion__nextBtn").click();
+      }
+    });
   }
 
     return (
       <>
         {questionCount && !endOfQuiz &&
-          <form className="japaneseQuestion" onSubmit={submitHandler}>
+          <div className="japaneseQuestion">
             <p className="japaneseQuestion__questionNumber">Question {questionNumber} of {questionCount}</p>
             <div className="japaneseQuestion__question">
               <p className="japaneseQuestion__questionText">{questionText}</p>
               <WanakanaInput
+                id="japaneseQuestion__answerField"
                 className={isFieldEmpty ? "japaneseQuestion__emptyAnswer" : "japaneseQuestion__answerField"}
                 type="text"
                 name="answerField"
@@ -61,13 +78,11 @@ function JapaneseQuestion({
                 value={inputValue}
                 to={inputMode}
               />
-              <input type="submit">
-                <Button className="japaneseQuestion__nextBtn">
-                  Next
-                </Button>
-              </input>
+              <Button className="japaneseQuestion__nextBtn" onClick={submitHandler}>
+                Next
+              </Button>
             </div>
-          </form>
+          </div>
       }
       {endOfQuiz && <Results answerHistory={answerHistory} />}
       </>
