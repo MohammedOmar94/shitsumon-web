@@ -3,6 +3,7 @@ import "./styles.scss";
 import React from "react";
 import PropTypes from "prop-types";
 import Results from  './Results';
+import _includes from "lodash/includes";
 
 import Button from "../../UI/Button/Button"
 
@@ -32,14 +33,20 @@ function SomaliQuestion({
 }) {
   const {
     question_text: questionText,
-    subject_pronoun: subjectPronoun,
     word,
     inflections,
-    conjugation_key: conjugationKey
+    verb_form: verbForm
   } = question;
 
+
+  const wordFirstChar = word[0];
   const wordWithoutLastChar = word.slice(0, -1);
   const baseWordChoices = [word, wordWithoutLastChar, "sh", "d"];
+
+  if (!_includes(word, "i") && _includes(word, "x")) {
+    const rootWordVariation = wordFirstChar + "ix"
+    baseWordChoices.splice(1, 0, rootWordVariation);
+  }
   const wordInfections = [...inflections];
 
   // Convert array of choices to a string, used to form users answer.
@@ -50,7 +57,7 @@ function SomaliQuestion({
   }
 
   const handleChoiceClick = (selectedChoice) => {
-    if (selectedChoices.includes(selectedChoice)) {
+    if (_includes(selectedChoices, selectedChoice)) {
         const index = selectedChoices.indexOf(selectedChoice);
         const usersChoices = [...selectedChoices]
         usersChoices.splice(index, 1)
@@ -59,25 +66,6 @@ function SomaliQuestion({
         onChoiceClick([...selectedChoices, selectedChoice])
     }
   }
-
-  const SUBJECT_PRONOUN = {
-    FIRST_PERSON: "First person (I, me)",
-    SECOND_PERSON: "Second person (You)",
-    THIRD_PERSON_MALE: "Third person (Male)",
-    THIRD_PERSON_FEMALE: "Third person (Female)",
-    FIRST_PERSON_PLURAL: "First person plural (We)",
-    SECOND_PERSON_PLURAL: "Second person plural (You)",
-    THIRD_PERSON_PLURAL: "Third person plural (They)",
-  }
-
-  const INFLECTIONS = {
-    PAST_TENSE: "Past tense",
-    PAST_PROGRESSIVE: "Past progressive",
-    PRESENT_TENSE: "Present tense",
-    PRESENT_PROGRESSIVE: "Present progressive"
-  }
-
-  const verbForm = `${INFLECTIONS[conjugationKey]} + ${SUBJECT_PRONOUN[subjectPronoun]}`;
 
   const hasSelectedAnOption = selectedChoices.length !== 0;
 
@@ -130,7 +118,7 @@ function AnswerChoices({
         <Button
           className="buttonChoice"
           theme="light"
-          selected={selectedChoices.includes(choice)}
+          selected={_includes(selectedChoices, choice)}
           onClick={() => onClick(choice)}
         >
           {choice}
