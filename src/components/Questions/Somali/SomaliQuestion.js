@@ -5,7 +5,10 @@ import PropTypes from "prop-types";
 import Results from  './Results';
 import _includes from "lodash/includes";
 
-import Button from "../../UI/Button/Button"
+import AnswerChoices from "../../UI/AnswerChoices";
+import AnswerChoiceOutput from "../../UI/AnswerChoiceOutput";
+import QuestionTitle from "../../UI/QuestionTitle";
+import Button from "../../UI/Button/Button";
 
 SomaliQuestion.propTypes = {
   questions: PropTypes.array,
@@ -67,33 +70,26 @@ function SomaliQuestion({
     }
   }
 
-  const hasSelectedAnOption = selectedChoices.length !== 0;
-
     return (
       <>
         {!endOfQuiz &&
           <div className="somaliQuestion">
             <p className="somaliQuestion__questionLabel">Question {questionNumber} of {questionCount}</p>
             <div className="somaliQuestion__question">
-              <p className="somaliQuestion__questionText">{questionText}</p>
-              <div className="somaliQuestion__questionPronoun">{verbForm}</div>
-              <div>
-                <p className="somaliQuestion__questionLabel">Your answer:</p>
-                {hasSelectedAnOption && <span className="somaliQuestion__questionText">{usersAnswer}</span>}
-                {!hasSelectedAnOption && <span className="somaliQuestion__choiceLabel">Please select an option</span>}
-                <AnswerChoices
-                  choices={baseWordChoices}
-                  label="Word choices:"
-                  selectedChoices={selectedChoices}
-                  onClick={handleChoiceClick}
-                />
-                <AnswerChoices
-                  choices={wordInfections}
-                  label="Conjugation choices:"
-                  selectedChoices={selectedChoices}
-                  onClick={handleChoiceClick}
-                />
-              </div>
+              <QuestionTitle title={questionText} subtitle={verbForm} />
+              <AnswerChoiceOutput usersAnswer={usersAnswer} />
+              <AnswerChoices
+                choices={baseWordChoices}
+                label="Word choices:"
+                selectedChoices={selectedChoices}
+                onClick={handleChoiceClick}
+              />
+              <AnswerChoices
+                choices={wordInfections}
+                label="Conjugation choices:"
+                selectedChoices={selectedChoices}
+                onClick={handleChoiceClick}
+              />
               <Button className="somaliQuestion__nextBtn" onClick={handleSubmit}>
                 Next
               </Button>
@@ -104,28 +100,5 @@ function SomaliQuestion({
       </>
     );
 };
-
-function AnswerChoices({
-  choices,
-  label,
-  selectedChoices,
-  onClick
-}) {
-  return (
-    <div>
-      <p className="somaliQuestion__choiceLabel">{label}</p>
-      {choices.map(choice => (
-        <Button
-          className="buttonChoice"
-          theme="light"
-          selected={_includes(selectedChoices, choice)}
-          onClick={() => onClick(choice)}
-        >
-          {choice}
-        </Button>
-      ))}
-    </div>
-  )
-}
 
 export default SomaliQuestion;

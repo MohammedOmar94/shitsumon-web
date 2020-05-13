@@ -1,0 +1,14 @@
+@import '../../../assets/_colors.scss';
+
+.answerChoices__choiceLabel {
+  color: $light-teal;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+.answerChoices__choiceBtn.button {
+  padding: 16px;
+  font-size: 16px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}

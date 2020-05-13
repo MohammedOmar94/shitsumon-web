@@ -1,0 +1,27 @@
+@import '../../../assets/_colors.scss';
+
+.answerChoiceOutput__questionLabel {
+  color: $teal;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.answerChoiceOutput__placeholder {
+  color: $light-teal;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+.answerChoiceOutput__usersAnswer {
+  font-weight: 600;
+  font-size: 18px;
+  color: $dark-teal;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .answerChoiceOutput__usersAnswer {
+    font-size: 24px;
+  }
+}

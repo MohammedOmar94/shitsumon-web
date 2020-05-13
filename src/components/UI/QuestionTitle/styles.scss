@@ -1,0 +1,30 @@
+@import '../../../assets/_colors.scss';
+
+.questionTitle__title {
+  font-weight: 600;
+  font-size: 18px;
+  color: $dark-teal;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.questionTitle__subtitle {
+  display: inline-block;
+  border-radius: 4px;
+  background: $light-teal;
+  padding: 5px 8px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+  .questionTitle__title {
+    font-size: 24px;
+  }
+
+  .questionTitle__subtitle {
+    font-size: 14px;
+  }
+}
