@@ -8,6 +8,7 @@ import axios from "axios";
 import _shuffle from "lodash/shuffle";
 
 import JapaneseQuestion from "../../Questions/Japanese/JapaneseQuestion";
+
 import Section from "../../UI/Section/Section";
 import Spinner from "../../UI/Spinner";
 
@@ -33,6 +34,8 @@ function JapaneseQuiz({
   const [showWrongPopup, setWrongPopupVisibility] = useState(false);
   const [answerEmpty, setAnswerEmpty] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState([])
+  const [selectedChoices, updateSelectedChoices] = useState([])
+
 
   const search = location.search;
   const quizParams = queryString.parse(search);
@@ -69,6 +72,7 @@ function JapaneseQuiz({
     setCorrectPopupVisibility(false);
     setWrongPopupVisibility(false);
     setAnswerEmpty(false);
+    updateSelectedChoices([]);
   };
 
   const handleNext = (inputValue) => {
@@ -149,9 +153,11 @@ function JapaneseQuiz({
             questionIndex={questionIndex}
             hideInputMode={hideInputMode}
             inputMode={inputMode}
+            onChoiceClick={updateSelectedChoices}
             onSubmit={event => handleNext(event)}
             answerHistory={answerHistory}
             isFieldEmpty={answerEmpty}
+            selectedChoices={selectedChoices}
             endOfQuiz={endOfQuiz}
           />
         )}

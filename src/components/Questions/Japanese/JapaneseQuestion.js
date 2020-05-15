@@ -2,9 +2,14 @@ import "./styles.scss";
 
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import _includes from "lodash/includes";
+
 import Results from  './Results';
 
 import Button from "../../UI/Button/Button"
+import QuestionTitle from "../../UI/QuestionTitle";
+import AnswerChoices from "../../UI/AnswerChoices";
+import AnswerChoiceOutput from "../../UI/AnswerChoiceOutput";
 
 import WanakanaInput from "react-wanakana";
 
@@ -25,21 +30,33 @@ function JapaneseQuestion({
   isFieldEmpty,
   inputMode,
   endOfQuiz,
+  onChoiceClick,
   onSubmit,
   question,
   questionCount,
   questionIndex,
+  selectedChoices,
   usersAnswer
 }) {
   const [inputValue, updateInputValue] = useState("")
   const questionNumber = questionIndex + 1;
 
+  // Convert array of choices to a string, used to form users answer.
+  const answerOutput = selectedChoices.join("")
+
   const {
-    question_text: questionText
+    question_text: questionText,
+    quizType,
+    wordChoices,
+    conjugationChoices
   } = question;
 
   const submitHandler = () => {
-    onSubmit(inputValue);
+    if (quizType === "writing") {
+      onSubmit(inputValue);
+    } else if (quizType === "conjugation") {
+      onSubmit(answerOutput)
+    }
     // updateInputValue("")
   }
 
@@ -59,25 +76,55 @@ function JapaneseQuestion({
     });
   }
 
+  const handleChoiceClick = (selectedChoice) => {
+    if (_includes(selectedChoices, selectedChoice)) {
+        const index = selectedChoices.indexOf(selectedChoice);
+        const usersChoices = [...selectedChoices]
+        usersChoices.splice(index, 1)
+        onChoiceClick(usersChoices)
+    } else {
+        onChoiceClick([...selectedChoices, selectedChoice])
+    }
+  }
+
     return (
       <>
         {questionCount && !endOfQuiz &&
           <div className="japaneseQuestion">
             <p className="japaneseQuestion__questionNumber">Question {questionNumber} of {questionCount}</p>
             <div className="japaneseQuestion__question">
-              <p className="japaneseQuestion__questionText">{questionText}</p>
-              <WanakanaInput
-                id="japaneseQuestion__answerField"
-                className={isFieldEmpty ? "japaneseQuestion__emptyAnswer" : "japaneseQuestion__answerField"}
-                type="text"
-                name="answerField"
-                autoFocus
-                autoComplete="off"
-                placeholder="Type the Japanese word here"
-                onChange={(event) => updateInputValue(event.target.value)}
-                value={inputValue}
-                to={inputMode}
-              />
+              <QuestionTitle title={questionText} />
+              {quizType === "conjugation" &&
+                <>
+                  <AnswerChoiceOutput usersAnswer={answerOutput} />
+                  <AnswerChoices
+                    choices={wordChoices}
+                    label="Word choices:"
+                    selectedChoices={selectedChoices}
+                    onClick={handleChoiceClick}
+                  />
+                  <AnswerChoices
+                    choices={conjugationChoices}
+                    label="Conjugation choices:"
+                    selectedChoices={selectedChoices}
+                    onClick={handleChoiceClick}
+                  />
+                </>
+              }
+              {quizType === "writing" &&
+                <WanakanaInput
+                  id="japaneseQuestion__answerField"
+                  className={isFieldEmpty ? "japaneseQuestion__emptyAnswer" : "japaneseQuestion__answerField"}
+                  type="text"
+                  name="answerField"
+                  autoFocus
+                  autoComplete="off"
+                  placeholder="Type the Japanese word here"
+                  onChange={(event) => updateInputValue(event.target.value)}
+                  value={inputValue}
+                  to={inputMode}
+                />
+              }
               <Button className="japaneseQuestion__nextBtn" onClick={submitHandler}>
                 Next
               </Button>

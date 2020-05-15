@@ -2,20 +2,17 @@
 
 .japaneseQuestion {
   margin-top: 8px;
-  padding: 4px;
+  padding: 8px;
 }
 
 .japaneseQuestion__question {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   margin: 8px 0px 8px 8px;
 }
 
 .japaneseQuestion__questionNumber {
-  color: $light-teal;
+  color: $teal;
+  font-size: 14px;
   font-weight: 700;
-  margin: 8px 0;
 }
 
 .japaneseQuestion__questionText {
@@ -31,7 +28,6 @@
   margin: 8px 0 16px;
   font-size: 18px;
   padding: 4px 8px;
-  width: 100%;
 }
 
 .japaneseQuestion__emptyAnswer {
@@ -44,8 +40,9 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .japaneseQuestion__questionNumber {
-    font-size: 16px;
+  .japaneseQuestion {
+    margin-top: 8px;
+    padding: 24px;
   }
 
   .japaneseQuestion__questionText {
