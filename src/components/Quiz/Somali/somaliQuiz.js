@@ -56,11 +56,11 @@ function SomaliQuiz({
       .catch(error => {
         console.log(error);
       });
-  }, [hasData]);
+  }, []);
 
   useEffect(() => {
     setShuffledQuestions(_shuffle(questions))
-  }, [questions])
+  }, [hasData])
 
   const questionCount = shuffledQuestions.length;
   const question = questionCount ? shuffledQuestions[questionIndex] : undefined;

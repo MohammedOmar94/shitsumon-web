@@ -48,7 +48,7 @@ function JapaneseQuiz({
       return;
     }
 
-    axios.post(`https://kakarot.now.sh/${languageStudied}/load_quiz`, quizParams)
+    axios.post(`http://localhost:5000/${languageStudied}/load_quiz`, quizParams)
       .then(response => {
         const quizData =
           {
@@ -62,11 +62,11 @@ function JapaneseQuiz({
       .catch(error => {
         console.log(error);
       });
-  }, [hasData]);
+  }, []);
 
   useEffect(() => {
     setShuffledQuestions(_shuffle(questions))
-  }, [questions])
+  }, [hasData])
 
   const resetUI = () => {
     setCorrectPopupVisibility(false);
