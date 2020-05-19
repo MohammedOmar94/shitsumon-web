@@ -48,7 +48,7 @@ function JapaneseQuiz({
       return;
     }
 
-    axios.post(`http://localhost:5000/${languageStudied}/load_quiz`, quizParams)
+    axios.post(`https://kakarot.now.sh/${languageStudied}/load_quiz`, quizParams)
       .then(response => {
         const quizData =
           {
