@@ -1,5 +1,18 @@
 @import '../../../assets/_colors.scss';
 
+.answerChoiceOutput {
+  background-color: $light-teal;
+  display: flex;
+  padding: 12px;
+}
+
+.answerChoiceOutput__answerOutput {
+  flex-grow: 1;
+  padding: 8px;
+  background-color: $light;
+  border-radius: 5px;
+}
+
 .answerChoiceOutput__questionLabel {
   color: $teal;
   font-size: 14px;

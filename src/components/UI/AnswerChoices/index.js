@@ -21,7 +21,7 @@ export default function AnswerChoices({
   onClick
 }) {
   return (
-    <div>
+    <div className="answerChoices">
       <p className="answerChoices__choiceLabel">{label}</p>
       {choices.map(choice => (
         <Button
