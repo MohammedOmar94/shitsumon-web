@@ -7,8 +7,7 @@ import _includes from "lodash/includes";
 
 import AnswerChoices from "../../UI/AnswerChoices";
 import AnswerChoiceOutput from "../../UI/AnswerChoiceOutput";
-import QuestionTitle from "../../UI/QuestionTitle";
-import Button from "../../UI/Button/Button";
+import Question from "../../UI/Question"
 
 SomaliQuestion.propTypes = {
   questions: PropTypes.array,
@@ -55,7 +54,7 @@ function SomaliQuestion({
   // Convert array of choices to a string, used to form users answer.
   const usersAnswer = selectedChoices.join("")
 
-  const handleSubmit = () => {
+  const onNextQuestion = () => {
     onSubmit(usersAnswer);
   }
 
@@ -73,28 +72,27 @@ function SomaliQuestion({
     return (
       <>
         {!endOfQuiz &&
-          <div className="somaliQuestion">
-            <p className="somaliQuestion__questionLabel">Question {questionNumber} of {questionCount}</p>
-            <div className="somaliQuestion__question">
-              <QuestionTitle title={questionText} subtitle={verbForm} />
-              <AnswerChoiceOutput usersAnswer={usersAnswer} />
-              <AnswerChoices
-                choices={baseWordChoices}
-                label="Word choices:"
-                selectedChoices={selectedChoices}
-                onClick={handleChoiceClick}
-              />
-              <AnswerChoices
-                choices={wordInfections}
-                label="Conjugation choices:"
-                selectedChoices={selectedChoices}
-                onClick={handleChoiceClick}
-              />
-              <Button className="somaliQuestion__nextBtn" onClick={handleSubmit}>
-                Next
-              </Button>
-            </div>
-          </div>
+          <Question 
+            questionCount={questionCount}
+            questionNumber={questionNumber}
+            questionText={questionText}
+            questionSubText={verbForm}
+            onButtonClick={onNextQuestion}
+          >
+            <AnswerChoiceOutput usersAnswer={usersAnswer} />
+            <AnswerChoices
+              choices={baseWordChoices}
+              label="Word choices:"
+              selectedChoices={selectedChoices}
+              onClick={handleChoiceClick}
+            />
+            <AnswerChoices
+              choices={wordInfections}
+              label="Conjugation choices:"
+              selectedChoices={selectedChoices}
+              onClick={handleChoiceClick}
+            />
+          </Question>
         }
         {endOfQuiz && <Results answerHistory={answerHistory} />}
       </>

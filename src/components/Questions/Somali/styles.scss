@@ -1,39 +1,5 @@
 @import '../../../assets/_colors.scss';
 
-.somaliQuestion {
-  margin-top: 8px;
-  padding: 8px;
-}
-
-.somaliQuestion__question {
-  margin: 8px 0px 8px 8px;
-}
-
-.somaliQuestion__questionPronoun {
-  display: inline-block;
-  border-radius: 4px;
-  background: $light-teal;
-  padding: 5px 8px;
-  font-weight: 600;
-  font-size: 12px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-}
-
-.somaliQuestion__questionLabel {
-  color: $teal;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.somaliQuestion__questionText {
-  font-weight: 600;
-  font-size: 18px;
-  color: $dark-teal;
-  margin-bottom: 8px;
-  width: 100%;
-}
-
 .somaliQuestion__answerField, .somaliQuestion__emptyAnswer {
   color: $dark-teal;
   margin: 8px 0 16px;
@@ -45,35 +11,9 @@
   border: 2px solid red;
 }
 
-.somaliQuestion__nextBtn {
-  margin-top: 16px;
-  padding: 8px 16px;
-}
-
 @media only screen and (min-width: 768px) {
-  .somaliQuestion {
-    margin-top: 8px;
-    padding: 24px;
-  }
-
-  .somaliQuestion__questionNumber {
-    font-size: 16px;
-  }
-
-  .somaliQuestion__questionText {
-    font-size: 24px;
-  }
-
-  .somaliQuestion__questionPronoun {
-    font-size: 14px;
-  }
-
   .somaliQuestion__answerField {
     font-size: 24px;
     padding: 4px 8px;
-  }
-
-  .somaliQuestion__nextBtn {
-    font-size: 16px;
   }
 }

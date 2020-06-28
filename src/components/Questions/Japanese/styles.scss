@@ -1,28 +1,5 @@
 @import '../../../assets/_colors.scss';
 
-.japaneseQuestion {
-  margin-top: 8px;
-  padding: 8px;
-}
-
-.japaneseQuestion__question {
-  margin: 8px 0px 8px 8px;
-}
-
-.japaneseQuestion__questionNumber {
-  color: $teal;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.japaneseQuestion__questionText {
-  font-weight: 800;
-  font-size: 18px;
-  color: $dark-teal;
-  margin-bottom: 8px;
-  width: 100%;
-}
-
 .japaneseQuestion__answerField, .japaneseQuestion__emptyAnswer {
   color: $dark-teal;
   margin: 8px 0 16px;
@@ -35,27 +12,9 @@
   border: 2px solid red;
 }
 
-.japaneseQuestion__nextBtn {
-  margin-top: 16px;
-  padding: 8px 16px;
-}
-
 @media only screen and (min-width: 768px) {
-  .japaneseQuestion {
-    margin-top: 8px;
-    padding: 24px;
-  }
-
-  .japaneseQuestion__questionText {
-    font-size: 24px;
-  }
-
   .japaneseQuestion__answerField {
     font-size: 16px;
     padding: 4px 8px;
-  }
-
-  .japaneseQuestion__nextBtn {
-    font-size: 16px;
   }
 }

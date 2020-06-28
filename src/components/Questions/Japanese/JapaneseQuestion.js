@@ -5,9 +5,7 @@ import PropTypes from "prop-types";
 import _includes from "lodash/includes";
 
 import Results from  './Results';
-
-import Button from "../../UI/Button/Button"
-import QuestionTitle from "../../UI/QuestionTitle";
+import Question from "../../UI/Question";
 import AnswerChoices from "../../UI/AnswerChoices";
 import AnswerChoiceOutput from "../../UI/AnswerChoiceOutput";
 
@@ -51,7 +49,7 @@ function JapaneseQuestion({
     conjugationChoices
   } = question;
 
-  const submitHandler = () => {
+  const onNextQuestion = () => {
     if (quizType === "writing") {
       onSubmit(inputValue);
     } else if (quizType === "conjugation") {
@@ -90,11 +88,13 @@ function JapaneseQuestion({
     return (
       <>
         {questionCount && !endOfQuiz &&
-          <div className="japaneseQuestion">
-            <p className="japaneseQuestion__questionNumber">Question {questionNumber} of {questionCount}</p>
-            <div className="japaneseQuestion__question">
-              <QuestionTitle title={questionText} />
-              {quizType === "conjugation" &&
+          <Question
+            questionCount={questionCount}
+            questionNumber={questionNumber}
+            questionText={questionText}
+            onButtonClick={onNextQuestion}
+          >
+            {quizType === "conjugation" &&
                 <>
                   <AnswerChoiceOutput usersAnswer={answerOutput} />
                   <AnswerChoices
@@ -125,11 +125,7 @@ function JapaneseQuestion({
                   to={inputMode}
                 />
               }
-              <Button className="japaneseQuestion__nextBtn" onClick={submitHandler}>
-                Next
-              </Button>
-            </div>
-          </div>
+          </Question>
       }
       {endOfQuiz && <Results answerHistory={answerHistory} />}
       </>
