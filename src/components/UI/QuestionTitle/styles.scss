@@ -1,11 +1,21 @@
 @import '../../../assets/_colors.scss';
 
+.questionTitle {
+  padding: 8px 16px;
+}
+
+.questionTitle__questionNumber {
+  color: $teal;
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .questionTitle__title {
+  color: $dark-teal;
   font-weight: 600;
   font-size: 18px;
-  color: $dark-teal;
-  margin-bottom: 8px;
-  width: 100%;
+  margin-top: 8px;
+  margin-left: 8px;
 }
 
 .questionTitle__subtitle {
@@ -16,6 +26,7 @@
   font-weight: 600;
   font-size: 12px;
   text-transform: uppercase;
+  margin-top: 8px;
   margin-bottom: 16px;
 }
 

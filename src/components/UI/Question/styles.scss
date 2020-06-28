@@ -1,43 +1,10 @@
 @import '../../../assets/_colors.scss';
-
-.question {
-  margin-top: 8px;
-  padding: 8px;
-}
-
-.question__question {
-  margin: 8px 0px 8px 8px;
-}
-
-.question__questionNumber {
-  color: $teal;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.question__questionText {
-  font-weight: 800;
-  font-size: 18px;
-  color: $dark-teal;
-  margin-bottom: 8px;
-  width: 100%;
-}
-
 .question__nextBtn {
-  margin-top: 16px;
+  margin: 16px;
   padding: 8px 16px;
 }
 
 @media only screen and (min-width: 768px) {
-  .question {
-    margin-top: 8px;
-    padding: 24px;
-  }
-
-  .question__questionText {
-    font-size: 24px;
-  }
-
   .question__nextBtn {
     font-size: 16px;
   }

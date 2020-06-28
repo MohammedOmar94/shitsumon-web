@@ -25,9 +25,13 @@ function Question({
 }) {
     return (
       <div className="question">
-        <p className="question__questionNumber">Question {questionNumber} of {questionCount}</p>
+        <QuestionTitle
+          questionCount={questionCount}
+          questionNumber={questionNumber}
+          title={questionText}
+          subtitle={questionSubText}
+        />
         <div className="question__question">
-          <QuestionTitle title={questionText} subtitle={questionSubText} />
           {children}
           <Button className="question__nextBtn" onClick={onButtonClick}>
             Next
