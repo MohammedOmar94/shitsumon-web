@@ -1,11 +1,12 @@
 @import '../../../assets/_colors.scss';
 
 .japaneseQuestion__answerField, .japaneseQuestion__emptyAnswer {
+  box-sizing: border-box;
   color: $dark-teal;
-  margin: 8px 0 16px;
+  margin: 0 16px;
   font-size: 18px;
   padding: 4px 8px;
-  width: 100%;
+  width: 90%;
 }
 
 .japaneseQuestion__emptyAnswer {
