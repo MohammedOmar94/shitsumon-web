@@ -1,4 +1,4 @@
-@import '../../assets/_colors.scss';
+@import '../../assets/dependencies.scss';
 
 .Quiz {
   position: relative;
@@ -18,70 +18,30 @@
   margin-bottom: 8px;
 }
 
-
-
-@keyframes stamp {
-  0%   {
-    opacity: 0;
-    transform: scale(3);
-  }
-  30%   {
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(10deg) scale(1);
-  }
-  50%   {
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(-10deg) scale(1);
-  }
-  70%   {
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(10deg) scale(1);
-  }
-  90% {
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(-10deg) scale(1);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(0deg) scale(1);
-  }
-}
-
-@keyframes pulse {
-  0%   {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .CorrectPopup {
+  background-color: $light-teal;
+  color: $light;
+  fill: $light;
   position: absolute;
   top: 50%;
   left: 50%;
+  padding: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   visibility: hidden;
   p {
-    color: #02cf5e;
     font-weight: 600;
     font-size: 22px;
   }
   &.--show {
+    @include zoomOutShuffleAnimation;
+
     visibility: visible;
-    animation-name: stamp;
-    animation-duration: 1000ms;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    animation-timing-function: linear;
   }
   & i {
     font-size: 72px;
-    color: #02cf5e;
-    fill: $light;
     margin-left: 4px;
   }
 }
@@ -96,18 +56,13 @@
   justify-content: center;
   height: 100px;
   width: 100px;
-  color: red;
   font-weight: 600;
   font-size: 72px;
   visibility: hidden;
   &.--show {
+    @include pulsateAnimation;
+
     visibility: visible;
-    animation-name: pulse;
-    animation-duration: 300ms;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 4;
-    animation-direction: alternate;
-    animation-timing-function: linear;
   }
   & i {
     color: red;

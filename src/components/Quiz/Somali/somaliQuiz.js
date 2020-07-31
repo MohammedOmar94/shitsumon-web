@@ -1,5 +1,4 @@
-// Maybe use generic components for each Quiz?
-import "./styles.scss";
+import "../styles.scss";
 
 import React, { useEffect, useState } from "react";
 import queryString from "query-string";

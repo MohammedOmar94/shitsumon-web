@@ -1,8 +1,52 @@
-@keyframes fade {
+@mixin pulsateAnimation {
+  animation-name: fadeIn;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 4;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
+
+@mixin zoomOutShuffleAnimation {
+  animation-name: zoomOutAndShuffle;
+  animation-duration: 1000ms;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+}
+
+@keyframes fadeIn {
   0%   {
     opacity: 0;
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes zoomOutAndShuffle {
+  0%   {
+    opacity: 0;
+    transform: scale(3);
+  }
+  30%   {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(10deg) scale(1);
+  }
+  50%   {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-10deg) scale(1);
+  }
+  70%   {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(10deg) scale(1);
+  }
+  90% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-10deg) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
   }
 }
