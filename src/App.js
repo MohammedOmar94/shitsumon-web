@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route } from "react-router-dom";
 
 import Backdrop from './components/UI/Backdrop/Backdrop';
-import Layout from './components/Layout/Layout';
+import Layout from './components/Layout';
 import SideDrawer from './containers/SideDrawer';
 
 // import CreateQuiz from './containers/CreateQuiz/CreateQuiz';
@@ -28,7 +28,7 @@ class App extends Component {
     const { isDrawerVisible } = this.state;
 
     return (
-      <Layout drawerClickHandler={this.onDrawerToggle}>
+      <Layout onSideMenuClick={this.onDrawerToggle}>
         <SideDrawer show={isDrawerVisible} clicked={this.onDrawerToggle}/>
         <Backdrop hide={!isDrawerVisible}  onClick={this.onBackdropClick} />
         <Route path="/" exact component={Portal} />

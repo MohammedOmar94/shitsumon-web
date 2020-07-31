@@ -1,0 +1,12 @@
+@import '../../assets/_colors.scss';
+
+.layout {
+  background-color: $background;
+  display: block;
+  min-height: 100%;
+  overflow: auto;
+}
+
+.layout--tealBackground {
+  background-color: $teal;
+}
