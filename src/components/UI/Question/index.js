@@ -33,9 +33,11 @@ function Question({
         />
         <div className="question__question">
           {children}
-          <Button className="question__nextBtn" onClick={onButtonClick}>
-            Next
-          </Button>
+          <div className="question__buttonContainer">
+            <Button className="question__nextBtn" onClick={onButtonClick}>
+              Next
+            </Button>
+          </div>
         </div>
       </div>
     );
