@@ -2,7 +2,8 @@
 
 .Quiz {
   position: relative;
-  margin: 24px 8px 8px 8px;
+  max-width: 1080px;
+  margin: 24px 8px;
 }
 
 .Preferences {
@@ -70,8 +71,11 @@
   }
 }
 
-
 @media only screen and (min-width: 768px) {
+  .Quiz {
+    margin: 24px auto;
+  }
+
   .Preferences p {
     font-size: 14px;
   }
