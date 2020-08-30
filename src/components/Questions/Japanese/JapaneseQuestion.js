@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import _includes from "lodash/includes";
 
-import Results from  './Results';
+import Results from  '../../Results';
 import Question from "../../UI/Question";
 import AnswerChoices from "../../UI/AnswerChoices";
 import AnswerChoiceOutput from "../../UI/AnswerChoiceOutput";
@@ -127,7 +127,7 @@ function JapaneseQuestion({
               }
           </Question>
       }
-      {endOfQuiz && <Results answerHistory={answerHistory} />}
+      {endOfQuiz && <Results answerHistory={answerHistory} isJapaneseQuiz={true} />}
       </>
     );
 };

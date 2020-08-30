@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import QuestionTitle from "../../../../UI/QuestionTitle";
+import QuestionTitle from "../../UI/QuestionTitle";
 
 import classes from "./Result.module.scss";
 

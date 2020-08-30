@@ -4,18 +4,20 @@ import React, { useState } from "react";
 import classnames from "classnames";
 import { toHiragana } from "wanakana";
 
-import Button from "../../../UI/Button/Button";
+import Button from "../UI/Button/Button";
 
 import Result from "./Result/Result";
 
-function Results({ answerHistory }) {
+function Results({ answerHistory, isJapaneseQuiz }) {
   const [questionIndex, setQuestionIndex] = useState(null);
   const [showQuestion, setQuestionVisibility] = useState(false);
 
   const selectedQuestion = answerHistory[questionIndex];
   const questionNumber = questionIndex + 1;
 
-  console.log(selectedQuestion)
+  const getCorrectAnswer = (correctAnswer) => {
+    return isJapaneseQuiz ? toHiragana(correctAnswer) : correctAnswer
+  }
 
   const resultClasses = answerWasCorrect =>
     classnames(
@@ -41,7 +43,7 @@ function Results({ answerHistory }) {
           <Result
             className="results__answerHistory"
             answerWasCorrect={selectedQuestion.answerWasCorrect}
-            correctAnswer={toHiragana(selectedQuestion.correctAnswer)}
+            correctAnswer={getCorrectAnswer(selectedQuestion.correctAnswer)}
             usersAnswer={selectedQuestion.usersAnswer}
             questionNumber={questionNumber}
             questionText={selectedQuestion.questionText}
