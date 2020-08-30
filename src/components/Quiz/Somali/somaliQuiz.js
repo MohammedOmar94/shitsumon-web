@@ -94,7 +94,7 @@ function SomaliQuiz({
     }
 
     usersCurrentAnswers.push({
-      text: question.question_text,
+      questionText: question.question_text,
       usersAnswer,
       correctAnswer: question.answers,
       answerWasCorrect
