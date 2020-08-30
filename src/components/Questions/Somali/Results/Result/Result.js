@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import classes from './Result.module.scss';
+import classes from '../../../Japanese/Results/Result/Result.module.scss';
 
 const result = (props) => {
   window.scrollTo(0, 0)

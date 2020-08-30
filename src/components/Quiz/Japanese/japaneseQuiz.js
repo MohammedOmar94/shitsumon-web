@@ -96,7 +96,7 @@ function JapaneseQuiz({
     }
 
     usersCurrentAnswers.push({
-      text: question.tquestion_textext,
+      questionText: question.question_text,
       usersAnswer,
       correctAnswer: question.answer,
       answerWasCorrect

@@ -8,40 +8,57 @@
 }
 
 .Answers {
-  color: $dark-teal;
-  font-size: 12px;
-  margin: 8px 0 0 8px;
+  background-color: $light-teal;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 24px;
+  word-break: break-all;
   & i {
     margin-left: 4px;
   }
 }
 
 .CorrectAnswer {
-  font-size: 12px;
-  font-weight: bold;
+  display: inline-block;
+  align-items: center;
+  border-radius: 5px;
   color: $light-teal;
+  background-color: $light;
+  border-radius: 5px;
+  margin-top: 8px;
+  padding: 8px;
+
+  & i {
+    color: $light-teal;
+  }
 }
 
 .WrongAnswer {
-  font-size: 12px;
-  font-weight: bold;
-  color: #ff0000;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #ff0000;
+  margin-top: 8px;
+  padding: 8px;
 }
 
 
 .Answer {
+  border-bottom: 1px solid #cacaca;
   color: $light-teal;
-  font-weight: bold;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 24px;
 }
 
 
-@media only screen and (min-width: 768px) {
-  .Answers, .WrongAnswer, .CorrectAnswer {
-    font-size: 14px;
-  }
+// @media only screen and (min-width: 768px) {
+//   .Answers, .WrongAnswer, .CorrectAnswer {
+//     font-size: 14px;
+//   }
 
-  .QuestionText {
-    color: $dark-teal;
-    font-size: 24px;
-  }
-}
+//   .QuestionText {
+//     color: $dark-teal;
+//     font-size: 24px;
+//   }
+// }

@@ -15,6 +15,8 @@ function Results({ answerHistory }) {
   const selectedQuestion = answerHistory[questionIndex];
   const questionNumber = questionIndex + 1;
 
+  console.log(selectedQuestion)
+
   const resultClasses = answerWasCorrect =>
     classnames(
       "results__result",
@@ -35,21 +37,23 @@ function Results({ answerHistory }) {
   return (
     <div className="results">
       {showQuestion && (
-        <>
-          <Button
-            className="results__backBtn"
-            onClick={() => onQuestionClose()}
-            type="back"
-          />
+        <div className="results__question">
           <Result
             className="results__answerHistory"
             answerWasCorrect={selectedQuestion.answerWasCorrect}
             correctAnswer={toHiragana(selectedQuestion.correctAnswer)}
             usersAnswer={selectedQuestion.usersAnswer}
             questionNumber={questionNumber}
-            questionText={selectedQuestion.question_text}
+            questionText={selectedQuestion.questionText}
           />
-        </>
+          <div className="results__btnsContainer">
+            <Button
+              className="results__backBtn"
+              onClick={() => onQuestionClose()}
+              type="back"
+            />
+          </div>
+        </div>
         )
       }
       {!showQuestion &&
