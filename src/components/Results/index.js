@@ -1,12 +1,22 @@
 import './styles.scss';
 
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 import { toHiragana } from "wanakana";
 
 import Button from "../UI/Button/Button";
 
 import Result from "./Result/Result";
+
+Results.propTypes = {
+  answerHistory: PropTypes.array,
+  isJapaneseQuiz: PropTypes.bool
+}
+
+Results.defaultProps = {
+  answerHistory: []
+}
 
 function Results({ answerHistory, isJapaneseQuiz }) {
   const [questionIndex, setQuestionIndex] = useState(null);

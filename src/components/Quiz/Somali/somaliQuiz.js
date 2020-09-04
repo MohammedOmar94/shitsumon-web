@@ -79,7 +79,7 @@ function SomaliQuiz({
     const question = shuffledQuestions[questionIndex];
 
     const answerWasCorrect = question.answers.includes(usersAnswer);
-    const usersCurrentAnswers = [...answerHistory];
+    const usersCurrentAnswers = answerHistory ? [...answerHistory] : [];
 
     const waitingForNextQuestion = showCorrectPopup || showWrongPopup;
 

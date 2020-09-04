@@ -81,7 +81,8 @@ function JapaneseQuiz({
     const usersAnswer = inputValue.toLowerCase();
     const answerWasCorrect =
       wanakana.toRomaji(usersAnswer) === wanakana.toRomaji(question.answer);
-    const usersCurrentAnswers = [...answerHistory];
+      const usersCurrentAnswers = answerHistory ? [...answerHistory] : [];
+
 
     const waitingForNextQuestion = showCorrectPopup || showWrongPopup;
 

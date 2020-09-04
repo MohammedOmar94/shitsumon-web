@@ -9,10 +9,10 @@ export default function quizReducer(state = {}, action) {
         // Other cached quiz objects.
         ...state,
         [quizData.id]: {
+          ...state[quizData.id],
           ...quizData.data,
           questionIndex: 0,
-          hasData: true,
-          answerHistory: []
+          hasData: true
         }
       };
     case actions.UPDATE_ANSWER_HISTORY:
