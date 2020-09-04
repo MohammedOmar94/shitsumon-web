@@ -12,6 +12,7 @@ import Question from "../../UI/Question"
 SomaliQuestion.propTypes = {
   questions: PropTypes.array,
   questionNumber: PropTypes.number,
+  quizScore: PropTypes.number,
   emptyAnswer: PropTypes.bool,
   endOfQuiz: PropTypes.bool,
   onChoiceClick: PropTypes.func
@@ -31,6 +32,7 @@ function SomaliQuestion({
   selectedChoices,
   question,
   questionCount,
+  quizScore,
   questionNumber
 }) {
   const {
@@ -94,7 +96,7 @@ function SomaliQuestion({
             />
           </Question>
         }
-        {endOfQuiz && <Results answerHistory={answerHistory} />}
+        {endOfQuiz && <Results answerHistory={answerHistory} quizScore={quizScore} />}
       </>
     );
 };

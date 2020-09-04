@@ -32,6 +32,7 @@ function JapaneseQuestion({
   onSubmit,
   question,
   questionCount,
+  quizScore,
   questionIndex,
   selectedChoices,
   usersAnswer
@@ -127,7 +128,7 @@ function JapaneseQuestion({
               }
           </Question>
       }
-      {endOfQuiz && <Results answerHistory={answerHistory} isJapaneseQuiz={true} />}
+      {endOfQuiz && <Results answerHistory={answerHistory} isJapaneseQuiz={true} quizScore={quizScore} />}
       </>
     );
 };

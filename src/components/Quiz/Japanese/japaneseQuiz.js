@@ -14,8 +14,12 @@ import Spinner from "../../UI/Spinner";
 
 const wanakana = require("wanakana");
 
+JapaneseQuestion.defaultProps = {
+  quizScore: 0
+}
+
 function JapaneseQuiz({
-  score,
+  quizScore,
   questionIndex,
   hasData,
   hideInputMode,
@@ -35,6 +39,7 @@ function JapaneseQuiz({
   const [answerEmpty, setAnswerEmpty] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState([])
   const [selectedChoices, updateSelectedChoices] = useState([])
+  const [score, updateScore] = useState(quizScore)
 
 
   const search = location.search;
@@ -89,7 +94,7 @@ function JapaneseQuiz({
     let animationDuration = 1100;
 
     if (answerWasCorrect) {
-      score = score + 1;
+      updateScore(prevScore => prevScore + 1);
       setCorrectPopupVisibility(true);
     } else if (!answerWasCorrect && usersAnswer) {
       animationDuration = 1200;
@@ -110,6 +115,7 @@ function JapaneseQuiz({
           data: {
             endOfQuiz: true,
             answerHistory: usersCurrentAnswers,
+            quizScore: score,
             sectionName: "Results"
           },
           id: quizId
@@ -121,7 +127,7 @@ function JapaneseQuiz({
         onUsersAnswer({
           data: {
             questionIndex: questionIndex + 1,
-            score,
+            quizScore: score,
             answerHistory: usersCurrentAnswers
           },
           id: quizId
@@ -149,6 +155,7 @@ function JapaneseQuiz({
       <Section name={sectionName} className={"Quiz"}>
         {question && (
           <JapaneseQuestion
+            quizScore={quizScore}
             question={question}
             questionCount={questionCount}
             questionIndex={questionIndex}

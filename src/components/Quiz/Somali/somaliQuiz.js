@@ -11,8 +11,12 @@ import Section from "../../UI/Section/Section";
 import Spinner from "../../UI/Spinner";
 import SomaliQuestion from "../../Questions/Somali/SomaliQuestion";
 
+SomaliQuiz.defaultProps = {
+  quizScore: 0
+}
+
 function SomaliQuiz({
-  score,
+  quizScore,
   questionIndex,
   hasData,
   hideInputMode,
@@ -29,6 +33,7 @@ function SomaliQuiz({
   const [showCorrectPopup, setCorrectPopupVisibility] = useState(false);
   const [showWrongPopup, setWrongPopupVisibility] = useState(false);
   const [shuffledQuestions, setShuffledQuestions] = useState([])
+  const [score, updateScore] = useState(quizScore)
 
   const search = location.search;
   const quizParams = queryString.parse(search);
@@ -86,7 +91,7 @@ function SomaliQuiz({
     let animationDuration = 1100;
 
     if (answerWasCorrect) {
-      score = score + 1;
+      updateScore(prevScore => prevScore + 1);
       setCorrectPopupVisibility(true);
     } else if (!answerWasCorrect && usersAnswer) {
       animationDuration = 1200;
@@ -107,6 +112,7 @@ function SomaliQuiz({
           data: {
             endOfQuiz: true,
             answerHistory: usersCurrentAnswers,
+            quizScore: score,
             sectionName: "Results"
           },
           id: quizId
@@ -118,7 +124,7 @@ function SomaliQuiz({
         onUsersAnswer({
           data: {
             questionIndex: questionIndex + 1,
-            score,
+            quizScore: score,
             answerHistory: usersCurrentAnswers
           },
           id: quizId
@@ -141,6 +147,7 @@ function SomaliQuiz({
       <Section name={sectionName} className={"Quiz"}>
         {question && (
           <SomaliQuestion
+            quizScore={quizScore}
             question={question}
             questionCount={questionCount}
             questionNumber={questionNumber}

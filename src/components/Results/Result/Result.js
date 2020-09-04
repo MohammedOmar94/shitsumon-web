@@ -41,7 +41,6 @@ function Result({
     )
   };
 
-  console.log(questionNumber, questionText, usersAnswer)
   return (
     <div className={className}>
       <QuestionTitle questionNumber={questionNumber} title={questionText} />

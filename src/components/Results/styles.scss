@@ -1,10 +1,30 @@
 @import '../../assets/_colors.scss';
 
 .results {
+  margin-top: 8px;
+}
+
+.results__scoreContainer {
+  font-size: 32px;
+  font-weight: 800;
+  color: $light-teal;
+  margin-bottom: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.results__scoreLabel {
+  color: $light-teal;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.results__square {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  margin-top: 8px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #cacaca;
 }
 
 .results__result {
@@ -33,6 +53,7 @@
 
 .results__btnsContainer {
   padding: 24px;
+  width: 100%;
 }
 
 .results__result--correct {
