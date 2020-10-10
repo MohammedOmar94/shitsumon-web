@@ -32,7 +32,10 @@ const sideDrawer = (props) => {
          <Item label='Profile' />
         </li>
       </ul>
-      <LanguageSelector onChange={handleChange} />
+      <LanguageSelector
+        languageStudied={languageStudied}
+        onChange={handleChange}
+      />
     </nav>
   )
 }
