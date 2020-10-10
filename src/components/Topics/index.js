@@ -3,6 +3,8 @@ import "./styles.scss";
 import React, { useEffect } from "react";
 import axios from "axios";
 
+import _capitalize from "lodash/capitalize"
+
 import TopicSelect from "./TopicSelect/index";
 
 import Pencil from "../UI/Icons/Pencil";
@@ -22,7 +24,7 @@ function Topics({ hasData, languageStudied, onUpdateTopics, topics = [] }) {
     <div>
       <Spinner hasData={hasData} />
       <h2 className="topics__header">
-        <IconWithText icon={Pencil}>Quizzes</IconWithText>
+        <IconWithText icon={Pencil}>{_capitalize(languageStudied)} Quizzes</IconWithText>
         {/* <button className='topics__createBtn' onClick={() => history.push('/create-quiz')}>
           CREATE
         </button> */}
