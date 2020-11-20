@@ -1,7 +1,9 @@
 import "./styles.scss";
 
 import React, { useEffect } from "react";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import { useQueryCache } from 'react-query'
+import { hydrate } from 'react-query/hydration'
 
 import _capitalize from "lodash/capitalize"
 
@@ -12,24 +14,36 @@ import Pencil from "../UI/Icons/Pencil";
 import IconWithText from "../UI/IconWithText";
 import Spinner from "../UI/Spinner";
 
-function Topics({ hasData, languageStudied, onUpdateTopics, topics = [] }) {
+import { useFetchTopics, getDehydratedStateFromLocalStorage } from "./useFetchTopics"
+
+function Topics() {
+  const queryCache = useQueryCache()
+  const { languageSelectorReducer } = useSelector(state => state)
+  const { languageStudied } = languageSelectorReducer
+
 
   useEffect(() => {
-    axios.get(`https://kakarot.now.sh/${languageStudied}/topics`).then(response => {
-      onUpdateTopics(response.data);
-    });
-  }, [hasData, languageStudied]);
+    // Loads data from local storage into query cache, if there is any data.
+    const dehydratedState = getDehydratedStateFromLocalStorage()
+
+    if (dehydratedState) {
+      hydrate(queryCache, dehydratedState)
+    }
+  }, [queryCache])
+
+  // const dispatch = useDispatch();
+  const { data: topics, isSuccess } = useFetchTopics(languageStudied)
 
   return (
     <div>
-      <Spinner hasData={hasData} />
+      <Spinner hasData={isSuccess} />
       <h2 className="topics__header">
         <IconWithText icon={Pencil}>{_capitalize(languageStudied)} Quizzes</IconWithText>
         {/* <button className='topics__createBtn' onClick={() => history.push('/create-quiz')}>
           CREATE
         </button> */}
       </h2>
-      {topics.map(topic => {
+      {isSuccess && topics.map(topic => {
         return (
           <TopicSelect
             key={topic.key}
