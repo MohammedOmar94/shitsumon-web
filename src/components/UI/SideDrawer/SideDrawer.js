@@ -4,16 +4,10 @@ import classes from './SideDrawer.module.scss';
 import Item from './Item/Item';
 import LanguageSelector from "../LanguageSelector"
 
-const sideDrawer = (props) => {
-  const { languageStudied, history, onChange } = props
-  let topicsPathname = `/${languageStudied}/topics`
+import { getLanguageStudied } from "../../../utils";
 
-  const handleChange = (newLanguage) => {
-    topicsPathname = `/${newLanguage}/topics`
-    onChange(newLanguage);
-    history.push(topicsPathname)
-    props.clicked()
-  }
+const sideDrawer = (props) => {
+  const topicsPathname = `/${getLanguageStudied()}/topics`
 
   let drawerOpenClass = props.show ? classes.DrawerOpen : null;
   return (
@@ -32,10 +26,7 @@ const sideDrawer = (props) => {
          <Item label='Profile' />
         </li>
       </ul>
-      <LanguageSelector
-        languageStudied={languageStudied}
-        onChange={handleChange}
-      />
+      <LanguageSelector onChange={() => props.clicked()} />
     </nav>
   )
 }

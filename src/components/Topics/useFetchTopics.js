@@ -35,7 +35,6 @@ export function useFetchTopics(languageStudied) {
   const queryCache = useQueryCache()
   const queryKey = ["topics", languageStudied]
   const queryConfig = {
-    // retry: false
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     // 1 second -> 1 minute -> 1 hour

@@ -12,6 +12,8 @@ import JapaneseQuestion from "../../Questions/Japanese/JapaneseQuestion";
 import Section from "../../UI/Section/Section";
 import Spinner from "../../UI/Spinner";
 
+import { getLanguageStudied } from "../../../utils";
+
 const wanakana = require("wanakana");
 
 JapaneseQuestion.defaultProps = {
@@ -25,7 +27,6 @@ function JapaneseQuiz({
   hideInputMode,
   history,
   inputMode,
-  languageStudied,
   location,
   questions,
   answerHistory,
@@ -41,11 +42,12 @@ function JapaneseQuiz({
   const [selectedChoices, updateSelectedChoices] = useState([])
   const [score, updateScore] = useState(quizScore)
 
-
   const search = location.search;
   const quizParams = queryString.parse(search);
   const { topic, quiz } = quizParams;
   const quizId = `${topic}__${quiz}`
+
+  const languageStudied = getLanguageStudied()
 
   useEffect(() => {
     if (!topic) {

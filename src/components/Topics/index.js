@@ -1,7 +1,7 @@
 import "./styles.scss";
 
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+
 import { useQueryCache } from 'react-query'
 import { hydrate } from 'react-query/hydration'
 
@@ -16,10 +16,12 @@ import Spinner from "../UI/Spinner";
 
 import { useFetchTopics, getDehydratedStateFromLocalStorage } from "./useFetchTopics"
 
+import { getLanguageStudied } from "../../utils";
+
 function Topics() {
   const queryCache = useQueryCache()
-  const { languageSelectorReducer } = useSelector(state => state)
-  const { languageStudied } = languageSelectorReducer
+
+  const languageStudied = getLanguageStudied()
 
 
   useEffect(() => {
