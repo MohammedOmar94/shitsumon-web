@@ -2,9 +2,10 @@ import "./styles.scss";
 
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import _get from "lodash/get";
 import _includes from "lodash/includes";
 
-import Results from  '../../Results';
+import Results from "../../Results";
 import Question from "../../UI/Question";
 import AnswerChoices from "../../UI/AnswerChoices";
 import AnswerChoiceOutput from "../../UI/AnswerChoiceOutput";
@@ -20,8 +21,8 @@ JapaneseQuestion.propTypes = {
 };
 
 JapaneseQuestion.defaultProps = {
-  inputMode: 'Default'
-}
+  inputMode: "Default"
+};
 
 function JapaneseQuestion({
   answerHistory,
@@ -34,35 +35,31 @@ function JapaneseQuestion({
   questionCount,
   quizScore,
   questionIndex,
-  selectedChoices,
-  usersAnswer
+  selectedChoices
 }) {
-  const [inputValue, updateInputValue] = useState("")
+  const [inputValue, updateInputValue] = useState("");
   const questionNumber = questionIndex + 1;
 
   // Convert array of choices to a string, used to form users answer.
-  const answerOutput = selectedChoices.join("")
+  const answerOutput = selectedChoices.join("");
 
-  const {
-    question_text: questionText,
-    quizType,
-    wordChoices,
-    conjugationChoices
-  } = question;
+  const questionText = _get(question, "question_text");
+  const quizType = _get(question, "quizType");
+  const wordChoices = _get(question, "wordChoices");
+  const conjugationChoices = _get(question, "conjugationChoices");
 
   const onNextQuestion = () => {
     if (quizType === "writing") {
       onSubmit(inputValue);
     } else if (quizType === "conjugation") {
-      onSubmit(answerOutput)
+      onSubmit(answerOutput);
     }
-    // updateInputValue("")
-  }
+  };
 
   // Get the input field
   const input = document.getElementById("japaneseQuestion__answerField");
 
-  if(input) {
+  if (input) {
     // Execute a function when the user releases a key on the keyboard
     input.addEventListener("keyup", function(event) {
       // Number 13 is the "Enter" key on the keyboard
@@ -75,62 +72,72 @@ function JapaneseQuestion({
     });
   }
 
-  const handleChoiceClick = (selectedChoice) => {
+  const handleChoiceClick = selectedChoice => {
     if (_includes(selectedChoices, selectedChoice)) {
-        const index = selectedChoices.indexOf(selectedChoice);
-        const usersChoices = [...selectedChoices]
-        usersChoices.splice(index, 1)
-        onChoiceClick(usersChoices)
+      const index = selectedChoices.indexOf(selectedChoice);
+      const usersChoices = [...selectedChoices];
+      usersChoices.splice(index, 1);
+      onChoiceClick(usersChoices);
     } else {
-        onChoiceClick([...selectedChoices, selectedChoice])
+      onChoiceClick([...selectedChoices, selectedChoice]);
     }
-  }
+  };
 
-    return (
-      <>
-        {questionCount && !endOfQuiz &&
-          <Question
-            questionCount={questionCount}
-            questionNumber={questionNumber}
-            questionText={questionText}
-            onButtonClick={onNextQuestion}
-          >
-            {quizType === "conjugation" &&
-                <>
-                  <AnswerChoiceOutput usersAnswer={answerOutput} />
-                  <AnswerChoices
-                    choices={wordChoices}
-                    label="Word choices:"
-                    selectedChoices={selectedChoices}
-                    onClick={handleChoiceClick}
-                  />
-                  <AnswerChoices
-                    choices={conjugationChoices}
-                    label="Conjugation choices:"
-                    selectedChoices={selectedChoices}
-                    onClick={handleChoiceClick}
-                  />
-                </>
+  return (
+    <>
+      {questionCount && !endOfQuiz && (
+        <Question
+          questionCount={questionCount}
+          questionNumber={questionNumber}
+          questionText={questionText}
+          onButtonClick={onNextQuestion}
+        >
+          {quizType === "conjugation" && (
+            <>
+              <AnswerChoiceOutput usersAnswer={answerOutput} />
+              <AnswerChoices
+                choices={wordChoices}
+                label="Word choices:"
+                selectedChoices={selectedChoices}
+                onClick={handleChoiceClick}
+              />
+              <AnswerChoices
+                choices={conjugationChoices}
+                label="Conjugation choices:"
+                selectedChoices={selectedChoices}
+                onClick={handleChoiceClick}
+              />
+            </>
+          )}
+          {quizType === "writing" && (
+            <WanakanaInput
+              id="japaneseQuestion__answerField"
+              className={
+                isFieldEmpty
+                  ? "japaneseQuestion__emptyAnswer"
+                  : "japaneseQuestion__answerField"
               }
-              {quizType === "writing" &&
-                <WanakanaInput
-                  id="japaneseQuestion__answerField"
-                  className={isFieldEmpty ? "japaneseQuestion__emptyAnswer" : "japaneseQuestion__answerField"}
-                  type="text"
-                  name="answerField"
-                  autoFocus
-                  autoComplete="off"
-                  placeholder="Type the Japanese word here"
-                  onChange={(event) => updateInputValue(event.target.value)}
-                  value={inputValue}
-                  to={inputMode}
-                />
-              }
-          </Question>
-      }
-      {endOfQuiz && <Results answerHistory={answerHistory} isJapaneseQuiz={true} quizScore={quizScore} />}
-      </>
-    );
-};
+              type="text"
+              name="answerField"
+              autoFocus
+              autoComplete="off"
+              placeholder="Type the Japanese word here"
+              onChange={event => updateInputValue(event.target.value)}
+              value={inputValue}
+              to={inputMode}
+            />
+          )}
+        </Question>
+      )}
+      {endOfQuiz && (
+        <Results
+          answerHistory={answerHistory}
+          isJapaneseQuiz={true}
+          quizScore={quizScore}
+        />
+      )}
+    </>
+  );
+}
 
 export default JapaneseQuestion;

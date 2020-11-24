@@ -1,10 +1,13 @@
 import "../styles.scss";
 
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import queryString from "query-string";
 import classnames from "classnames";
-import axios from "axios";
 
+import { useFetchQuiz } from "./japaneseQuiz.reactQuery";
+
+import _get from "lodash/get";
 import _shuffle from "lodash/shuffle";
 
 import JapaneseQuestion from "../../Questions/Japanese/JapaneseQuestion";
@@ -16,64 +19,52 @@ import { getLanguageStudied } from "../../../utils";
 
 const wanakana = require("wanakana");
 
-JapaneseQuestion.defaultProps = {
-  quizScore: 0
-}
+function JapaneseQuiz({ hideInputMode, location }) {
+  const history = useHistory();
 
-function JapaneseQuiz({
-  quizScore,
-  questionIndex,
-  hasData,
-  hideInputMode,
-  history,
-  inputMode,
-  location,
-  questions,
-  answerHistory,
-  endOfQuiz,
-  onQuizDownload,
-  onUsersAnswer,
-  sectionName
-}) {
   const [showCorrectPopup, setCorrectPopupVisibility] = useState(false);
   const [showWrongPopup, setWrongPopupVisibility] = useState(false);
   const [answerEmpty, setAnswerEmpty] = useState(false);
-  const [shuffledQuestions, setShuffledQuestions] = useState([])
-  const [selectedChoices, updateSelectedChoices] = useState([])
-  const [score, updateScore] = useState(quizScore)
+  const [shuffledQuestions, setShuffledQuestions] = useState([]);
+  const [selectedChoices, updateSelectedChoices] = useState([]);
+  const [quizProgressInfo, setQuizProgressInfo] = useState({
+    questionIndex: 0,
+    quizScore: 0,
+    answerHistory: [],
+    isEndOfQuiz: false
+  });
+
+  const {
+    questionIndex,
+    quizScore,
+    answerHistory,
+    isEndOfQuiz
+  } = quizProgressInfo;
 
   const search = location.search;
   const quizParams = queryString.parse(search);
   const { topic, quiz } = quizParams;
-  const quizId = `${topic}__${quiz}`
+  const quizId = `${topic}__${quiz}`;
 
-  const languageStudied = getLanguageStudied()
+  const languageStudied = getLanguageStudied();
+  const { data, isSuccess } = useFetchQuiz(languageStudied, quizParams);
+
+  const inputMode = _get(data, "inputMode", "");
+  const questions = _get(data, "questions", []);
+  const sectionName = _get(data, "sectionName", "");
 
   useEffect(() => {
     if (!topic) {
       history.push("/");
       return;
     }
-
-    axios.post(`https://kakarot.now.sh/${languageStudied}/load_quiz`, quizParams)
-      .then(response => {
-        const quizData =
-          {
-            data: {
-              ...response.data
-            },
-            id: quizId
-          }
-        onQuizDownload(quizData);
-      })
-      .catch(error => {
-        console.log(error);
-      });
   }, []);
 
   useEffect(() => {
-    setShuffledQuestions(_shuffle(questions))
-  }, [hasData])
+    if (isSuccess) {
+      setShuffledQuestions(_shuffle(questions));
+    }
+  }, [isSuccess, questions]);
 
   const resetUI = () => {
     setCorrectPopupVisibility(false);
@@ -82,21 +73,25 @@ function JapaneseQuiz({
     updateSelectedChoices([]);
   };
 
-  const handleNext = (inputValue) => {
+  const handleNext = inputValue => {
     const question = shuffledQuestions[questionIndex];
 
     const usersAnswer = inputValue.toLowerCase();
     const answerWasCorrect =
       wanakana.toRomaji(usersAnswer) === wanakana.toRomaji(question.answer);
-      const usersCurrentAnswers = answerHistory ? [...answerHistory] : [];
-
+    const usersCurrentAnswers = answerHistory.length ? [...answerHistory] : [];
 
     const waitingForNextQuestion = showCorrectPopup || showWrongPopup;
 
     let animationDuration = 1100;
 
     if (answerWasCorrect) {
-      updateScore(prevScore => prevScore + 1);
+      setQuizProgressInfo(prevQuizProgressInfo => {
+        return {
+          ...prevQuizProgressInfo,
+          quizScore: prevQuizProgressInfo.quizScore + 1
+        };
+      });
       setCorrectPopupVisibility(true);
     } else if (!answerWasCorrect && usersAnswer) {
       animationDuration = 1200;
@@ -110,29 +105,17 @@ function JapaneseQuiz({
       answerWasCorrect
     });
 
-    if (questionIndex + 1 === questions.length) {
+
+    if (usersAnswer && !waitingForNextQuestion) {
       setTimeout(() => {
         resetUI();
-        onUsersAnswer({
-          data: {
-            endOfQuiz: true,
+        setQuizProgressInfo(prevQuizProgressInfo => {
+          return {
+            ...prevQuizProgressInfo,
+            questionIndex: prevQuizProgressInfo.questionIndex + 1,
             answerHistory: usersCurrentAnswers,
-            quizScore: score,
-            sectionName: "Results"
-          },
-          id: quizId
-        });
-      }, animationDuration);
-    } else if (usersAnswer && !waitingForNextQuestion) {
-      setTimeout(() => {
-        resetUI();
-        onUsersAnswer({
-          data: {
-            questionIndex: questionIndex + 1,
-            quizScore: score,
-            answerHistory: usersCurrentAnswers
-          },
-          id: quizId
+            isEndOfQuiz: prevQuizProgressInfo.questionIndex + 1 === questions.length
+          };
         });
       }, animationDuration);
     } else {
@@ -149,13 +132,13 @@ function JapaneseQuiz({
   });
 
   const questionCount = shuffledQuestions.length;
-  const question = questionCount ? shuffledQuestions[questionIndex] : undefined;
+  const question = shuffledQuestions[questionIndex];
 
   return (
     <>
-      <Spinner hasData={hasData} />
+      <Spinner hasData={isSuccess} />
       <Section name={sectionName} className={"Quiz"}>
-        {question && (
+        {shuffledQuestions.length && (
           <JapaneseQuestion
             quizScore={quizScore}
             question={question}
@@ -168,7 +151,7 @@ function JapaneseQuiz({
             answerHistory={answerHistory}
             isFieldEmpty={answerEmpty}
             selectedChoices={selectedChoices}
-            endOfQuiz={endOfQuiz}
+            endOfQuiz={isEndOfQuiz}
           />
         )}
         <div className={correctPopupClass}>
