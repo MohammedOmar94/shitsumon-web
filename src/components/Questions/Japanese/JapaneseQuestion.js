@@ -17,7 +17,7 @@ JapaneseQuestion.propTypes = {
   questionIndex: PropTypes.number,
   isFieldEmpty: PropTypes.bool,
   inputMode: PropTypes.string,
-  endOfQuiz: PropTypes.bool
+  isEndOfQuiz: PropTypes.bool
 };
 
 JapaneseQuestion.defaultProps = {
@@ -28,9 +28,10 @@ function JapaneseQuestion({
   answerHistory,
   isFieldEmpty,
   inputMode,
-  endOfQuiz,
+  isEndOfQuiz,
   onChoiceClick,
   onSubmit,
+  quizId,
   question,
   questionCount,
   quizScore,
@@ -85,7 +86,7 @@ function JapaneseQuestion({
 
   return (
     <>
-      {questionCount && !endOfQuiz && (
+      {!isEndOfQuiz && (
         <Question
           questionCount={questionCount}
           questionNumber={questionNumber}
@@ -129,10 +130,11 @@ function JapaneseQuestion({
           )}
         </Question>
       )}
-      {endOfQuiz && (
+      {isEndOfQuiz && (
         <Results
           answerHistory={answerHistory}
           isJapaneseQuiz={true}
+          quizId={quizId}
           quizScore={quizScore}
         />
       )}

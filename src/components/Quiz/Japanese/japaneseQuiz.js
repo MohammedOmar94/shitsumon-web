@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import queryString from "query-string";
 import classnames from "classnames";
 
+import { getAnswerHistory, getQuizScore } from "../cache"
+
 import { useFetchQuiz } from "./japaneseQuiz.reactQuery";
 
 import _get from "lodash/get";
@@ -22,6 +24,12 @@ const wanakana = require("wanakana");
 function JapaneseQuiz({ hideInputMode, location }) {
   const history = useHistory();
 
+
+  const search = location.search;
+  const quizParams = queryString.parse(search);
+  const { topic, quiz } = quizParams;
+  const quizId = `${topic}__${quiz}`;
+
   const [showCorrectPopup, setCorrectPopupVisibility] = useState(false);
   const [showWrongPopup, setWrongPopupVisibility] = useState(false);
   const [answerEmpty, setAnswerEmpty] = useState(false);
@@ -29,8 +37,8 @@ function JapaneseQuiz({ hideInputMode, location }) {
   const [selectedChoices, updateSelectedChoices] = useState([]);
   const [quizProgressInfo, setQuizProgressInfo] = useState({
     questionIndex: 0,
-    quizScore: 0,
-    answerHistory: [],
+    quizScore: getQuizScore(quizId),
+    answerHistory: getAnswerHistory(quizId),
     isEndOfQuiz: false
   });
 
@@ -40,11 +48,6 @@ function JapaneseQuiz({ hideInputMode, location }) {
     answerHistory,
     isEndOfQuiz
   } = quizProgressInfo;
-
-  const search = location.search;
-  const quizParams = queryString.parse(search);
-  const { topic, quiz } = quizParams;
-  const quizId = `${topic}__${quiz}`;
 
   const languageStudied = getLanguageStudied();
   const { data, isSuccess } = useFetchQuiz(languageStudied, quizParams);
@@ -59,6 +62,17 @@ function JapaneseQuiz({ hideInputMode, location }) {
       return;
     }
   }, []);
+
+  useEffect(() => {
+    if (isSuccess && answerHistory.length === questions.length) {
+      setQuizProgressInfo(prevQuizProgressInfo => {
+        return {
+          ...prevQuizProgressInfo,
+          isEndOfQuiz: answerHistory.length === questions.length
+        };
+      });
+    }
+  }, [isSuccess, answerHistory, questions])
 
   useEffect(() => {
     if (isSuccess) {
@@ -140,6 +154,7 @@ function JapaneseQuiz({ hideInputMode, location }) {
       <Section name={sectionName} className={"Quiz"}>
         {shuffledQuestions.length && (
           <JapaneseQuestion
+            quizId={quizId}
             quizScore={quizScore}
             question={question}
             questionCount={questionCount}
@@ -151,7 +166,7 @@ function JapaneseQuiz({ hideInputMode, location }) {
             answerHistory={answerHistory}
             isFieldEmpty={answerEmpty}
             selectedChoices={selectedChoices}
-            endOfQuiz={isEndOfQuiz}
+            isEndOfQuiz={isEndOfQuiz}
           />
         )}
         <div className={correctPopupClass}>
