@@ -52,8 +52,9 @@
 }
 
 .results__btnsContainer {
+  display: flex;
+  justify-content: space-between;
   padding: 24px;
-  width: 100%;
 }
 
 .results__result--correct {

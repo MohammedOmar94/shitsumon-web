@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import _get from "lodash/get";
 import _includes from "lodash/includes";
 
-import Results from "../../Results";
 import Question from "../../UI/Question";
 import AnswerChoices from "../../UI/AnswerChoices";
 import AnswerChoiceOutput from "../../UI/AnswerChoiceOutput";
@@ -16,8 +15,7 @@ JapaneseQuestion.propTypes = {
   questions: PropTypes.array,
   questionIndex: PropTypes.number,
   isFieldEmpty: PropTypes.bool,
-  inputMode: PropTypes.string,
-  isEndOfQuiz: PropTypes.bool
+  inputMode: PropTypes.string
 };
 
 JapaneseQuestion.defaultProps = {
@@ -25,16 +23,12 @@ JapaneseQuestion.defaultProps = {
 };
 
 function JapaneseQuestion({
-  answerHistory,
   isFieldEmpty,
   inputMode,
-  isEndOfQuiz,
   onChoiceClick,
   onSubmit,
-  quizId,
   question,
   questionCount,
-  quizScore,
   questionIndex,
   selectedChoices
 }) {
@@ -85,60 +79,48 @@ function JapaneseQuestion({
   };
 
   return (
-    <>
-      {!isEndOfQuiz && (
-        <Question
-          questionCount={questionCount}
-          questionNumber={questionNumber}
-          questionText={questionText}
-          onButtonClick={onNextQuestion}
-        >
-          {quizType === "conjugation" && (
-            <>
-              <AnswerChoiceOutput usersAnswer={answerOutput} />
-              <AnswerChoices
-                choices={wordChoices}
-                label="Word choices:"
-                selectedChoices={selectedChoices}
-                onClick={handleChoiceClick}
-              />
-              <AnswerChoices
-                choices={conjugationChoices}
-                label="Conjugation choices:"
-                selectedChoices={selectedChoices}
-                onClick={handleChoiceClick}
-              />
-            </>
-          )}
-          {quizType === "writing" && (
-            <WanakanaInput
-              id="japaneseQuestion__answerField"
-              className={
-                isFieldEmpty
-                  ? "japaneseQuestion__emptyAnswer"
-                  : "japaneseQuestion__answerField"
-              }
-              type="text"
-              name="answerField"
-              autoFocus
-              autoComplete="off"
-              placeholder="Type the Japanese word here"
-              onChange={event => updateInputValue(event.target.value)}
-              value={inputValue}
-              to={inputMode}
-            />
-          )}
-        </Question>
+    <Question
+      questionCount={questionCount}
+      questionNumber={questionNumber}
+      questionText={questionText}
+      onButtonClick={onNextQuestion}
+    >
+      {quizType === "conjugation" && (
+        <>
+          <AnswerChoiceOutput usersAnswer={answerOutput} />
+          <AnswerChoices
+            choices={wordChoices}
+            label="Word choices:"
+            selectedChoices={selectedChoices}
+            onClick={handleChoiceClick}
+          />
+          <AnswerChoices
+            choices={conjugationChoices}
+            label="Conjugation choices:"
+            selectedChoices={selectedChoices}
+            onClick={handleChoiceClick}
+          />
+        </>
       )}
-      {isEndOfQuiz && (
-        <Results
-          answerHistory={answerHistory}
-          isJapaneseQuiz={true}
-          quizId={quizId}
-          quizScore={quizScore}
+      {quizType === "writing" && (
+        <WanakanaInput
+          id="japaneseQuestion__answerField"
+          className={
+            isFieldEmpty
+              ? "japaneseQuestion__emptyAnswer"
+              : "japaneseQuestion__answerField"
+          }
+          type="text"
+          name="answerField"
+          autoFocus
+          autoComplete="off"
+          placeholder="Type the Japanese word here"
+          onChange={event => updateInputValue(event.target.value)}
+          value={inputValue}
+          to={inputMode}
         />
       )}
-    </>
+    </Question>
   );
 }
 

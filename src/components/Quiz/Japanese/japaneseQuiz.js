@@ -13,6 +13,7 @@ import _get from "lodash/get";
 import _shuffle from "lodash/shuffle";
 
 import JapaneseQuestion from "../../Questions/Japanese/JapaneseQuestion";
+import Results from "../../Results";
 
 import Section from "../../UI/Section/Section";
 import Spinner from "../../UI/Spinner";
@@ -152,21 +153,24 @@ function JapaneseQuiz({ hideInputMode, location }) {
     <>
       <Spinner hasData={isSuccess} />
       <Section name={sectionName} className={"Quiz"}>
-        {shuffledQuestions.length && (
+        {!isEndOfQuiz && shuffledQuestions.length && (
           <JapaneseQuestion
-            quizId={quizId}
-            quizScore={quizScore}
             question={question}
             questionCount={questionCount}
             questionIndex={questionIndex}
-            hideInputMode={hideInputMode}
             inputMode={inputMode}
             onChoiceClick={updateSelectedChoices}
             onSubmit={event => handleNext(event)}
-            answerHistory={answerHistory}
             isFieldEmpty={answerEmpty}
             selectedChoices={selectedChoices}
-            isEndOfQuiz={isEndOfQuiz}
+          />
+        )}
+        {isEndOfQuiz && (
+          <Results
+            answerHistory={answerHistory}
+            isJapaneseQuiz={true}
+            quizId={quizId}
+            quizScore={quizScore}
           />
         )}
         <div className={correctPopupClass}>

@@ -1,4 +1,4 @@
-import './styles.scss';
+import "./styles.scss";
 
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
@@ -6,7 +6,7 @@ import classnames from "classnames";
 import { toHiragana } from "wanakana";
 import _get from "lodash/get";
 
-import { cacheStore } from "../Quiz/cache"
+import { cacheStore, clearQuizHistory } from "../Quiz/cache";
 
 import Button from "../UI/Button/Button";
 
@@ -15,20 +15,28 @@ import Result from "./Result/Result";
 Results.propTypes = {
   quizScore: PropTypes.number,
   answerHistory: PropTypes.array,
-  isJapaneseQuiz: PropTypes.bool
-}
+  isJapaneseQuiz: PropTypes.bool,
+  onResetQuiz: PropTypes.func
+};
 
 Results.defaultProps = {
   quizScore: 0,
-  answerHistory: []
-}
+  answerHistory: [],
+  onResetQuiz: () => {}
+};
 
-function Results({ answerHistory, isJapaneseQuiz, quizId, quizScore }) {
+function Results({
+  answerHistory,
+  isJapaneseQuiz,
+  quizId,
+  quizScore,
+  onResetQuiz
+}) {
   const [questionIndex, setQuestionIndex] = useState(null);
   const [showQuestion, setQuestionVisibility] = useState(false);
 
   useEffect(() => {
-    const cachedAnswerHistory = _get(cacheStore, quizId, [])
+    const cachedAnswerHistory = _get(cacheStore, quizId, []);
 
     if (!cachedAnswerHistory.length) {
       const hashAnswerHistory = {
@@ -37,17 +45,20 @@ function Results({ answerHistory, isJapaneseQuiz, quizId, quizScore }) {
           cachedAnswerHistory: [...answerHistory],
           cachedQuizScore: quizScore
         }
-      }
-      localStorage.setItem('shitsumon_quiz_answer_history', JSON.stringify(hashAnswerHistory));
+      };
+      localStorage.setItem(
+        "shitsumon_quiz_answer_history",
+        JSON.stringify(hashAnswerHistory)
+      );
     }
-  }, [])
+  }, []);
 
   const selectedQuestion = answerHistory[questionIndex];
   const questionNumber = questionIndex + 1;
 
-  const getCorrectAnswer = (correctAnswer) => {
-    return isJapaneseQuiz ? toHiragana(correctAnswer) : correctAnswer
-  }
+  const getCorrectAnswer = correctAnswer => {
+    return isJapaneseQuiz ? toHiragana(correctAnswer) : correctAnswer;
+  };
 
   const resultClasses = answerWasCorrect =>
     classnames(
@@ -66,8 +77,15 @@ function Results({ answerHistory, isJapaneseQuiz, quizId, quizScore }) {
     setQuestionVisibility(false);
   };
 
-  const numberOfQuestions = answerHistory.length
-  const answersCorrectAsPercentage = numberOfQuestions ? `${Math.round((quizScore/numberOfQuestions) * 100)}%` : "0%"
+  const onResetQuizClick = quizId => {
+    clearQuizHistory(quizId);
+    window.location.reload();
+  };
+
+  const numberOfQuestions = answerHistory.length;
+  const answersCorrectAsPercentage = numberOfQuestions
+    ? `${Math.round((quizScore / numberOfQuestions) * 100)}%`
+    : "0%";
 
   return (
     <div className="results">
@@ -89,9 +107,8 @@ function Results({ answerHistory, isJapaneseQuiz, quizId, quizScore }) {
             />
           </div>
         </div>
-        )
-      }
-      {!showQuestion &&
+      )}
+      {!showQuestion && (
         <>
           <div className="results__scoreContainer">
             <p className="results__scoreLabel">Your score</p>
@@ -116,9 +133,10 @@ function Results({ answerHistory, isJapaneseQuiz, quizId, quizScore }) {
               onClick={() => window.history.back()}
               type="back"
             />
+            <Button onClick={() => onResetQuizClick(quizId)} type="retry" />
           </div>
-      </>
-      }
+        </>
+      )}
     </div>
   );
 }
