@@ -6,7 +6,7 @@ import LanguageSelector from "../LanguageSelector"
 
 import { getLanguageStudied } from "../../../utils";
 
-const sideDrawer = (props) => {
+export default function SideDrawer(props) {
   const topicsPathname = `/${getLanguageStudied()}/topics`
 
   let drawerOpenClass = props.show ? classes.DrawerOpen : null;
@@ -30,4 +30,3 @@ const sideDrawer = (props) => {
     </nav>
   )
 }
-export default sideDrawer;

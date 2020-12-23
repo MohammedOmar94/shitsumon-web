@@ -1,7 +1,7 @@
 import "../styles.scss";
 
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import classnames from "classnames";
 
@@ -22,8 +22,9 @@ import { getLanguageStudied } from "../../../utils";
 
 const wanakana = require("wanakana");
 
-function JapaneseQuiz({ hideInputMode, location }) {
+function JapaneseQuiz({ hideInputMode }) {
   const history = useHistory();
+  const location = useLocation();
 
 
   const search = location.search;

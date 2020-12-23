@@ -29,8 +29,7 @@ function Results({
   answerHistory,
   isJapaneseQuiz,
   quizId,
-  quizScore,
-  onResetQuiz
+  quizScore
 }) {
   const [questionIndex, setQuestionIndex] = useState(null);
   const [showQuestion, setQuestionVisibility] = useState(false);

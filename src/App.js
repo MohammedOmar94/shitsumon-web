@@ -3,12 +3,12 @@ import { Route } from "react-router-dom";
 
 import Backdrop from './components/UI/Backdrop/Backdrop';
 import Layout from './components/Layout';
-import SideDrawer from './containers/SideDrawer';
+import SideDrawer from './components/UI/SideDrawer/SideDrawer';
 
 // import CreateQuiz from './containers/CreateQuiz/CreateQuiz';
 import Portal from './containers/Portal/Portal';
-import Quiz from './containers/Quiz';
-import Topics from './containers/Topics';
+import Quiz from './components/Quiz';
+import Topics from './components/Topics';
 
 class App extends Component {
   state = {

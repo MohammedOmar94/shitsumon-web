@@ -1,25 +1,15 @@
 import React from 'react';
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
 import './index.scss';
 import App from './App';
-import reducers from './reducers'
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(
-  reducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
-
 const app = (
-  <Provider store={store}>
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <App />
-    </BrowserRouter>
-  </Provider>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <App />
+  </BrowserRouter>
 );
 
 ReactDOM.render(app, document.getElementById('root'));
