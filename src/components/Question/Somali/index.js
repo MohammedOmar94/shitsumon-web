@@ -2,7 +2,6 @@ import "./styles.scss";
 
 import React from "react";
 import PropTypes from "prop-types";
-import Results from  '../../Results';
 import _includes from "lodash/includes";
 
 import AnswerChoices from "../../UI/AnswerChoices";
@@ -11,29 +10,22 @@ import Question from "../../UI/Question"
 
 SomaliQuestion.propTypes = {
   questions: PropTypes.array,
-  questionNumber: PropTypes.number,
-  quizScore: PropTypes.number,
-  emptyAnswer: PropTypes.bool,
-  endOfQuiz: PropTypes.bool,
+  questionCount: PropTypes.number,
   onChoiceClick: PropTypes.func
 };
 
 SomaliQuestion.defaultProps = {
   questions: [],
-  questionNumber: 1,
   isFieldEmpty: false
 }
 
 function SomaliQuestion({
-  answerHistory,
-  endOfQuiz,
   onChoiceClick,
   onSubmit,
   selectedChoices,
   question,
   questionCount,
-  quizScore,
-  questionNumber
+  questionIndex
 }) {
   const {
     question_text: questionText,
@@ -42,6 +34,7 @@ function SomaliQuestion({
     verb_form: verbForm
   } = question;
 
+  const questionNumber = questionIndex + 1;
 
   const wordFirstChar = word[0];
   const wordWithoutLastChar = word.slice(0, -1);
@@ -72,32 +65,27 @@ function SomaliQuestion({
   }
 
     return (
-      <>
-        {!endOfQuiz &&
-          <Question 
-            questionCount={questionCount}
-            questionNumber={questionNumber}
-            questionText={questionText}
-            questionSubText={verbForm}
-            onButtonClick={onNextQuestion}
-          >
-            <AnswerChoiceOutput usersAnswer={usersAnswer} />
-            <AnswerChoices
-              choices={baseWordChoices}
-              label="Word choices:"
-              selectedChoices={selectedChoices}
-              onClick={handleChoiceClick}
-            />
-            <AnswerChoices
-              choices={wordInfections}
-              label="Conjugation choices:"
-              selectedChoices={selectedChoices}
-              onClick={handleChoiceClick}
-            />
-          </Question>
-        }
-        {endOfQuiz && <Results answerHistory={answerHistory} quizScore={quizScore} />}
-      </>
+      <Question
+        questionCount={questionCount}
+        questionNumber={questionNumber}
+        questionText={questionText}
+        questionSubText={verbForm}
+        onButtonClick={onNextQuestion}
+      >
+        <AnswerChoiceOutput usersAnswer={usersAnswer} />
+        <AnswerChoices
+          choices={baseWordChoices}
+          label="Word choices:"
+          selectedChoices={selectedChoices}
+          onClick={handleChoiceClick}
+        />
+        <AnswerChoices
+          choices={wordInfections}
+          label="Conjugation choices:"
+          selectedChoices={selectedChoices}
+          onClick={handleChoiceClick}
+        />
+      </Question>
     );
 };
 

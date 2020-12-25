@@ -6,6 +6,8 @@ import classnames from "classnames";
 import { toHiragana } from "wanakana";
 import _get from "lodash/get";
 
+import { getLanguageStudied } from "../../utils";
+
 import { cacheStore, clearQuizHistory } from "../Quiz/cache";
 
 import Button from "../UI/Button/Button";
@@ -15,7 +17,6 @@ import Result from "./Result/Result";
 Results.propTypes = {
   quizScore: PropTypes.number,
   answerHistory: PropTypes.array,
-  isJapaneseQuiz: PropTypes.bool,
   onResetQuiz: PropTypes.func
 };
 
@@ -27,7 +28,6 @@ Results.defaultProps = {
 
 function Results({
   answerHistory,
-  isJapaneseQuiz,
   quizId,
   quizScore
 }) {
@@ -56,7 +56,8 @@ function Results({
   const questionNumber = questionIndex + 1;
 
   const getCorrectAnswer = correctAnswer => {
-    return isJapaneseQuiz ? toHiragana(correctAnswer) : correctAnswer;
+    const language = getLanguageStudied()
+    return language === "japanese" ? toHiragana(correctAnswer) : correctAnswer;
   };
 
   const resultClasses = answerWasCorrect =>
