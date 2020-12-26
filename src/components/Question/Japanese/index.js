@@ -62,7 +62,7 @@ function JapaneseQuestion({
         // Cancel the default action, if needed
         event.preventDefault();
         // Trigger the button element with a click
-        document.querySelector(".japaneseQuestion__nextBtn").click();
+        document.querySelector(".question__nextBtn").click();
       }
     });
   }
